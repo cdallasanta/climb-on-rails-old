@@ -4,7 +4,7 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
- 
+
 task :commit, :message  do |t, args|
   message = args.message
   if message==nil
