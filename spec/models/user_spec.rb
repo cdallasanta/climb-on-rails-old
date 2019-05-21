@@ -14,4 +14,9 @@ describe 'User' do
     good_user = User.create(good_attrs)
     expect(good_user).to be_valid
   end
+
+  it 'has a unique username' do
+    copy_name = User.create(good_attrs)
+    expect(copy_name).to_not be_valid
+  end
 end
