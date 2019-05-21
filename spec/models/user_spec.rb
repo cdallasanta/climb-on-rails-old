@@ -1,3 +1,5 @@
+require './config/environment'
+
 describe 'User' do
   let(:good_attrs) do
     {
