@@ -10,11 +10,24 @@
 user1_attrs = {
   fullname: "Chris Dalla Santa",
   username: "cdallasanta",
-  password: "p"
+  password: "p",
+  role: "admin"
 }
 
 user2_attrs = {
   fullname: "Jonathan Coulton",
   username: "codemonkey",
-  password: "cmly"
+  password: "cmly",
+  role: "facilitator"
 }
+
+user3_attrs = {
+  fullname: "Rain",
+  username: "rain",
+  password: "p",
+  role: "lead"
+}
+
+User.create(user1_attrs)
+User.create(user2_attrs)
+User.create(user3_attrs)
