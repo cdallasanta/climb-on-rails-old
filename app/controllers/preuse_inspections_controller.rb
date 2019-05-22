@@ -1,0 +1,2 @@
+class PreuseInspectionsController < ApplicationController
+end

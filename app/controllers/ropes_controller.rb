@@ -1,0 +1,2 @@
+class RopesController < ApplicationController
+end

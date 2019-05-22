@@ -10,7 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_21_010310) do
+ActiveRecord::Schema.define(version: 2019_05_22_165646) do
+
+  create_table "climbs", force: :cascade do |t|
+    t.integer "rope_id"
+    t.integer "preuse_inspection_id"
+    t.integer "number_of_climbs"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "elements", force: :cascade do |t|
+    t.string "name"
+    t.integer "site_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "preuse_inspections", force: :cascade do |t|
+    t.datetime "date"
+    t.integer "element_id"
+    t.integer "user_id"
+    t.text "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ropes", force: :cascade do |t|
+    t.string "primary_identifier"
+    t.string "secondary_identifier"
+    t.integer "element_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sites", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "fullname"
@@ -19,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_05_21_010310) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "role"
+    t.integer "site_id"
   end
 
 end

@@ -1,27 +1,33 @@
-require './config/environment'
+require 'rails_helper'
+require 'pry'
 
-# tests are not currently working, objects are persisting between tests
+# now test models are not persisting between tests, but at least they are not
+# persisting after it
 
-# describe 'User' do
-#   let(:good_attrs) do
-#     {
-#       fullname: "Billy Bob Thorton",
-#       username: "BBT",
-#       password: "y'all",
-#       role: "facilitator"
-#     }
-#   end
-#
-#   before do
-#     @good_user = User.create(good_attrs)
-#   end
-#
-#   it 'can instantiate a user with good attributes' do
-#     expect(@good_user).to be_valid
-#   end
-#
-#   it 'has a unique username' do
-#     copy_name = User.create(good_attrs)
-#     expect(copy_name).not_to be_valid
-#   end
-# end
+RSpec.describe User, type: :model do
+
+  let(:orkila) do
+    Site.find_or_create_by(name: "Orkila")
+  end
+
+  let(:good_attrs) do
+    {
+      fullname: "BBT",
+      username: "BBT",
+      password: "p",
+      role: "facilitator",
+      site: orkila
+    }
+  end
+
+  it "can create a new user" do
+    good_user = User.create(good_attrs)
+    expect(good_user).to be_valid
+  end
+
+  it "won't create a duplicate user" do
+    binding.pry
+    user_copy = User.create(good_attrs)
+    expect(user_copy).to_not be_valid
+  end
+end
