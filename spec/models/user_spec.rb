@@ -1,8 +1,5 @@
 require 'rails_helper'
 
-# now test models are not persisting between tests, but at least they are not
-# persisting after it
-
 RSpec.describe User, type: :model do
 
   let(:orkila) do
@@ -19,13 +16,21 @@ RSpec.describe User, type: :model do
     }
   end
 
-  it "can create a new user" do
-    good_user = User.create(good_attrs)
-    expect(good_user).to be_valid
+  before do
+    @good_user = User.create(good_attrs)
   end
 
-  it "won't create a duplicate user" do
+  it "can create a new user" do
+    expect(@good_user).to be_valid
+  end
+
+  it "won't create a user with a duplicate username" do
     user_copy = User.create(good_attrs)
     expect(user_copy).to_not be_valid
+  end
+
+  it 'must be created with a password' do
+    no_pass = User.create(good_attrs.except(:password))
+    expect(no_pass).not_to be_valid
   end
 end
