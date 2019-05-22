@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry'
 
 # now test models are not persisting between tests, but at least they are not
 # persisting after it
@@ -26,7 +25,6 @@ RSpec.describe User, type: :model do
   end
 
   it "won't create a duplicate user" do
-    binding.pry
     user_copy = User.create(good_attrs)
     expect(user_copy).to_not be_valid
   end

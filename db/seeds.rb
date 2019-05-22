@@ -12,33 +12,29 @@ orkila = Site.create(name:"Orkila")
 
 
 # sample users
-user1_attrs = {
+User.create(
   fullname: "Chris Dalla Santa",
   username: "cdallasanta",
   password: "p",
   role: "admin",
   site: orkila
-}
+)
 
-user2_attrs = {
+User.create(
   fullname: "Jonathan Coulton",
   username: "codemonkey",
   password: "cmly",
   role: "facilitator",
   site: orkila
-}
+)
 
-user3_attrs = {
+User.create(
   fullname: "Rain",
   username: "rain",
   password: "p",
   role: "lead",
   site: orkila
-}
-
-User.create(user1_attrs)
-User.create(user2_attrs)
-User.create(user3_attrs)
+)
 
 
 # sample elements
@@ -47,7 +43,7 @@ catwalk = Element.create(name: "Catwalk", site: orkila)
 
 
 #sample ropes
-Rope.create(primary_identifier: "North", element: zipline)
-Rope.create(primary_identifier: "South", element: zipline)
+Rope.create(primary_identifier: "north", element: zipline)
+Rope.create(primary_identifier: "south", element: zipline)
 Rope.create(primary_identifier: "green", secondary_identifier: "red", element: catwalk)
 Rope.create(primary_identifier: "blue", secondary_identifier: "red", element: catwalk)
