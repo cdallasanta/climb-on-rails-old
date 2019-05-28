@@ -14,7 +14,8 @@ orkila = Site.create(name:"Orkila")
 # sample users
 User.create(
   fullname: "Chris Dalla Santa",
-  username: "cdallasanta",
+  email: "chris@email.com",
+  nickname: "Chris",
   password: "p",
   role: "admin",
   site: orkila
@@ -22,15 +23,17 @@ User.create(
 
 User.create(
   fullname: "Jonathan Coulton",
-  username: "codemonkey",
+  nickname: "Joco",
+  email: "joco@email.com",
   password: "cmly",
   role: "facilitator",
   site: orkila
 )
 
 User.create(
-  fullname: "Rain",
-  username: "rain",
+  fullname: "Emily Trusky",
+  nickname: "Rain",
+  email: "rain@email.com",
   password: "p",
   role: "lead",
   site: orkila

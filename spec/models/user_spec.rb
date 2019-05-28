@@ -9,7 +9,8 @@ RSpec.describe User, type: :model do
   let(:good_attrs) do
     {
       fullname: "BBT",
-      username: "BBT",
+      nickname: "Bob"
+      email: "test@email.com",
       password: "p",
       role: "facilitator",
       site: orkila
@@ -20,11 +21,11 @@ RSpec.describe User, type: :model do
     @good_user = User.create(good_attrs)
   end
 
-  it "can create a new user" do
+  it "can create a new user with a name, email, nickname, and password" do
     expect(@good_user).to be_valid
   end
 
-  it "won't create a user with a duplicate username" do
+  it "won't create a user with a duplicate email" do
     user_copy = User.create(good_attrs)
     expect(user_copy).to_not be_valid
   end
