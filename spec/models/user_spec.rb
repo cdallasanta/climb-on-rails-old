@@ -9,7 +9,6 @@ RSpec.describe User, type: :model do
   let(:good_attrs) do
     {
       fullname: "BBT",
-      nickname: "Bob"
       email: "test@email.com",
       password: "p",
       role: "facilitator",

@@ -17,9 +17,16 @@ view all periodic inspections and edit any of them
 all of the above and:
 retire and replace ropes
 create elements
-create/edit users in bulk
 can view elements: rope age, last periodic inspection, all comments
 
+?create/edit users in bulk?
 ?add/retire gear?
 ?adjust permissions of their site?
 ?receive emails with comments from inspections?
+
+#Elements should:
+have ropes assigned to them
+have preuse inspections logged to them
+have preuse inspection procedures
+have periodic inspections logged to them
+have periodic inspection procedures
