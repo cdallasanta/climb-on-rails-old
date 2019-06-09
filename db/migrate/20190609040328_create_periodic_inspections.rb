@@ -1,6 +1,14 @@
 class CreatePeriodicInspections < ActiveRecord::Migration[5.2]
   def change
     create_table :periodic_inspections do |t|
+      t.boolean :equipment_complete
+      t.boolean :element_complete
+      t.boolean :environment_complete
+      t.integer :element_id
+      t.integer :user_id
+      t.datetime :date
+
+      t.timestamps
     end
   end
 end
