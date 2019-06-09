@@ -1,17 +1,7 @@
 class Rope < ApplicationRecord
   belongs_to :element
 
-  validates_presence_of :primary_identifier
-
-  # returns a more aesthetic combination of the identifiers for the element show page
-  # e.g. "Blue with red"
-  def rope_name
-    if secondary_identifier
-      "#{primary_identifier.capitalize} with #{secondary_identifier}"
-    else
-      primary_identifier.capitalize
-    end
-  end
+  validates_presence_of :identifier
 
   # returns the number of climbs this rope has received in its life
   # note: not the number of Climb object, but the number of uses
