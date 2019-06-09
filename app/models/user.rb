@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   belongs_to :site
-  has_many :preuse_inspections
+  has_many :periodic_inspections
+  has_many :setups
+  has_many :takedowns
+  #has_many comments, something about polymorphism
 
   validates_presence_of :fullname
   validates :email, presence: true, uniqueness: true

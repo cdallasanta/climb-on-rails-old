@@ -1,7 +1,7 @@
 class PreuseInspection < ApplicationRecord
-  has_many :climbs
   belongs_to :element
-  belongs_to :user
+  has_one :setup
+  has_one :takedown
 
   validates_presence_of :date
 end
