@@ -9,24 +9,18 @@ edit their own account
 #Leads should be able to:
 all of the above and:
 log periodic inspections
-view all periodic inspections and edit any of them
+view all periodic inspections and edit any of their own
+retire and replace ropes
 
 ?perform observations?
 
 #Admins should be able to:
 all of the above and:
-retire and replace ropes
 create elements
 can view elements: rope age, last periodic inspection, all comments
+can view and edit all periodic and preuse inspections
 
 ?create/edit users in bulk?
 ?add/retire gear?
 ?adjust permissions of their site?
 ?receive emails with comments from inspections?
-
-#Elements should:
-have ropes assigned to them
-have preuse inspections logged to them
-have preuse inspection procedures
-have periodic inspections logged to them
-have periodic inspection procedures
