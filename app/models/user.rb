@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   belongs_to :site
   has_many :periodic_inspections
-  has_many :setups
-  has_many :takedowns
+  has_many :setups, through: :user_setups
+  has_many :takedowns, through: :user_takedowns
   #has_many comments, something about polymorphism
 
   validates_presence_of :fullname

@@ -1,5 +1,10 @@
 <ul>
   <% @elements.each do |element| %>
-    <li><%= link_to element.name, new_element_preuse_inspection_path(element) %></li>
+    <li><%= element.name %>
+      <ul>
+        <li><%= link_to "view today's inspection", new_element_preuse_inspection_path(element) %></li>
+        <li><%= link_to "view past inspections", element_preuse_inspections_path(element) %></li>
+      </ul>
+    </li>
   <% end %>
 </ul>

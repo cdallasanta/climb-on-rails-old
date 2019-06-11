@@ -5,4 +5,5 @@ class PreuseInspection < ApplicationRecord
   has_one :takedown
 
   validates_presence_of :date
+  validates_presence_of :element
 end
