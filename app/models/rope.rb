@@ -1,7 +1,8 @@
 class Rope < ApplicationRecord
   belongs_to :element
   has_many :climbs
-  has_many :takedowns, through: :climbs
+  has_many :preuse_inspections, through: :element
+  #has_many :takedowns, through: :climbs
 
   validates_presence_of :identifier
 
