@@ -9,4 +9,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :role, inclusion: {in: %w(facilitator lead admin)}
   has_secure_password
+
+  def is_admin?
+    self.role == "admin"
+  end
 end

@@ -1,0 +1,8 @@
+<%= form_for @user do |f| %>
+  Full name: <%= f.text_field :fullname %><br>
+  Email: <%= f.text_field :email %><br>
+  Password: <%= f.password_field :password %><br>
+  Site: <%= f.select :site_id, options_from_collection_for_select(Site.all, :id, :name) %><br>
+  Role: <%= f.select :role, ["facilitator", "lead", "admin"] %><br>
+  <%= f.submit %>
+<% end %>

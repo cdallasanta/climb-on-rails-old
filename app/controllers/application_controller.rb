@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
   def current_site
     current_user.site
   end
+
+  def check_owner(object)
+    
+  end
 end
