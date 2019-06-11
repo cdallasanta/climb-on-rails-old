@@ -1,4 +1,5 @@
 <%= form_for User.new do |f| %>
-  <%= f.textfield :email %>
-  <%= f.textfield :password %>
+  Email: <%= f.text_field :email %><br>
+  Password: <%= f.text_field :password %><br>
+  <%= f.submit %>
 <% end %>
