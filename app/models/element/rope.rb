@@ -1,7 +1,7 @@
 class Element::Rope < ApplicationRecord
   self.table_name = "ropes"
   belongs_to :element
-  has_many :climbs
+  has_many :climbs, class_name: "Element::Rope::Climb"
   has_many :preuse_inspections, through: :element
 
   validates_presence_of :identifier

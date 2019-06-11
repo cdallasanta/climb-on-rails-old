@@ -26,6 +26,7 @@ class PreuseInspectionsController < ApplicationController
     if @setup.is_complete?
       @inspection.takedown ||= Takedown.create
     end
+  end
 
   def edit
   end
