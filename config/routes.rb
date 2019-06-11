@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  resources :preuse_inspections
-  resources :ropes
-  resources :elements
-  resources :sites
+  root to: 'elements#index'
+
+  get '/login', to: 'users#login'
 end
