@@ -17,7 +17,11 @@ class ApplicationController < ActionController::Base
     current_user.site
   end
 
+  #TODO is this used yet?
   def check_owner(object)
-    
+    unless object.user == current_user || current_user.is_admin?
+      flash[:alert] = "You must be logged in as that item's creator to view/edit it"
+      redirect_to root_path
+    end
   end
 end

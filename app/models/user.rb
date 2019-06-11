@@ -13,4 +13,17 @@ class User < ApplicationRecord
   def is_admin?
     self.role == "admin"
   end
+
+  def is_lead?
+    self.role == "lead"
+  end
+
+  def has_permissions?(level)
+    case level
+    when "admin"
+      self.is_admin?
+    when "lead"
+      self.is_lead? || self.is_admin?
+    end
+  end
 end
