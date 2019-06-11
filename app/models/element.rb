@@ -5,6 +5,7 @@ class Element < ApplicationRecord
   has_many :periodic_inspections
 
   validates_presence_of :name
+  validates_presence_of :site
 
   after_initialize :init
 
