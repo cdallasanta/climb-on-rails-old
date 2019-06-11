@@ -1,4 +1,5 @@
-class Rope < ApplicationRecord
+class Element::Rope < ApplicationRecord
+  self.table_name = "ropes"
   belongs_to :element
   has_many :climbs
   has_many :preuse_inspections, through: :element

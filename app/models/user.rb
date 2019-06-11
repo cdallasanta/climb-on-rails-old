@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   belongs_to :site
-  has_many :periodic_inspections
+  has_many :periodic_inspections, class_name: "Inspection::PeriodicInspection"
+  has_many :user_setups, class_name: "JoinTable::UserSetups"
   has_many :setups, through: :user_setups
+  has_many :user_takedowns, class_name: "JoinTable::UserTakedowns"
   has_many :takedowns, through: :user_takedowns
   #has_many comments, something about polymorphism
 

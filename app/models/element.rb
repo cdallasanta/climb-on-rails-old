@@ -1,8 +1,8 @@
 class Element < ApplicationRecord
   belongs_to :site
-  has_many :ropes
-  has_many :preuse_inspections
-  has_many :periodic_inspections
+  has_many :ropes, class_name: "Element::Rope"
+  has_many :preuse_inspections, class_name: "Inspection::PreuseInspection"
+  has_many :periodic_inspections, class_name: "Inspection::PeriodicInspection"
 
   validates_presence_of :name
   validates_presence_of :site
