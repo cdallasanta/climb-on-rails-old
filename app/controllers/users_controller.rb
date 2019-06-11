@@ -4,11 +4,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    binding.pry
     @user = User.new(user_params)
 
     if @user.save
-      session[:user_id] = user.id
+      session[:user_id] = @user.id
       redirect_to site_elements_path(current_site)
     else
       render 'new'
