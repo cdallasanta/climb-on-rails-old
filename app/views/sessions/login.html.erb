@@ -1,5 +1,9 @@
 <%= form_for User.new, {url: '/login'} do |f| %>
   Email: <%= f.text_field :email %><br>
   Password: <%= f.text_field :password %><br>
-  <%= f.submit %>
+  <%= f.submit "Log In" %>
 <% end %>
+
+<p>
+  Or <%= link_to "signup", new_user_path %>
+</p>
