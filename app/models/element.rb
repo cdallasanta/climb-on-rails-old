@@ -7,9 +7,5 @@ class Element < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :site
 
-  after_initialize :init
-
-  def init
-    #set default instructions here?
-  end
+  #TODO figure out how to deal with default instructions.
 end

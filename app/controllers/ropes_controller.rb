@@ -1,2 +1,0 @@
-class RopesController < ApplicationController
-end

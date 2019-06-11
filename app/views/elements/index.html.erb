@@ -1,1 +1,5 @@
-<% binding.pry %>
+<ul>
+  <% @elements.each do |element| %>
+    <li><%= link_to element.name, new_element_preuse_inspection_path(element) %></li>
+  <% end %>
+</ul>
