@@ -1,4 +1,4 @@
-class PreuseInspection::Takedown < ApplicationRecord
+class Inspection::PreuseInspection::Takedown < ApplicationRecord
   self.table_name = "takedowns"
   belongs_to :preuse_inspection
   has_many :users, through: :user_takedowns
