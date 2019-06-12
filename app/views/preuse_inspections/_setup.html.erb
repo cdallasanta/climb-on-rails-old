@@ -1,13 +1,14 @@
 <%= form_for @inspection, url: element_preuse_inspection_path(@element, @inspection)  do |f| %>
-  Date: <%= f.date_field :date %>
+  Date: <%= f.date_field :date %><br>
 
-  <%= f.fields_for @inspection.setup do |ff| %>
+
+  <%= f.fields_for setup do |ff| %>
     <%= @element.preuse_equipment_instructions %><br>
-    <%= ff.check_box :equipment_complete, "Section completed?" %><br>
+    Section completed? <%= ff.check_box :equipment_complete %><br>
     <%= @element.preuse_element_instructions %><br>
-    <%= ff.check_box :element_complete, "Section completed?" %><br>
+    Section completed? <%= ff.check_box :element_complete %><br>
     <%= @element.preuse_environment_instructions %><br>
-    <%= ff.check_box :environment_complete, "Section completed?" %><br>
+    Section completed? <%= ff.check_box :environment_complete %><br>
     <%# comments here %>
   <% end %>
 
@@ -17,7 +18,7 @@
 <%# TODO this format is gross. Put it in a div %>
 <i>
 Updated by:<br>
-<% @setup.users.each do |user| %>
+<% setup.users.each do |user| %>
   <%= user.fullname %><br>
 <% end %>
 </i>
