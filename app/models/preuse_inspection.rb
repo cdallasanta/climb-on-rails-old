@@ -1,5 +1,4 @@
 class PreuseInspection < ApplicationRecord
-  self.table_name = "preuse_inspections"
   belongs_to :element
   has_many :ropes, through: :element
   has_one :setup, class_name: "PreuseInspection::Setup"

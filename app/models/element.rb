@@ -8,4 +8,8 @@ class Element < ApplicationRecord
   validates_presence_of :site
 
   #TODO figure out how to deal with default instructions.
+
+  def date_of_last_periodic
+    #TODO make this
+  end
 end
