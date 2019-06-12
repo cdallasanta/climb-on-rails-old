@@ -7,4 +7,8 @@ class PreuseInspection < ApplicationRecord
 
   validates_presence_of :date
   validates_presence_of :element
+
+  def self.find_or_create_todays_inspection(element_id)
+    self.where(date:Date.today.strftime("%Y-%m-%d") , element: Element.find(element_id)).first_or_create
+  end
 end

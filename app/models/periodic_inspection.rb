@@ -5,4 +5,5 @@ class PeriodicInspection < ApplicationRecord
   has_many :comments, as: :commentable
 
   #validates date
+
 end

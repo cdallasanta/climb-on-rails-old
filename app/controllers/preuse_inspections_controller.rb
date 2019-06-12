@@ -1,10 +1,8 @@
 class PreuseInspectionsController < ApplicationController
   before_action :check_logged_in
 
-  def new
-    # this somewhat breaks convention by creating in the GET route, but I can't figure out how to have
-    # elements/index direct to the POST route
-    @inspection = PreuseInspection.find_or_create_by(date:Date.today.strftime("%Y-%m-%d") , element: Element.find_by(params[:element_id]))
+  def create
+    @inspection = PreuseInspection.find_or_create_todays_inspection(params[:element_id])
     @inspection.setup = PreuseInspection::Setup.create if @inspection.setup == nil
 
     if @inspection.valid?
@@ -15,7 +13,7 @@ class PreuseInspectionsController < ApplicationController
     end
   end
 
-  # currently, no #create is needed, TODO remove route
+  # currently, no #new is needed, TODO remove route from config
 
   def show
     @inspection = PreuseInspection.find_by(id: params[:id])

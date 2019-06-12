@@ -2,7 +2,7 @@
   <% @elements.each do |element| %>
     <li><%= element.name %>
       <ul>
-        <li><%= link_to "view today's inspection", new_element_preuse_inspection_path(element) %></li>
+        <li><%= link_to "view today's inspection", "/elements/#{element.id}/preuse_inspections", method: :post %></li>
         <li><%= link_to "view past inspections", element_preuse_inspections_path(element) %></li>
       </ul>
     </li>
