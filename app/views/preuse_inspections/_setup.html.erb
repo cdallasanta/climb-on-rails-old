@@ -1,0 +1,17 @@
+<% binding.pry %>
+<%= form_for @setup, element_preuse_inspection_path(@setup.element, @setup.preuse_inspection)  do |f| %>
+  Date: <%= f.date_field :date %>
+  <%= f.checkbox :equipment_complete %>
+  <%= f.checkbox :environment_complete %>
+  <%= f.checkbox :element_complete %>
+
+  <%= f.submit %>
+<% end %>
+
+<%# TODO this format is gross. Put it in a div %>
+<i>
+Updated by:<br>
+<% @setup.users.each do |user| %>
+  <%= user.fullname %><br>
+<% end %>
+</i>
