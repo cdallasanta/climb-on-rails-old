@@ -24,3 +24,8 @@ can view and edit all periodic and preuse inspections
 ?add/retire gear?
 ?adjust permissions of their site?
 ?receive emails with comments from inspections?
+
+
+#future:
+Devise
+ActiveAdmin

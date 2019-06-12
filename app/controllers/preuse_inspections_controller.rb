@@ -48,12 +48,12 @@ class PreuseInspectionsController < ApplicationController
     setup.users << current_user unless setup.users.include?(current_user)
 
     #updating takedown
-    takedown = preuse.takedown
-    takedown.update(preuse_params[:preuse_inspection_takedown])
-    takedown.users << current_user unless takedown.users.include?(current_user)
+    # takedown = preuse.takedown
+    # takedown.update(preuse_params[:preuse_inspection_takedown])
+    # takedown.users << current_user unless takedown.users.include?(current_user)
 
     #TODO flash message for success? also check for other errors, like form editing?
-    redirect_to element_preuse_inspection_path(preuse.element, preuse)
+    redirect_to edit_element_preuse_inspection_path(preuse.element, preuse)
   end
 
   private
