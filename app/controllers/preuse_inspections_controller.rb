@@ -13,6 +13,9 @@ class PreuseInspectionsController < ApplicationController
     end
   end
 
+  def index
+    @element = Element.find_by(params[:element_id])
+  end
 
   def show
     #TODO is this used?
