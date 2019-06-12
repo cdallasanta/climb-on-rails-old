@@ -1,9 +1,11 @@
-<% binding.pry %>
-<%= form_for @setup, element_preuse_inspection_path(@setup.element, @setup.preuse_inspection)  do |f| %>
+<%= form_for @inspection, url: element_preuse_inspection_path(@element, @inspection)  do |f| %>
   Date: <%= f.date_field :date %>
-  <%= f.checkbox :equipment_complete %>
-  <%= f.checkbox :environment_complete %>
-  <%= f.checkbox :element_complete %>
+
+  <%= f.fields_for @setup do |ff| %>
+    <%= ff.check_box :equipment_complete %>
+    <%= ff.check_box :environment_complete %>
+    <%= ff.check_box :element_complete %>
+  <% end %>
 
   <%= f.submit %>
 <% end %>
