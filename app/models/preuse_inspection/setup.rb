@@ -12,9 +12,10 @@ class PreuseInspection::Setup < ApplicationRecord
     self.equipment_complete ||= false
     self.element_complete ||= false
     self.environment_complete ||= false
+    self.save
   end
 
   def is_complete?
-    !self.attributes.any?(false)
+    !self.attributes.any?{|attr, val| val == false}
   end
 end
