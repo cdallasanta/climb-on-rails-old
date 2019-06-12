@@ -29,11 +29,11 @@ class PreuseInspectionsController < ApplicationController
   end
 
   def update
-    binding.pry
     #updating preuse (just the date, really)
     preuse = PreuseInspection.find_by(id: params[:id])
     preuse.date = preuse_params[:date]
     #save preuse for date validation
+    #should be something if that date already has an inspection
     unless preuse.save
       render element_preuse_inspection_path(preuse.element, preuse)
     end

@@ -1,1 +1,10 @@
-<%= render partial: 'setup', locals: {setup: @inspection.setup} %>
+<%= form_for @inspection, url: element_preuse_inspection_path(@element, @inspection)  do |f| %>
+  Date: <%= f.date_field :date %><br>
+
+  <%= render partial: 'setup', locals: {setup: @inspection.setup, f: f} %>
+
+  <%= takedown_partial_if_exists(f) %>
+
+  <%= f.submit %>
+
+<% end %>

@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2019_06_11_225841) do
     t.integer "setup_id"
   end
 
-  create_table "user_takedownsses", force: :cascade do |t|
+  create_table "user_takedowns", force: :cascade do |t|
     t.integer "user_id"
     t.integer "takedown_id"
   end

@@ -1,18 +1,18 @@
-<%= f.fields_for setup do |ff| %>
+<hr>
+<br>
+<%= f.fields_for takedown do |ff| %>
   <%= @element.preuse_equipment_instructions %><br>
   Section completed? <%= ff.check_box :equipment_complete %><br>
   <%= @element.preuse_element_instructions %><br>
   Section completed? <%= ff.check_box :element_complete %><br>
   <%= @element.preuse_environment_instructions %><br>
   Section completed? <%= ff.check_box :environment_complete %><br>
-  <%# comments here %>
 <% end %>
-
 
 <%# TODO this format is gross. Put it in a div %>
 <i>
 Updated by:<br>
-<% setup.users.each do |user| %>
+<% takedown.users.each do |user| %>
   <%= user.fullname %><br>
 <% end %>
 </i>
