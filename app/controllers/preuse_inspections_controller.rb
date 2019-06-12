@@ -19,9 +19,8 @@ class PreuseInspectionsController < ApplicationController
     @inspection = PreuseInspection.find_by(id: params[:id])
     @element = @inspection.element
     #TODO check for url schenanegains for both element and inspection
-    @setup = @inspection.setup
 
-    if @setup.is_complete?
+    if @inspection.setup.is_complete?
       @inspection.takedown ||= PreuseInspection::Takedown.create
     end
   end

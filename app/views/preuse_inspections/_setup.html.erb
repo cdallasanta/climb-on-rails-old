@@ -1,10 +1,14 @@
 <%= form_for @inspection, url: element_preuse_inspection_path(@element, @inspection)  do |f| %>
   Date: <%= f.date_field :date %>
 
-  <%= f.fields_for @setup do |ff| %>
-    <%= ff.check_box :equipment_complete %>
-    <%= ff.check_box :environment_complete %>
-    <%= ff.check_box :element_complete %>
+  <%= f.fields_for @inspection.setup do |ff| %>
+    <%= @element.preuse_equipment_instructions %><br>
+    <%= ff.check_box :equipment_complete, "Section completed?" %><br>
+    <%= @element.preuse_element_instructions %><br>
+    <%= ff.check_box :element_complete, "Section completed?" %><br>
+    <%= @element.preuse_environment_instructions %><br>
+    <%= ff.check_box :environment_complete, "Section completed?" %><br>
+    <%# comments here %>
   <% end %>
 
   <%= f.submit %>
