@@ -4,10 +4,10 @@ class PreuseInspectionsController < ApplicationController
   def new
     # this somewhat breaks convention by creating in the GET route, but I can't figure out how to have
     # elements/index direct to the POST route
-    @inspection = PreuseInspection.new(date:Date.today, element: Element.find_by(params[:element_id]))
-    @inspection.setup = PreuseInspection::Setup.create
+    @inspection = PreuseInspection.find_or_create_by(date:Date.today.strftime("%Y-%m-%d") , element: Element.find_by(params[:element_id]))
+    @inspection.setup = PreuseInspection::Setup.create if @inspection.setup == nil
 
-    if @inspection.save
+    if @inspection.valid?
       redirect_to element_preuse_inspection_path(@inspection.element, @inspection)
     else
       flash[:alert] = "Element not found"
@@ -18,9 +18,9 @@ class PreuseInspectionsController < ApplicationController
   # currently, no #create is needed, TODO remove route
 
   def show
-    @inspection = PreuseInspection.find_by(id: params[:preuse_inspection_id])
+    @inspection = PreuseInspection.find_by(id: params[:id])
     @element = @inspection.element
-    #TODO check for url schenanegains
+    #TODO check for url schenanegains for both element and inspection
     @setup = @inspection.setup
 
     if @setup.is_complete?

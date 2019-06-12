@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    binding.pry
     @user = User.new(user_params)
 
     if @user.save
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
 
   def update
     params[:user][:password] ||= @user.password
-    
+
     if @user.update(user_params)
       #TODO "saved successfully message?"
       redirect_to user_path(@user)
