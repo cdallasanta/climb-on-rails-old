@@ -1,4 +1,4 @@
-class Inspection::PeriodicInspection < ApplicationRecord
+class PeriodicInspection < ApplicationRecord
   self.table_name = "periodic_inspections"
   belongs_to :element
   belongs_to :user

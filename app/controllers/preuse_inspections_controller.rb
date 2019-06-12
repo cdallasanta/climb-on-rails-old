@@ -5,7 +5,7 @@ class PreuseInspectionsController < ApplicationController
     # this somewhat breaks convention by creating in the GET route, but I can't figure out how to have
     # elements/index direct to the POST route
     @inspection = PreuseInspection.new(date:Date.today, element: Element.find_by(params[:element_id]))
-    @inspection.setup = Setup.create
+    @inspection.setup = PreuseInspection::Setup.create
 
     if @inspection.save
       redirect_to element_preuse_inspection_path(@inspection.element, @inspection)
@@ -24,7 +24,7 @@ class PreuseInspectionsController < ApplicationController
     @setup = @inspection.setup
 
     if @setup.is_complete?
-      @inspection.takedown ||= Takedown.create
+      @inspection.takedown ||= PreuseInspection::Takedown.create
     end
   end
 

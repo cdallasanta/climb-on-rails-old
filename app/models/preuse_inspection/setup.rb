@@ -1,4 +1,4 @@
-class Inspection::PreuseInspection::Setup < ApplicationRecord
+class PreuseInspection::Setup < ApplicationRecord
   self.table_name = "setups"
   belongs_to :preuse_inspection
   has_many :users, through: :user_setups

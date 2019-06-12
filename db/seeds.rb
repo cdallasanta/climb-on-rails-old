@@ -15,13 +15,13 @@ zipline = Element.create(name:"Zipline", site: orkila)
 giants_ladder = Element.create(name:"Giant's Ladder", site: orkila)
 
 #rope
-Rope.create(element:catwalk, identifier:"Olive with red pcord")
-Rope.create(element:catwalk, identifier:"Blue with red pcord")
-Rope.create(element:zipline, identifier:"North")
-Rope.create(element:zipline, identifier:"South")
-Rope.create(element:giants_ladder, identifier:"Red with orange pcord")
-Rope.create(element:giants_ladder, identifier:"White with orange pcord")
-Rope.create(element:giants_ladder, identifier:"Blue with orange pcord")
+Element::Rope.create(element:catwalk, identifier:"Olive with red pcord")
+Element::Rope.create(element:catwalk, identifier:"Blue with red pcord")
+Element::Rope.create(element:zipline, identifier:"North")
+Element::Rope.create(element:zipline, identifier:"South")
+Element::Rope.create(element:giants_ladder, identifier:"Red with orange pcord")
+Element::Rope.create(element:giants_ladder, identifier:"White with orange pcord")
+Element::Rope.create(element:giants_ladder, identifier:"Blue with orange pcord")
 
 #Users
 chris = User.create(
