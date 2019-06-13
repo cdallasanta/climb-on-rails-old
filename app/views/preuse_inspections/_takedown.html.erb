@@ -2,19 +2,8 @@
 <br>
 <%= f.fields_for takedown do |ff| %>
 
-<%# TODO so nasty, get all this into helpers! %>
-  <%= ff.fields_for :ropes do |rope_form| %>
-    <% takedown.ropes.each do |rope| %>
-      <%= rope_form.fields_for rope do |indv_rope_form| %>
-        <%= indv_rope_form.label :identifier, "#{rope.identifier}" %>
-        <% 4.times do |i| %>
-          <%= indv_rope_form.fields_for Element::Rope::Climb.new do |climb_form| %>
-            <%= climb_form.phone_field :number_of_climbs, {name: "preuse_inspection[preuse_inspection_takedown][ropes][#{rope.identifier}][#{i}]"} %>
-          <% end %>
-        <% end %> <br>
-      <% end %>
-    <% end %>
-  <% end %>
+  <%= rope_and_climb_fields(ff, takedown) %>
+
 
 <%# TODO this can be abstraced too %>
   <%= @element.preuse_equipment_instructions %><br>
