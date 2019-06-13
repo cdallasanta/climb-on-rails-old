@@ -11,8 +11,8 @@ Specs:
   - PreuseInspection has_many :ropes, through: :element
   - Ropes has_many :preuse_inspections, through: :element
 - [x] The "through" part of the has_many through includes at least one user submittable attribute, that is to say, some attribute other than its foreign keys that can be submitted by the app's user
-  -Element has plenty other attributes an admin would change
-  -Climb is a quasi-join table with a user-submitted attribute
+  - Element has plenty other attributes an admin would change
+  - Climb is a quasi-join table with a user-submitted attribute
 - [x] Include reasonable validations for simple model objects (User, PreuseInspection, PeriodicInspection, Element, Rope, Site)
 - [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes) - PreUse find today's inspection
 - [ ] Include signup (how e.g. Devise)
