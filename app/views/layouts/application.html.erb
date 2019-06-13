@@ -10,12 +10,14 @@
   </head>
 
   <body>
+    <%= render partial: 'layouts/header' %>
+
     <% if flash.alert %>
       <div class="errors">
         <%= flash.alert %>
       </div>
     <% end %>
-    
+
     <%= yield %>
   </body>
 </html>

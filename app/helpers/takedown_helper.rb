@@ -21,8 +21,8 @@ module TakedownHelper
       end.join.html_safe
     #otherwise, use new climb objects
     else
-      [1..4].collect do |i|
-        indv_rope_form.fields_for Element::Rope::Climb.new do |climb_form|
+      4.times.collect do |i|
+        form.fields_for Element::Rope::Climb.new do |climb_form|
           climb_form.phone_field :number_of_climbs, {name: "preuse_inspection[preuse_inspection_takedown][ropes][#{rope.identifier}][#{i+1}]"}
         end
       end.join.html_safe
