@@ -44,7 +44,6 @@ class PreuseInspectionsController < ApplicationController
 
     #updating setup
     setup = preuse.setup
-    #TODO this adding users to update will always run, even if updating the takedown
     if setup_was_changed?(setup)
       setup.users << current_user unless setup.users.include?(current_user)
     end
@@ -53,8 +52,10 @@ class PreuseInspectionsController < ApplicationController
     #updating takedown
     takedown = preuse.takedown
     if takedown
+      if takedown_was_changed?(takedown)
+        takedown.users << current_user unless takedown.users.include?(current_user)
+      end
       takedown.update(preuse_params[:preuse_inspection_takedown])
-      takedown.users << current_user unless takedown.users.include?(current_user)
     end
 
     #TODO flash message for success? also check for other errors, like form editing?
@@ -68,11 +69,24 @@ class PreuseInspectionsController < ApplicationController
       :date,
       preuse_inspection_setup:
         [:equipment_complete, :element_complete, :environment_complete]
+      ),
+      preuse_inspection_takedown:
+        [:equipment_complete, :element_complete, :environment_complete]
       )
   end
 
   def setup_was_changed?(setup)
     preuse_params[:preuse_inspection_setup].to_h.any? do |attr, val|
+      setup.attributes[attr] != !val.to_i.zero?
+      # e.g.
+      # equipment_complete == false, and new equipment_complete == "1" would work out to:
+      # false != !(1.zero?)
+      # false != true => true, which means the value is changing
+    end
+  end
+
+  def takedown_was_changed?(setup)
+    preuse_params[:preuse_inspection_takedown].to_h.any? do |attr, val|
       setup.attributes[attr] != !val.to_i.zero?
       # e.g.
       # equipment_complete == false, and new equipment_complete == "1" would work out to:
