@@ -52,10 +52,12 @@ class PreuseInspectionsController < ApplicationController
     #updating takedown
     takedown = preuse.takedown
     if takedown
-      if takedown.will_change?(preuse_params[:preuse_inspection_takedown])
+      # TODO temporarily broken: if takedown.will_change?(preuse_params[:preuse_inspection_takedown])
+        # add users
         takedown.users << current_user unless takedown.users.include?(current_user)
-        takedown.update(preuse_params[:preuse_inspection_takedown])
-      end
+        # update checkboxes and update/create climbs
+        takedown.update_everything(preuse_params[:preuse_inspection_takedown])
+      # end
     end
 
     #TODO flash message for success? also check for other errors, like form editing?
@@ -70,7 +72,9 @@ class PreuseInspectionsController < ApplicationController
       preuse_inspection_setup:
         [:equipment_complete, :element_complete, :environment_complete],
       preuse_inspection_takedown:
-        [:equipment_complete, :element_complete, :environment_complete]
+        [:equipment_complete, :element_complete, :environment_complete,
+          ropes: {}
+        ]
       )
   end
 end

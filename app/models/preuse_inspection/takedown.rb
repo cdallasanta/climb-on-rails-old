@@ -28,4 +28,28 @@ class PreuseInspection::Takedown < ApplicationRecord
   def ropes
     self.preuse_inspection.ropes
   end
+
+  def update_everything(params)
+    self.update_checkboxes(params.except(:ropes))
+    self.update_climbs(params[:ropes])
+  end
+
+  def update_checkboxes(checkbox_params)
+    self.update(checkbox_params)
+  end
+
+  def update_climbs(params)
+    params.each do |rope, climbs|
+      rope_obj = Element::Rope.find_by(identifier:rope, element:self.preuse_inspection.element)
+
+      climbs.each do |block_num, climb_num|
+        climb = rope_obj.climbs.find_or_create_by(climbing_block:(block_num.to_i+1), takedown_id: self.id)
+
+        #only updates if the numbers are different, to reduce changes to the database
+        if climb.number_of_climbs != climb_num.to_i
+          climb.update(number_of_climbs: climb_num.to_i)
+        end
+      end
+    end
+  end
 end
