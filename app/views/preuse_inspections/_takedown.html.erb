@@ -3,7 +3,14 @@
 
   <%= rope_and_climb_fields(ff, takedown) %>
 
-  <%= render partial: 'checkboxes', locals: {ff: ff} %>
+  <%= @element.takedown_equipment_instructions.html_safe %><br>
+  Section completed? <%= ff.check_box :equipment_complete %><br>
+  <%= @element.takedown_element_instructions.html_safe %><br>
+  Section completed? <%= ff.check_box :element_complete %><br>
+  <%= @element.takedown_environment_instructions.html_safe %><br>
+  Section completed? <%= ff.check_box :environment_complete %><br>
+
+<%# TODO comments here %>
 
 <% end %>
 

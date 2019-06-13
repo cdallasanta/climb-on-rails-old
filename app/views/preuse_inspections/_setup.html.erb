@@ -1,6 +1,11 @@
 <%= f.fields_for setup do |ff| %>
 
-  <%= render partial: 'checkboxes', locals: {ff: ff} %>
+<%= @element.setup_equipment_instructions.html_safe %><br>
+Section completed? <%= ff.check_box :equipment_complete %><br>
+<%= @element.setup_element_instructions.html_safe %><br>
+Section completed? <%= ff.check_box :element_complete %><br>
+<%= @element.setup_environment_instructions.html_safe %><br>
+Section completed? <%= ff.check_box :environment_complete %><br>
 
   <%# TODO comments here %>
 <% end %>
