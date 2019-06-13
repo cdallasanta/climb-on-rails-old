@@ -68,8 +68,7 @@ class PreuseInspectionsController < ApplicationController
     params.require(:preuse_inspection).permit(
       :date,
       preuse_inspection_setup:
-        [:equipment_complete, :element_complete, :environment_complete]
-      ),
+        [:equipment_complete, :element_complete, :environment_complete],
       preuse_inspection_takedown:
         [:equipment_complete, :element_complete, :environment_complete]
       )
@@ -85,9 +84,10 @@ class PreuseInspectionsController < ApplicationController
     end
   end
 
-  def takedown_was_changed?(setup)
+  def takedown_was_changed?(takedown)
+    binding.pry
     preuse_params[:preuse_inspection_takedown].to_h.any? do |attr, val|
-      setup.attributes[attr] != !val.to_i.zero?
+      takedown.attributes[attr] != !val.to_i.zero?
       # e.g.
       # equipment_complete == false, and new equipment_complete == "1" would work out to:
       # false != !(1.zero?)
