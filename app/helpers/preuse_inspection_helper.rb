@@ -4,4 +4,17 @@ module PreuseInspectionHelper
       render partial: "takedown", locals: {f:f, takedown: @inspection.takedown}
     end
   end
+
+  def updated_by_div(object)
+    "<div class=\"updated-by\">
+      Updated by:<br>
+      #{updaters_listed(object)}
+    </div>".html_safe
+  end
+
+  def updaters_listed(object)
+    object.users.collect do |user|
+      user.fullname + '<br>'
+    end.join
+  end
 end
