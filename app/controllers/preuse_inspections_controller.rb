@@ -37,25 +37,25 @@ class PreuseInspectionsController < ApplicationController
     preuse = PreuseInspection.find_by(id: params[:id])
     preuse.date = preuse_params[:date]
     #save preuse for date validation
-    #should be something if that date already has an inspection
+    # TODO should be something for if that date already has an inspection
     unless preuse.save
       render element_preuse_inspection_path(preuse.element, preuse)
     end
 
     #updating setup
     setup = preuse.setup
-    if setup_was_changed?(setup)
+    if setup.will_change?(preuse_params[:preuse_inspection_setup])
       setup.users << current_user unless setup.users.include?(current_user)
+      setup.update(preuse_params[:preuse_inspection_setup])
     end
-    setup.update(preuse_params[:preuse_inspection_setup])
 
     #updating takedown
     takedown = preuse.takedown
     if takedown
-      if takedown_was_changed?(takedown)
+      if takedown.will_change?(preuse_params[:preuse_inspection_takedown])
         takedown.users << current_user unless takedown.users.include?(current_user)
+        takedown.update(preuse_params[:preuse_inspection_takedown])
       end
-      takedown.update(preuse_params[:preuse_inspection_takedown])
     end
 
     #TODO flash message for success? also check for other errors, like form editing?
@@ -72,26 +72,5 @@ class PreuseInspectionsController < ApplicationController
       preuse_inspection_takedown:
         [:equipment_complete, :element_complete, :environment_complete]
       )
-  end
-
-  def setup_was_changed?(setup)
-    preuse_params[:preuse_inspection_setup].to_h.any? do |attr, val|
-      setup.attributes[attr] != !val.to_i.zero?
-      # e.g.
-      # equipment_complete == false, and new equipment_complete == "1" would work out to:
-      # false != !(1.zero?)
-      # false != true => true, which means the value is changing
-    end
-  end
-
-  def takedown_was_changed?(takedown)
-    binding.pry
-    preuse_params[:preuse_inspection_takedown].to_h.any? do |attr, val|
-      takedown.attributes[attr] != !val.to_i.zero?
-      # e.g.
-      # equipment_complete == false, and new equipment_complete == "1" would work out to:
-      # false != !(1.zero?)
-      # false != true => true, which means the value is changing
-    end
   end
 end
