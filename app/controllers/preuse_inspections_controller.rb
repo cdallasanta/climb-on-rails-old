@@ -44,8 +44,11 @@ class PreuseInspectionsController < ApplicationController
 
     #updating setup
     setup = preuse.setup
+    #TODO this adding users to update will always run, even if updating the takedown
+    if setup_was_changed?(setup)
+      setup.users << current_user unless setup.users.include?(current_user)
+    end
     setup.update(preuse_params[:preuse_inspection_setup])
-    setup.users << current_user unless setup.users.include?(current_user)
 
     #updating takedown
     takedown = preuse.takedown
@@ -66,5 +69,15 @@ class PreuseInspectionsController < ApplicationController
       preuse_inspection_setup:
         [:equipment_complete, :element_complete, :environment_complete]
       )
+  end
+
+  def setup_was_changed?(setup)
+    preuse_params[:preuse_inspection_setup].to_h.any? do |attr, val|
+      setup.attributes[attr] != !val.to_i.zero?
+      # e.g.
+      # equipment_complete == false, and new equipment_complete == "1" would work out to:
+      # false != !(1.zero?)
+      # false != true => true, which means the value is changing
+    end
   end
 end
