@@ -1,6 +1,9 @@
 <hr>
 <br>
 <%= f.fields_for takedown do |ff| %>
+
+
+
   <%= @element.preuse_equipment_instructions %><br>
   Section completed? <%= ff.check_box :equipment_complete %><br>
   <%= @element.preuse_element_instructions %><br>

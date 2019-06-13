@@ -4,7 +4,6 @@ class PreuseInspection::Takedown < ApplicationRecord
   has_many :user_takedowns, class_name: "JoinTable::UserTakedowns"
   has_many :users, through: :user_takedowns
   has_many :climbs, class_name: "Element::Rope::Climb"
-  has_many :ropes, through: :preuse_inspection
   has_many :comments, as: :commentable
 
   after_create :default_to_false
@@ -24,5 +23,9 @@ class PreuseInspection::Takedown < ApplicationRecord
       # false != !(1.zero?)
       # false != true => true, which means the value is changing
     end
+  end
+
+  def ropes
+    self.preuse_inspection.ropes
   end
 end
