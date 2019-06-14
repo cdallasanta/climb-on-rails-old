@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     params[:user][:password] ||= @user.password
 
     if @user.update(user_params)
-      #TODO "saved successfully message?"
+      flash[:alert] = "Details saved successfully"
       redirect_to user_path(@user)
     else
       render edit_user_path(@user)

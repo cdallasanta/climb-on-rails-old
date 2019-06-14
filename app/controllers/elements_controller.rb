@@ -10,7 +10,7 @@ class ElementsController < ApplicationController
 
     unless @element
       flash[:alert] = "Element not found"
-      render root_path
+      render :index
     end
   end
 
@@ -19,17 +19,21 @@ class ElementsController < ApplicationController
 
     unless @element
       flash[:alert] = "Element not found"
-      render root_path
+      render :index
     end
   end
 
   def update
     @element = Element.find_by(id: params[:id])
-    binding.pry
     @element.update(element_params.except(:ropes_attributes))
     @element.update_ropes(element_params[:ropes_attributes])
 
-    redirect_to element_path(@element)
+    if @element.valid?
+      flash[:alert] = "Element saved successfully"
+      redirect_to element_path(@element)
+    else
+      render :edit
+    end
   end
 
   def new

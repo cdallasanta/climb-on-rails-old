@@ -1,8 +1,8 @@
 class Element < ApplicationRecord
   belongs_to :site
   has_many :ropes, class_name: "Element::Rope"
-  has_many :preuse_inspections, class_name: "Inspection::PreuseInspection"
-  has_many :periodic_inspections, class_name: "Inspection::PeriodicInspection"
+  has_many :preuse_inspections
+  has_many :periodic_inspections
   accepts_nested_attributes_for :ropes
 
   validates_presence_of :name
@@ -38,7 +38,11 @@ class Element < ApplicationRecord
    end
 
   def date_of_last_periodic
-    #TODO make this
+    if self.periodic_inspections != []
+      self.periodic_inspections.last.date
+    else
+      "This element has never recieved a periodic inspection"
+    end
   end
 
   def update_ropes(params)
@@ -52,6 +56,15 @@ class Element < ApplicationRecord
         end
       elsif rope_details[:identifier]
         element.ropes.create(identifier: rope_details[:identifier])
+      end
+    end
+    clean_up_ropes
+  end
+
+  def clean_up_ropes
+    self.ropes.reverse_each do |rope|
+      unless rope.valid?
+        self.ropes.delete(rope)
       end
     end
   end
