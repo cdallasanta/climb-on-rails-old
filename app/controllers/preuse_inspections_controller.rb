@@ -48,14 +48,15 @@ class PreuseInspectionsController < ApplicationController
 
     #updating setup
     setup = preuse.setup
-    if setup.will_change?(preuse_params[:preuse_inspection_setup])
+    if setup.will_change?(preuse_params[:setup_attributes])
       setup.users << current_user unless setup.users.include?(current_user)
-      setup.update(preuse_params[:preuse_inspection_setup])
+      setup.update(preuse_params[:setup_attributes])
     end
 
     #updating takedown
-    takedown = PreuseInspection::Takedown.find_by(id: preuse_params[:takedown_attributes][:id])
-    if takedown == preuse.takedown
+    takedown = preuse.takedown
+    if takedown
+      if  takedown == PreuseInspection::Takedown.find_by(id: preuse_params[:takedown_attributes][:id])
       # TODO temporarily broken: if takedown.will_change?(preuse_params[:preuse_inspection_takedown])
       # #changed?
         # add users
@@ -63,9 +64,10 @@ class PreuseInspectionsController < ApplicationController
         # update checkboxes and update/create climbs
         takedown.update_everything(preuse_params[:takedown_attributes])
       # end
-    else
-      flash[:alert] = "Takedown inspection id not found"
-      render edit_element_preuse_inspection_path(preuse.element, preuse)
+      else
+        flash[:alert] = "Takedown inspection id not found"
+        render edit_element_preuse_inspection_path(preuse.element, preuse)
+      end
     end
 
     #TODO flash message for success? also check for other errors, like form editing?

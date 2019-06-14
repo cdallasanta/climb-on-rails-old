@@ -45,7 +45,6 @@ class PreuseInspection::Takedown < ApplicationRecord
       rope_obj = Element::Rope.find_by(id:rope_attributes[:id], element:self.preuse_inspection.element)
 
       rope_attributes[:climbs_attributes].each do |block_num, last_hash|
-        binding.pry
         climb = rope_obj.climbs.find_or_create_by(climbing_block:(block_num.to_i+1), takedown_id: self.id)
         climb_num = last_hash[:number_of_climbs].to_i
         #only updates if the numbers are different, to reduce changes to the database
