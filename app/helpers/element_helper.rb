@@ -1,11 +1,13 @@
 module ElementHelper
   def rope_details
     @element.ropes.collect do |rope|
-      "<div class=\"rope-details\">
-        <h3>#{rope.identifier}</h3>
-        Total climbs: #{rope.climb_count}<br>
-        #{link_to "Edit or replace rope", edit_element_rope_path(@element, rope)}
-      </div>"
+        if !rope.retired
+        "<div class=\"rope-details\">
+          <h3>#{rope.identifier}</h3>
+          Total climbs: #{rope.climb_count}<br>
+          #{link_to("Retire and replace rope", element_rope_path(@element, rope), method: :patch)}
+        </div>"
+      end
     end.join.html_safe
   end
 
@@ -16,7 +18,9 @@ module ElementHelper
   def ropes_fields(f)
     two_new_ropes(@element)
     f.fields_for :ropes do |ff|
-      ff.text_field(:identifier) + "<br>".html_safe
+      if !ff.object.retired
+        ff.text_field(:identifier) + "<br>".html_safe
+      end
     end
   end
 

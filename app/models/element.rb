@@ -48,10 +48,10 @@ class Element < ApplicationRecord
         old_rope = element.ropes.find_by(id: rope_details[:id])
         if old_rope.identifier != rope_details[:identifier]
           old_rope.update(retired: true)
-          element.rope.create(identifier: rope_details[:identifier])
+          element.ropes.create(identifier: rope_details[:identifier])
         end
       elsif rope_details[:identifier]
-        element.rope.create(identifier: rope_details[:identifier])
+        element.ropes.create(identifier: rope_details[:identifier])
       end
     end
   end

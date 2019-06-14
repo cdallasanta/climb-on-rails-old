@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   resources :elements do #TODO what routes do I need?
-    resources :ropes, only: [:new, :create, :edit, :update, :destory]
+    resources :ropes, only: [:new, :create, :update]
     resources :preuse_inspections
     resources :periodic_inspections
   end

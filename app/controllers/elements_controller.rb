@@ -25,6 +25,7 @@ class ElementsController < ApplicationController
 
   def update
     @element = Element.find_by(id: params[:id])
+    binding.pry
     @element.update(element_params.except(:ropes_attributes))
     @element.update_ropes(element_params[:ropes_attributes])
 
@@ -53,5 +54,9 @@ class ElementsController < ApplicationController
       :periodic_envvironment_instructions,
       ropes_attributes: {}
     )
+  end
+
+  def string_to_html(text)
+    text.sub("\n","<br>")
   end
 end
