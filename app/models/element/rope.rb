@@ -3,6 +3,7 @@ class Element::Rope < ApplicationRecord
   belongs_to :element
   has_many :climbs, class_name: "Element::Rope::Climb"
   has_many :preuse_inspections, through: :element
+  accepts_nested_attributes_for :climbs
 
   validates_presence_of :identifier
   validates_presence_of :element

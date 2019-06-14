@@ -54,15 +54,18 @@ class PreuseInspectionsController < ApplicationController
     end
 
     #updating takedown
-    takedown = preuse.takedown
-    if takedown
+    takedown = PreuseInspection::Takedown.find_by(id: preuse_params[:takedown_attributes][:id])
+    if takedown == preuse.takedown
       # TODO temporarily broken: if takedown.will_change?(preuse_params[:preuse_inspection_takedown])
       # #changed?
         # add users
         takedown.users << current_user unless takedown.users.include?(current_user)
         # update checkboxes and update/create climbs
-        takedown.update_everything(preuse_params[:preuse_inspection_takedown])
+        takedown.update_everything(preuse_params[:takedown_attributes])
       # end
+    else
+      flash[:alert] = "Takedown inspection id not found"
+      render edit_element_preuse_inspection_path(preuse.element, preuse)
     end
 
     #TODO flash message for success? also check for other errors, like form editing?
@@ -74,11 +77,11 @@ class PreuseInspectionsController < ApplicationController
   def preuse_params
     params.require(:preuse_inspection).permit(
       :date,
-      preuse_inspection_setup:
-        [:equipment_complete, :element_complete, :environment_complete],
-      preuse_inspection_takedown:
-        [:equipment_complete, :element_complete, :environment_complete,
-          ropes: {}
+      setup_attributes:
+        [:equipment_complete, :element_complete, :environment_complete, :id],
+      takedown_attributes:
+        [:equipment_complete, :element_complete, :environment_complete, :id,
+          ropes_attributes: {}
         ]
       )
   end

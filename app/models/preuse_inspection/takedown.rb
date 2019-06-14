@@ -5,7 +5,8 @@ class PreuseInspection::Takedown < ApplicationRecord
   has_many :users, through: :user_takedowns
   has_many :climbs, class_name: "Element::Rope::Climb"
   has_many :comments, as: :commentable
-  accepts_nested_attributes_for :climbs
+  has_many :ropes, through: :preuse_inspection, class_name: "Element::Rope"
+  accepts_nested_attributes_for :ropes
 
   after_create :default_to_false
 
@@ -31,6 +32,7 @@ class PreuseInspection::Takedown < ApplicationRecord
   end
 
   def update_everything(params)
+    binding.pry
     self.update_checkboxes(params.except(:ropes))
     self.update_climbs(params[:ropes])
   end
