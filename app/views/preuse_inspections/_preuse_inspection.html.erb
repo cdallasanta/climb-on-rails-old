@@ -1,11 +1,13 @@
 <%= form_for inspection, url: edit_element_preuse_inspection_path(inspection.element, inspection), method: :get  do |f| %>
 
   <fieldset disabled>
-    Date: <%= f.date_field :date %><br>
-    <%= render partial: 'setup', locals: {setup: inspection.setup, f: f} %>
-    <%= takedown_partial_if_exists(f) %>
+    <div class="inspection">
+      Date: <%= f.date_field :date %><br>
+      <%= render partial: 'setup', locals: {setup: inspection.setup, f: f} %>
+      <%= takedown_partial_if_exists(f) %>
+    </div>
   </fieldset>
 
-  <%= f.submit %>
+  <%= f.submit "Edit this inspection" %>
 
 <% end %>

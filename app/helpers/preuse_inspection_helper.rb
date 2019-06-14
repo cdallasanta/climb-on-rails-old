@@ -18,7 +18,7 @@ module PreuseInspectionHelper
     end.join
   end
 
-  def show_if_inspection_selected
+  def show_inspection_if_selected
     if @inspection
       render partial: "preuse_inspection", locals: {inspection: @inspection}
     end
