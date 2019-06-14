@@ -1,5 +1,7 @@
 <h2>Edit details for <%= @element.name %></h2>
 <%= form_for @element do |f| %>
+  <%= errors_check(@element) %>
+
   Element name: <%= f.text_field :name %><br>
 
   <h3>Ropes</h3>

@@ -1,4 +1,6 @@
 <%= form_for @user do |f| %>
+  <%= errors_check(@user) %>
+
   Full name: <%= f.text_field :fullname %><br>
   Email: <%= f.text_field :email %><br>
   Password: <%= f.password_field :password %><br>

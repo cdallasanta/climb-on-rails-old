@@ -12,4 +12,10 @@ module ApplicationHelper
   def current_site
     current_user.site
   end
+
+  def errors_check(object)
+    if object.errors.any?
+      render partial: 'application/errors', locals: {object: object}
+    end
+  end
 end

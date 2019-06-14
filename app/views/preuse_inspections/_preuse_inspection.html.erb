@@ -1,5 +1,6 @@
 <%= form_for inspection, url: edit_element_preuse_inspection_path(inspection.element, inspection), method: :get  do |f| %>
-
+  <%= errors_check(inspection) %>
+  
   <fieldset disabled>
     <div class="inspection">
       Date: <%= f.date_field :date %><br>

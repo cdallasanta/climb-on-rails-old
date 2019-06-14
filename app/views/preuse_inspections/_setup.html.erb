@@ -1,4 +1,5 @@
 <%= f.fields_for :setup do |ff| %>
+  <%= errors_check(setup) %>
   <div class="setup-instructions">
     <%= @element.setup_equipment_instructions.html_safe %><br>
     Section completed? <%= ff.check_box :equipment_complete %>

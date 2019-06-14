@@ -15,9 +15,9 @@ Specs:
   - Climb is a quasi-join table with a user-submitted attribute
 - [x] Include reasonable validations for simple model objects (User, PreuseInspection, PeriodicInspection, Element, Rope, Site)
 - [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes) - PreUse find today's inspection
-- [ ] Include signup (how e.g. Devise)
-- [ ] Include login (how e.g. Devise)
-- [ ] Include logout (how e.g. Devise)
+- [x] Include signup (/signup)
+- [x] Include login (/login)
+- [x] Include logout (/logout)
 - [ ] Include third party signup/login (how e.g. Devise/OmniAuth)
 - [x] Include nested resource show or index (URL e.g. users/2/recipes)
   - /sites/1/elements
