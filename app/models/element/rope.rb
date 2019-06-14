@@ -8,6 +8,12 @@ class Element::Rope < ApplicationRecord
   validates_presence_of :identifier
   validates_presence_of :element
 
+  after_create :not_retired
+
+  def not_retired
+    self.retired ||= false
+  end
+
   # returns the number of climbs this rope has received in its life
   # note: not the number of Climb objects, but the number of uses
   def climb_count

@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2019_06_11_225841) do
   create_table "ropes", force: :cascade do |t|
     t.string "identifier"
     t.integer "element_id"
+    t.boolean "retired"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

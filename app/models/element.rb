@@ -40,4 +40,19 @@ class Element < ApplicationRecord
   def date_of_last_periodic
     #TODO make this
   end
+
+  def update_ropes(params)
+    element = self
+    params.each do |rope_num, rope_details|
+      if rope_details[:id]
+        old_rope = element.ropes.find_by(id: rope_details[:id])
+        if old_rope.identifier != rope_details[:identifier]
+          old_rope.update(retired: true)
+          element.rope.create(identifier: rope_details[:identifier])
+        end
+      elsif rope_details[:identifier]
+        element.rope.create(identifier: rope_details[:identifier])
+      end
+    end
+  end
 end

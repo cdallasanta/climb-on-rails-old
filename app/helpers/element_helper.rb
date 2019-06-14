@@ -13,6 +13,13 @@ module ElementHelper
     text.sub("<br>","\n")
   end
 
+  def ropes_fields(f)
+    two_new_ropes(@element)
+    f.fields_for :ropes do |ff|
+      ff.text_field(:identifier) + "<br>".html_safe
+    end
+  end
+
   def two_new_ropes(element)
     element.ropes.new
     element.ropes.new

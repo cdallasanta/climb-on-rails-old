@@ -3,12 +3,12 @@
   Element name: <%= f.text_field :name %><br>
 
   <h3>Ropes</h3>
-  <% two_new_ropes(@element) %>
-  <%= f.fields_for :ropes do |ff| %>
-    <%= ff.text_field :identifier %><br>
-  <% end %>
+  Note: Changing any existing ropes here will retire and replace that rope.<br>
+  To rename a rope and keep it in service, go <%= link_to "here", element_path(@element) %><br>
+  <%= ropes_fields(f) %>
 
   <h3>Instructions:</h3>
   <%= render partial: 'instruction_forms', locals: {f: f} %>
 
+  <%= f.submit %>
 <% end %>

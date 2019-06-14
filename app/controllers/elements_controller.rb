@@ -24,11 +24,34 @@ class ElementsController < ApplicationController
   end
 
   def update
+    @element = Element.find_by(id: params[:id])
+    @element.update(element_params.except(:ropes_attributes))
+    @element.update_ropes(element_params[:ropes_attributes])
+
+    redirect_to element_path(@element)
   end
 
   def new
   end
 
   def create
+  end
+
+  private
+
+  def element_params
+    params.require(:element).permit(
+      :name,
+      :setup_equipment_instructions,
+      :setup_element_instructions,
+      :setup_envvironment_instructions,
+      :takedown_equipment_instructions,
+      :takedown_element_instructions,
+      :takedown_envvironment_instructions,
+      :periodic_equipment_instructions,
+      :periodic_element_instructions,
+      :periodic_envvironment_instructions,
+      ropes_attributes: {}
+    )
   end
 end
