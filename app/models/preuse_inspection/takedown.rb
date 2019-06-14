@@ -32,9 +32,8 @@ class PreuseInspection::Takedown < ApplicationRecord
   end
 
   def update_everything(params)
-    binding.pry
-    self.update_checkboxes(params.except(:ropes))
-    self.update_climbs(params[:ropes])
+    self.update_checkboxes(params.except(:ropes_attributes, :id))
+    self.update_climbs(params[:ropes_attributes])
   end
 
   def update_checkboxes(checkbox_params)
@@ -42,15 +41,16 @@ class PreuseInspection::Takedown < ApplicationRecord
   end
 
   def update_climbs(params)
-    params.each do |rope, climbs|
-      rope_obj = Element::Rope.find_by(identifier:rope, element:self.preuse_inspection.element)
+    params.each do |i, rope_attributes|
+      rope_obj = Element::Rope.find_by(id:rope_attributes[:id], element:self.preuse_inspection.element)
 
-      climbs.each do |block_num, climb_num|
-        climb = rope_obj.climbs.find_or_create_by(climbing_block:(block_num.to_i), takedown_id: self.id)
-
+      rope_attributes[:climbs_attributes].each do |block_num, last_hash|
+        binding.pry
+        climb = rope_obj.climbs.find_or_create_by(climbing_block:(block_num.to_i+1), takedown_id: self.id)
+        climb_num = last_hash[:number_of_climbs].to_i
         #only updates if the numbers are different, to reduce changes to the database
-        if climb.number_of_climbs != climb_num.to_i
-          climb.update(number_of_climbs: climb_num.to_i)
+        if climb.number_of_climbs != climb_num
+          climb.update(number_of_climbs: climb_num)
         end
       end
     end
