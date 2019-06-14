@@ -1,0 +1,6 @@
+<h2><%= @element.name %></h2>
+<%= link_to "Edit details", edit_element_path(@element) %>
+
+<%= rope_details %>
+
+<%= render partial: 'instructions', locals: {element: @element} %>

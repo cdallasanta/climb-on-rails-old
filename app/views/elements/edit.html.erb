@@ -1,0 +1,14 @@
+<h2>Edit details for <%= @element.name %></h2>
+<%= form_for @element do |f| %>
+  Element name: <%= f.text_field :name %><br>
+
+  <h3>Ropes</h3>
+  <% two_new_ropes(@element) %>
+  <%= f.fields_for :ropes do |ff| %>
+    <%= ff.text_field :identifier %><br>
+  <% end %>
+
+  <h3>Instructions:</h3>
+  <%= render partial: 'instruction_forms', locals: {f: f} %>
+
+<% end %>

@@ -3,11 +3,12 @@ class Element < ApplicationRecord
   has_many :ropes, class_name: "Element::Rope"
   has_many :preuse_inspections, class_name: "Inspection::PreuseInspection"
   has_many :periodic_inspections, class_name: "Inspection::PeriodicInspection"
+  accepts_nested_attributes_for :ropes
 
   validates_presence_of :name
   validates_presence_of :site
 
-  after_create :default_instructions
+  after_initialize :set_default_instructions
 
   #TODO figure out how to deal with default instructions.
   @@DEFAULT_INSRUCTIONS = {
@@ -22,7 +23,7 @@ class Element < ApplicationRecord
     periodic_environment_instructions: "filler"
   }
 
-  def default_instructions
+  def set_default_instructions
     #TODO, this is filler until I work on elements/new
     self.setup_equipment_instructions ||= @@DEFAULT_INSRUCTIONS[:setup_equipment_instructions]
     self.setup_element_instructions ||= @@DEFAULT_INSRUCTIONS[:setup_element_instructions]

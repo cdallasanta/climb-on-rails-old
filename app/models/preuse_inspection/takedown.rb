@@ -5,6 +5,7 @@ class PreuseInspection::Takedown < ApplicationRecord
   has_many :users, through: :user_takedowns
   has_many :climbs, class_name: "Element::Rope::Climb"
   has_many :comments, as: :commentable
+  accepts_nested_attributes_for :climbs
 
   after_create :default_to_false
 

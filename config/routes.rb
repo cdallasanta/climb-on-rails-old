@@ -4,16 +4,16 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  
-  get '/signup', to: 'users#new'
-  resources :users, only: [:new, :create, :show, :edit, :update]
 
-  #TODO probably not all I need
+  get '/signup', to: 'users#new'
+  resources :users, only: [:create, :show, :edit, :update]
+
   resources :sites, only: [:show] do
-    resources :elements, only: [:index, :show]
+    resources :elements
   end
 
   resources :elements do #TODO what routes do I need?
+    resources :ropes, only: [:new, :create, :edit, :update, :destory]
     resources :preuse_inspections
     resources :periodic_inspections
   end
