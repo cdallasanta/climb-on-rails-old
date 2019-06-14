@@ -15,11 +15,15 @@ class PreuseInspectionsController < ApplicationController
 
   def index
     @element = Element.find_by(params[:element_id])
+    if params[:date]
+      @inspection = PreuseInspection.find_past_inspection(params[:date], @element.id)
+    end
   end
 
   def show
     #TODO is this used?
   end
+
   # currently, no #new is needed, TODO remove route from config
 
   def edit
@@ -53,6 +57,7 @@ class PreuseInspectionsController < ApplicationController
     takedown = preuse.takedown
     if takedown
       # TODO temporarily broken: if takedown.will_change?(preuse_params[:preuse_inspection_takedown])
+      # #changed?
         # add users
         takedown.users << current_user unless takedown.users.include?(current_user)
         # update checkboxes and update/create climbs

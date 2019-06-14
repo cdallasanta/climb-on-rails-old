@@ -49,14 +49,14 @@ ActiveRecord::Schema.define(version: 2019_06_11_225841) do
     t.boolean "environment_complete"
     t.integer "element_id"
     t.integer "user_id"
-    t.datetime "date"
+    t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "preuse_inspections", force: :cascade do |t|
     t.integer "element_id"
-    t.datetime "date"
+    t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

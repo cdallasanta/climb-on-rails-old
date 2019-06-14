@@ -6,7 +6,7 @@ class CreatePeriodicInspections < ActiveRecord::Migration[5.2]
       t.boolean :environment_complete
       t.integer :element_id
       t.integer :user_id
-      t.string :date
+      t.date :date
 
       t.timestamps
     end
