@@ -9,7 +9,6 @@ class User < ApplicationRecord
 
   validates_presence_of :fullname
   validates :email, presence: true, uniqueness: true
-  validates :role, inclusion: {in: %w(facilitator lead admin)}
   has_secure_password
 
   def is_admin?

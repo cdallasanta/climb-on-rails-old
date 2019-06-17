@@ -20,11 +20,10 @@ create elements
 can view elements: rope age, last periodic inspection, all comments
 can view and edit all periodic and preuse inspections
 
-?create/edit users in bulk?
-?add/retire gear?
-?adjust permissions of their site?
-?receive emails with comments from inspections?
-
+?create/edit users in bulk
+?add/retire gear
+?adjust permissions of their site
+?receive emails with comments from inspections
 
 #future:
 Devise

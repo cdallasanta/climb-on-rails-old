@@ -4,7 +4,9 @@ class ApplicationController < ActionController::Base
   end
 
   def check_logged_in
-    unless logged_in?
+    if logged_in?
+      check_user_data_complete
+    else
       redirect_to '/login'
     end
   end
@@ -19,11 +21,10 @@ class ApplicationController < ActionController::Base
     current_user.site
   end
 
-  #TODO is this used yet?
-  def check_owner(object)
-    unless object.user == current_user || current_user.is_admin?
-      flash[:alert] = "You must be logged in as that item's creator to view/edit it"
-      redirect_to root_path
+  def check_user_data_complete
+    if current_user.role == nil ||  current_user.site == nil
+      flash[:alert] = "Please complete your profile details"
+      redirect_to user_path(current_user)
     end
   end
 end

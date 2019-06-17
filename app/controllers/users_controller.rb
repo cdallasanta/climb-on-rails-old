@@ -17,9 +17,11 @@ class UsersController < ApplicationController
   end
 
   def show
+    # @user is set in the before_action, #check_owner_of_user
   end
 
   def edit
+    # @user is set in the before_action, #check_owner_of_user
   end
 
   def update
@@ -42,7 +44,7 @@ class UsersController < ApplicationController
   def check_owner_of_user
     @user = User.find_by(id: params[:id])
 
-    if @user != current_user
+    unless @user == current_user || current_user.is_admin?
       flash[:alert] = "You must be logged in as that user to view their page"
       redirect_to root_path
     end

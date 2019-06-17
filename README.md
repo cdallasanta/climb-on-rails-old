@@ -6,6 +6,7 @@ Climb On is a web app for challenge course managers (CCM) to cut down on the tre
 - "Make it look good"
 - Implimenting Devise and ActiveAdmin engines
 - Adding more user data, such as their portfolio (maybe leading to an automatic log of hours)
+- Site contact receives emails with comments from inspections
 - Replies to comments, such as one a CCM would leave on a repaired piece of gear
 - Gear log
 
