@@ -5,14 +5,23 @@ Climb On is a web app for challenge course managers (CCM) to cut down on the tre
 ### Future Features
 - "Make it look good"
 - Implimenting Devise and ActiveAdmin engines
-- Adding more user data, such as their portfolio (maybe leading to an automatic log of hours)
+- replace omniauth-facebook with admin-created users (and allow the admin to do so in bulk via a spreadsheet)
+- Adding more user data, such as their ropes portfolio (maybe leading to an automatic log of hours)
 - Site contact receives emails with comments from inspections
 - Replies to comments, such as one a CCM would leave on a repaired piece of gear
 - Gear log
 
 
 ## Usage
-To run the app locally, clone this repo. Run `bundle install` in your terminal, run the migrations using `rake db:migrate` and you can seed the database with dummy data by running `rake db:seed`. You can now run `rails server` in your terminal, and the app will be available at localhost:3000.
+To run the app locally, clone this repo. Run `bundle install` in your terminal, run the migrations using `rake db:migrate` and you can seed the database with dummy data by running `rake db:seed`. Since it uses the gem `omniauth-facebook,` you will need to create a `.env` file and add your facebook key and secret like so:
+
+```ruby
+# /climb-on-rails/.env
+FACEBOOK_KEY = (your app id here)
+FACEBOOK_SECRET = (your app secret here)
+```
+
+You can now run `rails server` in your terminal, and the app will be available at localhost:3000.
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/cdallasanta/ropes-sinatra. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
