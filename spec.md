@@ -23,10 +23,10 @@ Specs:
   - /sites/1/elements
 - [x] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new)
   - /elements/1/preuse_inspections/new
-- [ ] Include form display of validation errors (form URL e.g. /recipes/new)
+- [x] Include form display of validation errors (form URL e.g. /recipes/new)
 
 Confirm:
 - [ ] The application is pretty DRY
-- [ ] Limited logic in controllers
-- [ ] Views use helper methods if appropriate
-- [ ] Views use partials if appropriate
+- [x] Limited logic in controllers
+- [x] Views use helper methods if appropriate
+- [x] Views use partials if appropriate
