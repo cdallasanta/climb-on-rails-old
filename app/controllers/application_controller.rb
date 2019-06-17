@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   def check_user_data_complete
     if current_user.role == nil ||  current_user.site == nil
       flash[:alert] = "Please complete your profile details"
-      redirect_to user_path(current_user)
+      redirect_to edit_user_path(current_user)
     end
   end
 end

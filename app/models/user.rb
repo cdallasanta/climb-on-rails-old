@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  belongs_to :site
+  belongs_to :site, optional: true
   has_many :periodic_inspections, class_name: "Inspection::PeriodicInspection"
   has_many :user_setups, class_name: "JoinTable::UserSetups"
   has_many :setups, through: :user_setups
