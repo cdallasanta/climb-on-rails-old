@@ -32,10 +32,6 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'dotenv-rails', groups: [:development, :test]
 
-# Use bootstrap for navbar pretty-fication
-gem 'bootstrap', '~> 4.3.1'
-gem 'jquery-rails'
-
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
