@@ -1,0 +1,15 @@
+=> [32m#<Element:0x00007fffd6b60c50[0m
+ id: [1;34m1[0m,
+ name: [31m[1;31m"[0m[31mCatwalk[1;31m"[0m[31m[0m,
+ site_id: [1;34m1[0m,
+ setup_equipment_instructions: [31m[1;31m"[0m[31mAll gear checked<br>Bad gear set aside[1;31m"[0m[31m[0m,
+ setup_element_instructions: [31m[1;31m"[0m[31mEverything appears normal<br>Backup halos not engaged[1;31m"[0m[31m[0m,
+ setup_environment_instructions: [31m[1;31m"[0m[31mWeather is appropriate for climbing<br>No widowmakers[1;31m"[0m[31m[0m,
+ takedown_equipment_instructions: [31m[1;31m"[0m[31mGear stored properly<br>Helmets sprayed[1;31m"[0m[31m[0m,
+ takedown_element_instructions: [31m[1;31m"[0m[31mAccess methods removed[1;31m"[0m[31m[0m,
+ takedown_environment_instructions: [31m[1;31m"[0m[31mArea clear of garbage[1;31m"[0m[31m[0m,
+ periodic_equipment_instructions: [31m[1;31m"[0m[31mfiller[1;31m"[0m[31m[0m,
+ periodic_element_instructions: [31m[1;31m"[0m[31mfiller[1;31m"[0m[31m[0m,
+ periodic_environment_instructions: [31m[1;31m"[0m[31mfiller[1;31m"[0m[31m[0m,
+ created_at: [1;34;4mTue[0m, [1;34m18[0m [1;34;4mJun[0m [1;34m2019[0m [1;34m21[0m:[1;34m29[0m:[1;34m05[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+ updated_at: [1;34;4mTue[0m, [1;34m18[0m [1;34;4mJun[0m [1;34m2019[0m [1;34m21[0m:[1;34m29[0m:[1;34m05[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m[32m>[0m

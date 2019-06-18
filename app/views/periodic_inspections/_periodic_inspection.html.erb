@@ -1,5 +1,9 @@
 <%= form_for [inspection.element, inspection] do |f| %>
   <%= errors_check(inspection) %>
+  <div class="form-group">
+    <%= f.label :date %>
+    <%= f.date_field :date, class: "form-control-sm", required: true %>
+  </div>
   <div class="periodic-instructions form-group">
     <%= @element.periodic_equipment_instructions.html_safe %><br>
     <div class="form-check">

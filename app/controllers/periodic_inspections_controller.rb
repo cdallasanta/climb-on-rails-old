@@ -1,27 +1,64 @@
 class PeriodicInspectionsController < ApplicationController
-  before_action :check_logged_in
+  before_action :check_logged_in, :check_for_element_and_inspection
 
   def new
-    @element = Element.find_by(id:params[:element_id])
     @inspection = PeriodicInspection.new(element: @element)
   end
 
   def create
-    @element = Element.find_by(id:params[:element_id])
-    @inspection = PeriodicInspection.new(element: @element)
+    @inspection = PeriodicInspection.find_or_create_by_date(@element, params[:periodic_inspection][:date])
+
+    if @inspection.update(periodic_params)
+      @inspection.users << current_user unless @inspection.users.include?(current_user)
+      flash[:alert] = "Inspection logged successfully"
+      redirect_to element_periodic_inspection_path(@element, @inspection)
+    else
+      render edit_element_periodic_inspection_path(@element, @inspection)
+    end
   end
 
   def show
-    @element = Element.find_by(id:params[:element_id])
-    @inspection = PeriodicInspection.find_by(id: params[:id])
+    # @inspection is set in the before_action, check_for_element_and_inspection
   end
 
   def edit
-    @element = Element.find_by(id:params[:element_id])
-    @inspection = PeriodicInspection.find_by(id: params[:id])
+    # @inspection is set in the before_action, check_for_element_and_inspection
   end
 
   def update
+    if @inspection.update(periodic_params)
+      @inspection.users << current_user unless @inspection.users.include?(current_user)
+      flash[:alert] = "Inspection logged successfully"
+      redirect_to element_periodic_inspection_path(@element, @inspection)
+    else
+      render edit_element_periodic_inspection_path(@element, @inspection)
+    end
+  end
+
+  private
+
+  def periodic_params
+    params.require(:periodic_inspection).permit(
+      :equipment_complete,
+      :element_complete,
+      :environment_complete
+    )
+  end
+
+  def check_for_element_and_inspection
+    @element = Element.find_by(id:params[:element_id])
+    if @element
+      if params[:id]
+        @inspection = @element.periodic_inspections.find_by(id: params[:id])
+        if @inspection.nil?
+          flash[:alert] = "Inspection id not found under that element"
+          redirect_to element_path(@element)
+        end
+      end
+    else
+      flash[:alert] = "No element found with that id"
+      redirect_to root_path
+    end
   end
 
 end

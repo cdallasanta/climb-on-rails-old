@@ -7,6 +7,8 @@
     </div>
     <%= render partial: 'setup', locals: {setup: inspection.setup, f: f} %>
     <%= takedown_partial_if_exists(f) %>
+
+    <%= updated_by_div(setup) %>
   </fieldset>
 
   <%= f.submit "Edit this inspection" %>

@@ -2,7 +2,7 @@
 <%= link_to "Edit details", edit_element_path(@element) %><br>
 
 Date of last Periodic Inspection:<br>
-<%= @element.date_of_last_periodic %>
+<%= link_to @element.date_of_last_periodic, element_periodic_inspection_path(@element, @element.periodic_inspections.last) %>
 
 <%= rope_details %>
 
