@@ -25,7 +25,7 @@ class ElementsController < ApplicationController
 
   def update
     @element = Element.find_by(id: params[:id])
-    @element.update(element_params.except(:ropes_attributes))
+    @element.update(string_to_html(element_params.except(:ropes_attributes)))
     @element.update_ropes(element_params[:ropes_attributes])
 
     if @element.valid?
@@ -34,12 +34,6 @@ class ElementsController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def new
-  end
-
-  def create
   end
 
   private
@@ -60,7 +54,9 @@ class ElementsController < ApplicationController
     )
   end
 
-  def string_to_html(text)
-    text.sub("\n","<br>")
+  def string_to_html(params)
+    params.to_h.transform_values do |text|
+      text.sub("\r\n","<br>")
+    end
   end
 end

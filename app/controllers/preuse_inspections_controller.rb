@@ -20,12 +20,6 @@ class PreuseInspectionsController < ApplicationController
     end
   end
 
-  def show
-    #TODO is this used?
-  end
-
-  # currently, no #new is needed, TODO remove route from config
-
   def edit
     @inspection = PreuseInspection.find_by(id: params[:id])
     @element = @inspection.element

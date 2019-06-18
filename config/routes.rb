@@ -9,13 +9,9 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   resources :users, only: [:create, :show, :edit, :update]
 
-  resources :sites, only: [:show] do
-    resources :elements
-  end
-
-  resources :elements do #TODO what routes do I need?
+  resources :elements, only: [:index, :show, :edit, :update] do
     resources :ropes, only: [:new, :create, :update]
-    resources :preuse_inspections
+    resources :preuse_inspections, only: [:index, :create, :edit, :update]
     resources :periodic_inspections
   end
 end
