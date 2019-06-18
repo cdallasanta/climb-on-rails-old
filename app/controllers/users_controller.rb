@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     params[:user][:password] ||= @user.password
 
     if @user.update(user_params)
+      check_user_data_complete
       flash[:alert] = "Details saved successfully"
       redirect_to user_path(@user)
     else
