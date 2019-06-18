@@ -1,0 +1,5 @@
+<%= f.label "Comments:" %><br>
+
+<%= f.fields_for :comments do |ff| %>
+  <%= ff.text_area :content %>
+<% end %>

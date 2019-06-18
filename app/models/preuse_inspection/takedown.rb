@@ -7,6 +7,7 @@ class PreuseInspection::Takedown < ApplicationRecord
   has_many :comments, as: :commentable
   has_many :ropes, through: :preuse_inspection, class_name: "Element::Rope"
   accepts_nested_attributes_for :ropes
+  accepts_nested_attributes_for :comments
 
   after_create :default_to_false
 

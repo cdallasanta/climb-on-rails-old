@@ -21,6 +21,7 @@ class PreuseInspectionsController < ApplicationController
   end
 
   def update
+    binding.pry
     check_for_previous_inspection_on_that_date
     #updating preuse (just the date, really)
     @inspection.date = preuse_params[:date]

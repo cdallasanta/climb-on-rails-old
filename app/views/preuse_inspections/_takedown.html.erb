@@ -23,8 +23,9 @@
     <%= ff.label "Section completed?", class: "form-check-label" %>
   </div>
 
-<%# TODO comments here %>
-
+  <div class="form-group">
+    <%= render partial: 'comments', locals: {f:f, inspection:takedown} %>
+  </div>
 <% end %>
 
 <%= updated_by_div(takedown) %>

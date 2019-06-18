@@ -3,6 +3,7 @@ class PeriodicInspection < ApplicationRecord
   has_many :user_periodic_inspections, class_name: "JoinTable::UserPeriodicInspections"
   has_many :users, through: :user_periodic_inspections
   has_many :comments, as: :commentable
+  accepts_nested_attributes_for :comments
 
   validates :date, presence: true, uniqueness: {scope: :element}
   validates_presence_of :element

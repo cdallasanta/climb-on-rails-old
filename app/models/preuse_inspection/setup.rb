@@ -5,6 +5,7 @@ class PreuseInspection::Setup < ApplicationRecord
   has_many :users, through: :user_setups
   has_many :comments, as: :commentable
   has_one :element, through: :preuse_inspection
+  accepts_nested_attributes_for :comments
 
   after_create :default_to_false
 

@@ -3,9 +3,11 @@ class PeriodicInspectionsController < ApplicationController
 
   def new
     @inspection = PeriodicInspection.new(element: @element)
+    @inspection.comments.build(user:current_user)
   end
 
   def create
+    binding.pry
     @inspection = PeriodicInspection.find_or_create_by_date(@element, params[:periodic_inspection][:date])
 
     if @inspection.update(periodic_params)
@@ -41,7 +43,8 @@ class PeriodicInspectionsController < ApplicationController
     params.require(:periodic_inspection).permit(
       :equipment_complete,
       :element_complete,
-      :environment_complete
+      :environment_complete,
+      comments: {}
     )
   end
 

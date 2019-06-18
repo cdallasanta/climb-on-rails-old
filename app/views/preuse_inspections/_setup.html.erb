@@ -22,7 +22,9 @@
     </div>
   </div>
 
-  <%# TODO comments here %>
+  <div class="form-group">
+    <%= render partial: 'comments', locals: {f:f, inspection:setup} %>
+  </div>
 <% end %>
 
 <%= updated_by_div(setup) %>
