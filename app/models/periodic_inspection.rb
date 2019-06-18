@@ -4,7 +4,7 @@ class PeriodicInspection < ApplicationRecord
   has_many :users, through: :user_periodic_inspections
   has_many :comments, as: :commentable
 
-  validates_presence_of :date
+  validates :date, presence: true, uniqueness: {scope: :element}
   validates_presence_of :element
 
   def self.find_or_create_by_date(element, date)

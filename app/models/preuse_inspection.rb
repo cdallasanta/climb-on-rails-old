@@ -6,7 +6,7 @@ class PreuseInspection < ApplicationRecord
   accepts_nested_attributes_for :setup
   accepts_nested_attributes_for :takedown
 
-  validates_presence_of :date
+  validates :date, presence: true, uniqueness: {scope: :element}
   validates_presence_of :element
 
   def self.find_or_create_todays_inspection(element_id)
