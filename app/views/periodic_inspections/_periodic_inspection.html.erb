@@ -1,5 +1,5 @@
-<%= f.fields_for @inspection do |ff| %>
-  <%= errors_check(@inspection) %>
+<%= form_for [inspection.element, inspection] do |ff| %>
+  <%= errors_check(inspection) %>
   <div class="periodic-instructions form-group">
     <%= @element.periodic_equipment_instructions.html_safe %><br>
     <div class="form-check">
@@ -25,4 +25,4 @@
   <%# TODO comments here %>
 <% end %>
 
-<%= updated_by_div(@inspection) %>
+<%= updated_by_div(inspection) %>

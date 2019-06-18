@@ -1,6 +1,7 @@
 class PeriodicInspection < ApplicationRecord
   belongs_to :element
-  belongs_to :user
+  has_many :user_periodic_inspections, class_name: "JoinTable::UserPeriodicInspections"
+  has_many :users, through: :user_periodic_inspections
   has_many :comments, as: :commentable
 
   validates_presence_of :date
