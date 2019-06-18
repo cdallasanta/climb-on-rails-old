@@ -18,6 +18,7 @@ class PreuseInspection::Takedown < ApplicationRecord
   end
 
   def will_change?(params)
+    binding.pry
     params.to_h.any? do |attr, val|
       self.attributes[attr] != !val.to_i.zero?
       # e.g.

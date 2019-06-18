@@ -1,5 +1,5 @@
 class PeriodicInspectionsController < ApplicationController
-  before_action :check_logged_in, :check_for_element_and_inspection
+  before_action :check_logged_in, :check_for_element_and_inspection_existance
 
   def new
     @inspection = PeriodicInspection.new(element: @element)
@@ -45,7 +45,7 @@ class PeriodicInspectionsController < ApplicationController
     )
   end
 
-  def check_for_element_and_inspection
+  def check_for_element_and_inspection_existance
     @element = Element.find_by(id:params[:element_id])
     if @element
       if params[:id]
@@ -60,5 +60,4 @@ class PeriodicInspectionsController < ApplicationController
       redirect_to root_path
     end
   end
-
 end
