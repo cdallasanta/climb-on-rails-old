@@ -1,19 +1,20 @@
 module HeaderHelper
   def login_link_or_user_page
     if logged_in?
-      "<div class=\"header-link\">
-          #{link_to "Elements", elements_path}
-        </div>
-        <div class=\"header-link\">
-        #{link_to "My profile", user_path(current_user)}
-      </div>
-      <div class=\"header-link\">
-        #{link_to "Logout", logout_path}
-      </div>".html_safe
+      "<li class=\"nav-item\">
+          #{link_to "Elements", elements_path, class: "nav-link", class: "nav-link"}
+        </li>
+        <li class=\"nav-item\">
+        #{link_to "My profile", user_path(current_user), class: "nav-link"}
+        </li>
+        <li class=\"nav-item\">
+        #{link_to "Logout", logout_path, class: "nav-link"}
+        </li>
+      ".html_safe
     else
-      "<div class=\"header-link\">
-          #{link_to "Login", login_path}
-      </div>".html_safe
+      "<li class=\"nav-item\">
+          #{link_to "Login", login_path, class: "nav-link"}
+      </li>".html_safe
     end
   end
 end

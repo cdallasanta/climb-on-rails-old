@@ -6,10 +6,12 @@ module PreuseInspectionHelper
   end
 
   def updated_by_div(object)
-    "<div class=\"updated-by\">
-      Updated by:<br>
-      #{updaters_listed(object)}
-    </div>".html_safe
+    unless object.users == []
+      "<div class=\"updated-by\">
+        Updated by:<br>
+        #{updaters_listed(object)}
+      </div>".html_safe
+    end
   end
 
   def updaters_listed(object)

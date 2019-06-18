@@ -1,14 +1,38 @@
-<h4>Setup</h4>
-Equipment: <%= f.text_area :setup_equipment_instructions, value: html_to_string(@element.setup_equipment_instructions) %><br>
-Element: <%= f.text_area :setup_element_instructions, value: html_to_string(@element.setup_element_instructions) %><br>
-Environment: <%= f.text_area :setup_environment_instructions, value: html_to_string(@element.setup_environment_instructions) %><br>
+<div class="form-group">
+  <h4>Setup</h4>
+  Equipment: <%= f.text_area :setup_equipment_instructions,
+    value: html_to_string(@element.setup_equipment_instructions),
+    class: "form-control" %><br>
+  Element: <%= f.text_area :setup_element_instructions,
+    value: html_to_string(@element.setup_element_instructions),
+    class: "form-control" %><br>
+  Environment: <%= f.text_area :setup_environment_instructions,
+    value: html_to_string(@element.setup_environment_instructions),
+    class: "form-control" %><br>
+</div>
 
-<h4>Takedown</h4>
-Equipment: <%= f.text_area :takedown_equipment_instructions, value: html_to_string(@element.takedown_equipment_instructions) %><br>
-Element: <%= f.text_area :takedown_element_instructions, value: html_to_string(@element.takedown_element_instructions) %><br>
-Environment: <%= f.text_area :takedown_environment_instructions, value: html_to_string(@element.takedown_environment_instructions) %><br>
+<div class="form-group">
+  <h4>Takedown</h4>
+  Equipment: <%= f.text_area :takedown_equipment_instructions,
+    value: html_to_string(@element.takedown_equipment_instructions),
+    class: "form-control" %><br>
+  Element: <%= f.text_area :takedown_element_instructions,
+    value: html_to_string(@element.takedown_element_instructions),
+    class: "form-control" %><br>
+  Environment: <%= f.text_area :takedown_environment_instructions,
+    value: html_to_string(@element.takedown_environment_instructions),
+    class: "form-control" %><br>
+</div
 
-<h4>Periodic</h4>
-Equipment: <%= f.text_area :periodic_equipment_instructions, value: html_to_string(@element.periodic_equipment_instructions) %><br>
-Element: <%= f.text_area :periodic_element_instructions, value: html_to_string(@element.periodic_element_instructions) %><br>
-Environment: <%= f.text_area :periodic_environment_instructions, value: html_to_string(@element.periodic_environment_instructions) %><br>
+<div class="form-group">
+  <h4>Periodic</h4>
+  Equipment: <%= f.text_area :periodic_equipment_instructions,
+    value: html_to_string(@element.periodic_equipment_instructions),
+    class: "form-control" %><br>
+  Element: <%= f.text_area :periodic_element_instructions,
+    value: html_to_string(@element.periodic_element_instructions),
+    class: "form-control" %><br>
+  Environment: <%= f.text_area :periodic_environment_instructions,
+    value: html_to_string(@element.periodic_environment_instructions),
+    class: "form-control" %><br>
+</div

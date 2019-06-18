@@ -12,7 +12,7 @@ module TakedownHelper
       4.times { rope.climbs.new }
     end
     form.fields_for :climbs do |climb_form|
-      climb_form.phone_field :number_of_climbs
+      climb_form.phone_field :number_of_climbs, class:"form-control-sm"
     end
   end
 end

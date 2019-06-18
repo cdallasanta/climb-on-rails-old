@@ -1,9 +1,9 @@
 <%= form_for inspection, url: edit_element_preuse_inspection_path(inspection.element, inspection), method: :get  do |f| %>
   <%= errors_check(inspection) %>
-  
+
   <fieldset disabled>
-    <div class="inspection">
-      Date: <%= f.date_field :date %><br>
+    <div class="form-group">
+      Date: <%= f.date_field :date, class:"form-control" %><br>
       <%= render partial: 'setup', locals: {setup: inspection.setup, f: f} %>
       <%= takedown_partial_if_exists(f) %>
     </div>

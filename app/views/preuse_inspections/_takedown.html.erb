@@ -1,21 +1,21 @@
 <hr>
 <%= f.fields_for :takedown do |ff| %>
   <%= errors_check(takedown) %>
-  <div class="climb-blocks">
+  <div class="climb-blocks form-group">
     <%= rope_and_climb_fields(ff, takedown) %>
   </div>
 
-  <div class="takedown-instructions">
+  <div class="takedown-instructions form-group">
     <%= @element.takedown_equipment_instructions.html_safe %><br>
-    Section completed? <%= ff.check_box :equipment_complete %>
+    Section completed? <%= ff.check_box :equipment_complete, class:"form-check" %>
   </div>
-  <div class="takedown-instructions">
+  <div class="takedown-instructions form-group">
     <%= @element.takedown_element_instructions.html_safe %><br>
-    Section completed? <%= ff.check_box :element_complete %>
+    Section completed? <%= ff.check_box :element_complete, class:"form-check" %>
   </div>
-  <div class="takedown-instructions">
+  <div class="takedown-instructions form-group">
     <%= @element.takedown_environment_instructions.html_safe %><br>
-    Section completed? <%= ff.check_box :environment_complete %>
+    Section completed? <%= ff.check_box :environment_complete, class:"form-check" %>
   </div>
 
 <%# TODO comments here %>
