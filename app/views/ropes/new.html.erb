@@ -1,6 +1,16 @@
 <%= form_for @rope do |f| %>
   <%= errors_check(@rope) %>
-  New Rope Identifier: <%= f.text_field :identifier %><br>
-  Element Name: <%= f.select :element_id, options_from_collection_for_select(current_site.elements, :id, :name, @rope.element_id) %><br>
-  <%= f.submit %>
+  <div class="form-group">
+    <% f.label "New Rope Identifier:" %>
+    <%= f.text_field :identifier, class: "form-control" %><br>
+  </div>
+  <div class="form-group">
+    <% f.label "Element Name:" %>
+    <%= f.select :element_id,
+      options_from_collection_for_select(current_site.elements, :id, :name, @rope.element_id),
+      class: "form-control" %><br>
+  </div>
+  <div class="form-group">
+    <%= f.submit %>
+  </div>
 <% end %>

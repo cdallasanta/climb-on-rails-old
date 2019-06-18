@@ -4,9 +4,9 @@
   <fieldset disabled>
     <div class="form-group">
       Date: <%= f.date_field :date, class:"form-control" %><br>
-      <%= render partial: 'setup', locals: {setup: inspection.setup, f: f} %>
-      <%= takedown_partial_if_exists(f) %>
     </div>
+    <%= render partial: 'setup', locals: {setup: inspection.setup, f: f} %>
+    <%= takedown_partial_if_exists(f) %>
   </fieldset>
 
   <%= f.submit "Edit this inspection" %>

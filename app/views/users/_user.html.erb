@@ -1,10 +1,27 @@
 <%= form_for @user do |f| %>
   <%= errors_check(@user) %>
 
-  Full name: <%= f.text_field :fullname %><br>
-  Email: <%= f.text_field :email %><br>
-  Password: <%= f.password_field :password %><br>
-  Site: <%= f.select :site_id, options_from_collection_for_select(Site.all, :id, :name) %><br>
-  Role: <%= f.select :role, ["facilitator", "lead", "admin"] %><br>
-  <%= f.submit %>
+  <div class="form-group">
+    <%= f.label "Full name:" %>
+    <%= f.text_field :fullname, class: "form-control-md" %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label "Email:" %>
+    <%= f.text_field :email, class: "form-control-md" %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label "Password:" %>
+    <%= f.password_field :password, class: "form-control-md" %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label "Site:" %>
+    <%= f.select :site_id, options_from_collection_for_select(Site.all, :id, :name), class: "form-control-md" %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label "Role:" %>
+    <%= f.select :role, ["facilitator", "lead", "admin"], class: "form-control-md" %><br>
+  </div>
+  <div class="form-group">
+    <%= f.submit %>
+  </div>
 <% end %>
