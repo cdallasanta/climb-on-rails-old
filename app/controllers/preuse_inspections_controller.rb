@@ -29,16 +29,16 @@ class PreuseInspectionsController < ApplicationController
     unless @inspection.save
       render element_preuse_inspection_path(@element, @inspection) and return
     end
-
+    remove_empty_comments
     #updating setup
     setup = PreuseInspection::Setup.find_by(id: preuse_params[:setup_attributes][:id])
     if setup == @inspection.setup
-      # TODO fix this, because of comments
-      if setup.will_change?(preuse_params[:setup_attributes])
+      setup.assign_attributes(preuse_params[:setup_attributes])
+
+      if setup.changed_for_autosave?
+        setup.save
         setup.users << current_user unless setup.users.include?(current_user)
-        unless setup.update(preuse_params[:setup_attributes])
-          render render element_preuse_inspection_path(@element, @inspection) and return
-        end
+        flash[:alert] = "Inspection logged successfully"
       end
     else
       flash[:alert] = "Setup inspection id not found"
@@ -50,22 +50,18 @@ class PreuseInspectionsController < ApplicationController
       takedown = PreuseInspection::Takedown.find_by(id: preuse_params[:takedown_attributes][:id])
       if takedown == @inspection.takedown
         # update checkboxes,comments, and update/create climbs
-
         takedown.assign_attributes(preuse_params[:takedown_attributes])
-          # add users TODO, fix this
-          binding.pry
-          if takedown.changed_for_autosave?
-            takedown.save
-            takedown.users << current_user unless takedown.users.include?(current_user)
-          end
-      # end
+        if takedown.changed_for_autosave?
+          takedown.save
+          takedown.users << current_user unless takedown.users.include?(current_user)
+          flash[:alert] = "Inspection logged successfully"
+        end
       else
         flash[:alert] = "Takedown inspection id not found"
         render edit_element_preuse_inspection_path(@inspection.element, @inspection) and return
       end
     end
 
-    flash[:alert] = "Inspection logged successfully"
     redirect_to edit_element_preuse_inspection_path(@inspection.element, @inspection)
   end
 
@@ -127,6 +123,18 @@ class PreuseInspectionsController < ApplicationController
     if previous_inspection
       flash[:alert] = "There is already a preuse inspection for that date. View it <a href='#{edit_element_preuse_inspection_path(@element, previous_inspection)}'>'here'</a>".html_safe
       redirect_to element_preuse_inspections_path(@element) and return
+    end
+  end
+
+  def remove_empty_comments
+    params[:preuse_inspection][:setup_attributes][:comments_attributes].delete_if do |num, comment|
+      comment[:content] == ""
+    end
+
+    if params[:preuse_inspection][:takedown_attributes]
+      params[:preuse_inspection][:takedown_attributes][:comments_attributes].delete_if do |num, comment|
+        comment[:content] == ""
+      end
     end
   end
 end

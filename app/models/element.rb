@@ -10,7 +10,6 @@ class Element < ApplicationRecord
 
   after_initialize :set_default_instructions
 
-  #TODO figure out how to deal with default instructions.
   @@DEFAULT_INSRUCTIONS = {
     setup_equipment_instructions: "All gear checked<br>Bad gear set aside",
     setup_element_instructions: "Everything appears normal<br>Backup halos not engaged",
@@ -24,7 +23,6 @@ class Element < ApplicationRecord
   }
 
   def set_default_instructions
-    #TODO, this is filler until I work on elements/new
     self.setup_equipment_instructions ||= @@DEFAULT_INSRUCTIONS[:setup_equipment_instructions]
     self.setup_element_instructions ||= @@DEFAULT_INSRUCTIONS[:setup_element_instructions]
     self.setup_environment_instructions ||= @@DEFAULT_INSRUCTIONS[:setup_environment_instructions]
@@ -39,7 +37,7 @@ class Element < ApplicationRecord
 
   def date_of_last_periodic
     if self.periodic_inspections != []
-      self.periodic_inspections.last.date
+      link_to self.periodic_inspections.last.date, element_periodic_inspection_path(self, self.periodic_inspections.last)
     else
       "This element has never recieved a periodic inspection"
     end
