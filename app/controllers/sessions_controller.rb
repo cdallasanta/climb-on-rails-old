@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  skip_before_action :check_logged_in, only: [:new, :create]
+  
+  # /login
   def new
     render :login
   end
@@ -29,6 +32,7 @@ class SessionsController < ApplicationController
     end
   end
 
+  # /logout
   def destroy
     session.delete(:user_id)
     redirect_to root_path

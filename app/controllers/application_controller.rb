@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :check_logged_in
+
   def logged_in?
     !!session[:user_id]
   end

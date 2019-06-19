@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :check_owner_of_user, only: [:show, :edit, :update]
+  skip_before_action :check_logged_in, only: [:new, :create]
 
   def new
     @user = User.new

@@ -1,5 +1,5 @@
 class PreuseInspectionsController < ApplicationController
-  before_action :check_logged_in, :check_for_element_and_preuse_existance
+  before_action :check_for_element_and_preuse_existance
 
   def create
     @inspection = PreuseInspection.find_or_create_todays_inspection(params[:element_id])
