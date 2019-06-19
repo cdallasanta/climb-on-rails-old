@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    render 'login'
+    render :login
   end
 
   # directed here from /login or from facebook
@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         redirect_to root_path
       else
-        render 'login'
+        render :login
       end
     end
   end

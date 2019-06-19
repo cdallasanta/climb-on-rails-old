@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       flash[:alert] = "Details saved successfully"
       redirect_to user_path(@user)
     else
-      render edit_user_path(@user)
+      render :edit
     end
   end
 

@@ -43,7 +43,7 @@ class PreuseInspectionsController < ApplicationController
       end
     else
       flash[:alert] = "Setup inspection id not found"
-      render edit_element_preuse_inspection_path(@inspection.element, @inspection) and return
+      render :edit and return
     end
 
     #updating takedown
@@ -59,7 +59,7 @@ class PreuseInspectionsController < ApplicationController
         end
       else
         flash[:alert] = "Takedown inspection id not found"
-        render edit_element_preuse_inspection_path(@inspection.element, @inspection) and return
+        render :edit and return
       end
     end
 
