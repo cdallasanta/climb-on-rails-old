@@ -11,7 +11,7 @@ module TakedownHelper
   def climb_fields(rope, form)
     #for each rope, if they already have Climb objects, show those
     if rope.climbs == []
-      4.times { rope.climbs.new }
+      4.times { rope.climbs.create }
     end
     form.fields_for :climbs do |climb_form|
       climb_form.phone_field :number_of_climbs, class:"form-control-sm"

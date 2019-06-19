@@ -28,6 +28,7 @@ class PeriodicInspectionsController < ApplicationController
   end
 
   def update
+    # TODO check for an inspection already existing for that day
     if @inspection.update(periodic_params)
       @inspection.users << current_user unless @inspection.users.include?(current_user)
       flash[:alert] = "Inspection logged successfully"
@@ -44,7 +45,10 @@ class PeriodicInspectionsController < ApplicationController
       :equipment_complete,
       :element_complete,
       :environment_complete,
-      comments: {}
+      comments_attributes: [
+        :user_id,
+        :content
+      ]
     )
   end
 

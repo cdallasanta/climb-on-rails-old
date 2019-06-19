@@ -1,11 +1,9 @@
 module PeriodicInspectionHelper
-  def inspection_comments
-    f.label "Comments:"
-    @inspection.comments.each do |comment|
-      "#{comment.user.fullname}: #{comment.content}"
-    end
-    fields_for :comments do |ff|
+  def textarea_or_straight_text(ff)
+    if ff.object.content == nil
       ff.text_area :content
+    else
+      "<strong>#{ff.object.user.fullname}:</strong> #{ff.object.content}<br>".html_safe
     end
   end
 end

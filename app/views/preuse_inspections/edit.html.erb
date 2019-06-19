@@ -1,5 +1,5 @@
 <%= form_for @inspection, url: element_preuse_inspection_path(@element, @inspection)  do |f| %>
-  Date: <%= f.date_field :date %><br>
+  Date: <%= f.date_field :date, diabled: true %><br>
 
   <%= render partial: 'setup', locals: {setup: @inspection.setup, f: f} %>
 
