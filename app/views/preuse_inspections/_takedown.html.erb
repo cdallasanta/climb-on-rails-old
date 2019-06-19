@@ -11,16 +11,23 @@
     <div class="form-check">
       <%= ff.check_box :equipment_complete, class:"form-check-input" %>
       <%= ff.label "Section completed?", class: "form-check-label" %>
+    </div>
   </div>
   <div class="takedown-instructions form-group">
     <%= @element.takedown_element_instructions.html_safe %><br>
-    <%= ff.check_box :element_complete, class:"form-check-input" %>
-    <%= ff.label "Section completed?", class: "form-check-label" %>
+
+    <div class="form-check">
+      <%= ff.check_box :element_complete, class:"form-check-input" %>
+      <%= ff.label "Section completed?", class: "form-check-label" %>
+    </div>
   </div>
   <div class="takedown-instructions form-group">
     <%= @element.takedown_environment_instructions.html_safe %><br>
-    <%= ff.check_box :environment_complete, class:"form-check-input" %>
-    <%= ff.label "Section completed?", class: "form-check-label" %>
+
+    <div class="form-check">
+      <%= ff.check_box :environment_complete, class:"form-check-input" %>
+      <%= ff.label "Section completed?", class: "form-check-label" %>
+    </div>
   </div>
 
   <div class="form-group">

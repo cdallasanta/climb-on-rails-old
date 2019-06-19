@@ -33,6 +33,7 @@ class PreuseInspectionsController < ApplicationController
     #updating setup
     setup = PreuseInspection::Setup.find_by(id: preuse_params[:setup_attributes][:id])
     if setup == @inspection.setup
+      # TODO fix this, because of comments
       if setup.will_change?(preuse_params[:setup_attributes])
         setup.users << current_user unless setup.users.include?(current_user)
         unless setup.update(preuse_params[:setup_attributes])
@@ -48,12 +49,13 @@ class PreuseInspectionsController < ApplicationController
     if preuse_params[:takedown_attributes]
       takedown = PreuseInspection::Takedown.find_by(id: preuse_params[:takedown_attributes][:id])
       if takedown == @inspection.takedown
-        # update checkboxes and update/create climbs
-  binding.pry
-        # TODO test ropes attributes
-        takedown.update_everything(preuse_params[:takedown_attributes])
-          # add users
-          if takedown.changed?
+        # update checkboxes,comments, and update/create climbs
+
+        takedown.assign_attributes(preuse_params[:takedown_attributes])
+          # add users TODO, fix this
+          binding.pry
+          if takedown.changed_for_autosave?
+            takedown.save
             takedown.users << current_user unless takedown.users.include?(current_user)
           end
       # end
