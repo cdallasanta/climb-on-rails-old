@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
       user = User.find_by(email: user_params[:email])
       if user && user.authenticate(user_params[:password])
         session[:user_id] = user.id
-        redirect_to site_elements_path(current_site)
+        redirect_to root_path
       else
         render 'login'
       end

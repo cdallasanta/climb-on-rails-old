@@ -1,0 +1,14 @@
+
+[1mFrom:[0m /mnt/c/Users/Chris/Documents/projects/climb-on-rails/app/views/preuse_inspections/_setup.html.erb @ line 27 ActionView::CompiledTemplates#_app_views_preuse_inspections__setup_html_erb___4162252390229593733_70167466926260:
+
+    [1;34m22[0m:     </div>
+    [1;34m23[0m:   </div>
+    [1;34m24[0m: 
+    [1;34m25[0m:   <div class="form-group">
+    [1;34m26[0m:     <%= render partial: 'periodic_inspections/comments', locals: {f:ff, inspection:setup} %>
+ => [1;34m27[0m:     <%binding.pry %>
+    [1;34m28[0m:   </div>
+    [1;34m29[0m: <% end %>
+    [1;34m30[0m: 
+    [1;34m31[0m: <%= updated_by_div(setup) %>
+
