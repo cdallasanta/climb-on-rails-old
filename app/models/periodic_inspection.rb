@@ -7,8 +7,4 @@ class PeriodicInspection < ApplicationRecord
 
   validates :date, presence: true, uniqueness: {scope: :element}
   validates_presence_of :element
-
-  def self.find_or_create_by_date(element, date)
-    self.where(date: Date.strptime(date, "%Y-%m-%d"), element: element).first_or_create
-  end
 end

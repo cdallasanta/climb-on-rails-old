@@ -1,5 +1,5 @@
 class PreuseInspectionsController < ApplicationController
-  before_action :check_logged_in, :check_for_element_and_inspection_existance
+  before_action :check_logged_in, :check_for_element_and_preuse_existance
 
   def create
     @inspection = PreuseInspection.find_or_create_todays_inspection(params[:element_id])
@@ -16,6 +16,7 @@ class PreuseInspectionsController < ApplicationController
 
   def edit
     @inspection.setup.comments.build(user:current_user)
+    binding.pry
     if @inspection.setup.is_complete?
       @inspection.takedown ||= PreuseInspection::Takedown.create
       @inspection.takedown.comments.build(user:current_user)
@@ -25,10 +26,11 @@ class PreuseInspectionsController < ApplicationController
   def update
     #updating preuse (just the date, really)
     @inspection.date = preuse_params[:date]
-    #save preuse for date validation
+    #save preuse for date validation, to ensure the date is unique on that element
     unless @inspection.save
-      render element_preuse_inspection_path(@element, @inspection) and return
+      redirect_to_previous_preuse_on_that_date and return
     end
+
     remove_empty_comments
     #updating setup
     setup = PreuseInspection::Setup.find_by(id: preuse_params[:setup_attributes][:id])
@@ -98,10 +100,10 @@ class PreuseInspectionsController < ApplicationController
           :content
         ]
       ]
-      )
+    )
   end
 
-  def check_for_element_and_inspection_existance
+  def check_for_element_and_preuse_existance
     @element = Element.find_by(id:params[:element_id])
     if @element
       if params[:id]
@@ -117,12 +119,11 @@ class PreuseInspectionsController < ApplicationController
     end
   end
 
-  # TODO is this needed anymore?
-  def check_for_previous_inspection_on_that_date
+  def redirect_to_previous_preuse_on_that_date
     previous_inspection = PreuseInspection.find_past_inspection(params[:preuse_inspection][:date], @element.id)
     if previous_inspection
-      flash[:alert] = "There is already a preuse inspection for that date. View it <a href='#{edit_element_preuse_inspection_path(@element, previous_inspection)}'>'here'</a>".html_safe
-      redirect_to element_preuse_inspections_path(@element) and return
+      flash[:alert] = "There is already an inspection logged for that date. View/edit it <a href='#{edit_element_preuse_inspection_path(@element, previous_inspection)}'>here</a>"
+      redirect_to edit_element_preuse_inspection_path(@element, @inspection)
     end
   end
 

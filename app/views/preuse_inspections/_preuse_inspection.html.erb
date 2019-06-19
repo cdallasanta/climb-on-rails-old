@@ -3,12 +3,10 @@
 
   <fieldset disabled>
     <div class="form-group">
-      Date: <%= f.date_field :date, class:"form-control" %><br>
+      Date: <%= f.date_field :date, class:"form-control-sm" %><br>
     </div>
     <%= render partial: 'setup', locals: {setup: inspection.setup, f: f} %>
     <%= takedown_partial_if_exists(f) %>
-
-    <%= updated_by_div(setup) %>
   </fieldset>
 
   <%= f.submit "Edit this inspection" %>

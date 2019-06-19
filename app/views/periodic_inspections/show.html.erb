@@ -28,6 +28,10 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <%= render partial: 'comments', locals: {f:f, inspection:@inspection} %>
+    </div>
+
     <%= updated_by_div(@inspection) %>
   </fieldset>
 

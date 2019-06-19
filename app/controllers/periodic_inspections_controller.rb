@@ -1,21 +1,24 @@
 class PeriodicInspectionsController < ApplicationController
-  before_action :check_logged_in, :check_for_element_and_inspection_existance
+  before_action :check_logged_in, :check_for_element_and_periodic_existance
+  before_action :check_for_previous_periodic_on_that_date, :remove_empty_comments, only: [:create, :update]
 
   def new
-    @inspection = PeriodicInspection.new(element: @element)
+    @inspection = PeriodicInspection.new(element: @element, date:Date.today)
     @inspection.comments.build(user:current_user)
   end
 
   def create
-    binding.pry
-    @inspection = PeriodicInspection.find_or_create_by_date(@element, params[:periodic_inspection][:date])
+    @inspection = PeriodicInspection.new(element: @element)
+    @inspection.assign_attributes(periodic_params)
 
-    if @inspection.update(periodic_params)
-      @inspection.users << current_user unless @inspection.users.include?(current_user)
-      flash[:alert] = "Inspection logged successfully"
-      redirect_to element_periodic_inspection_path(@element, @inspection)
-    else
-      render edit_element_periodic_inspection_path(@element, @inspection)
+    if @inspection.changed_for_autosave?
+      if @inspection.save
+        @inspection.users << current_user unless @inspection.users.include?(current_user)
+        flash[:alert] = "Inspection logged successfully"
+        redirect_to element_periodic_inspection_path(@element, @inspection)
+      else
+        render edit_element_periodic_inspection_path(@element, @inspection)
+      end
     end
   end
 
@@ -25,16 +28,21 @@ class PeriodicInspectionsController < ApplicationController
 
   def edit
     # @inspection is set in the before_action, check_for_element_and_inspection
+    @inspection.comments.build(user:current_user)
   end
 
   def update
-    # TODO check for an inspection already existing for that day
-    if @inspection.update(periodic_params)
-      @inspection.users << current_user unless @inspection.users.include?(current_user)
-      flash[:alert] = "Inspection logged successfully"
-      redirect_to element_periodic_inspection_path(@element, @inspection)
-    else
-      render edit_element_periodic_inspection_path(@element, @inspection)
+    binding.pry
+    @inspection.assign_attributes(periodic_params)
+
+    if @inspection.changed_for_autosave?
+      if @inspection.save
+        @inspection.users << current_user unless @inspection.users.include?(current_user)
+        flash[:alert] = "Inspection logged successfully"
+        redirect_to element_periodic_inspection_path(@element, @inspection)
+      else
+        render edit_element_periodic_inspection_path(@element, @inspection)
+      end
     end
   end
 
@@ -42,6 +50,7 @@ class PeriodicInspectionsController < ApplicationController
 
   def periodic_params
     params.require(:periodic_inspection).permit(
+      :date,
       :equipment_complete,
       :element_complete,
       :environment_complete,
@@ -52,7 +61,7 @@ class PeriodicInspectionsController < ApplicationController
     )
   end
 
-  def check_for_element_and_inspection_existance
+  def check_for_element_and_periodic_existance
     @element = Element.find_by(id:params[:element_id])
     if @element
       if params[:id]
@@ -65,6 +74,24 @@ class PeriodicInspectionsController < ApplicationController
     else
       flash[:alert] = "No element found with that id"
       redirect_to root_path
+    end
+  end
+
+  def check_for_previous_periodic_on_that_date
+    previous_inspection = PeriodicInspection.find_by(date: params[:periodic_inspection][:date], element:@element.id)
+    if previous_inspection != @inspection
+      flash[:alert] = "There is already an inspection logged for that date. View/edit it <a href='#{edit_element_periodic_inspection_path(@element, previous_inspection)}'>here</a>"
+      if @inspection
+        render :edit and return
+      else
+        redirect_to new_element_periodic_inspection_path(@element) and return
+      end
+    end
+  end
+
+  def remove_empty_comments
+    params[:periodic_inspection][:comments_attributes].delete_if do |num, comment|
+      comment[:content] == ""
     end
   end
 end

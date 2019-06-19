@@ -17,9 +17,9 @@ class Element < ApplicationRecord
     takedown_equipment_instructions: "Gear stored properly<br>Helmets sprayed",
     takedown_element_instructions: "Access methods removed",
     takedown_environment_instructions: "Area clear of garbage",
-    periodic_equipment_instructions: "filler",
-    periodic_element_instructions: "filler",
-    periodic_environment_instructions: "filler"
+    periodic_equipment_instructions: "All gear checked for rust and wear<br>No gear is over their age limit<br>Rescue bag checked and reflaked",
+    periodic_element_instructions: "All QLs checked for wear<br>Belay and access cables showing no rust<br>Element climbed",
+    periodic_environment_instructions: "Trees appear healthy, no loose or overhanging branches<br>Trail in good condition"
   }
 
   def set_default_instructions
