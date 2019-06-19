@@ -16,7 +16,6 @@ class PreuseInspectionsController < ApplicationController
 
   def edit
     @inspection.setup.comments.build(user:current_user)
-    binding.pry
     if @inspection.setup.is_complete?
       @inspection.takedown ||= PreuseInspection::Takedown.create
       @inspection.takedown.comments.build(user:current_user)

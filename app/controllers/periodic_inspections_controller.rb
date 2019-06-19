@@ -32,7 +32,6 @@ class PeriodicInspectionsController < ApplicationController
   end
 
   def update
-    binding.pry
     @inspection.assign_attributes(periodic_params)
 
     if @inspection.changed_for_autosave?
@@ -41,8 +40,10 @@ class PeriodicInspectionsController < ApplicationController
         flash[:alert] = "Inspection logged successfully"
         redirect_to element_periodic_inspection_path(@element, @inspection)
       else
-        render edit_element_periodic_inspection_path(@element, @inspection)
+        render :edit
       end
+    else
+      redirect_to element_periodic_inspection_path(@element, @inspection)
     end
   end
 
