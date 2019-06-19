@@ -65,7 +65,7 @@ class PreuseInspectionsController < ApplicationController
       end
     end
 
-    #TODO flash message for success?
+    flash[:alert] = "Inspection logged successfully"
     redirect_to edit_element_preuse_inspection_path(@inspection.element, @inspection)
   end
 

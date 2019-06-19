@@ -1,6 +1,6 @@
 #Facilitators should be able to:
 perform pre-use inspections
-leave comments on elements
+leave comments on elements through inspections
 view that day's pre-use inspection, and edit pre-use inspections
 edit their own account
 
@@ -9,16 +9,15 @@ edit their own account
 #Leads should be able to:
 all of the above and:
 log periodic inspections
-view all periodic inspections and edit any of their own
 retire and replace ropes
 
 ?perform observations?
 
 #Admins should be able to:
 all of the above and:
-create elements
-can view elements: rope age, last periodic inspection, all comments
-can view and edit all periodic and preuse inspections
+create elements (future)
+can view elements: rope age, last periodic inspection, recent comments (future)
+can view and edit all periodic and preuse inspections (future)
 
 ?create/edit users in bulk
 ?add/retire gear
