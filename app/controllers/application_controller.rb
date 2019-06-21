@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :check_logged_in
 
+  # Helpers
   def logged_in?
     !!session[:user_id]
   end
@@ -23,6 +24,8 @@ class ApplicationController < ActionController::Base
     current_user.site
   end
 
+  # This is the way around requiring a site and role for a user, but allowing
+  # a signup via facebook, which doesn't specify that at creation.
   def check_user_data_complete
     if current_user.role == nil ||  current_user.site == nil
       flash[:alert] = "Please complete your profile details"

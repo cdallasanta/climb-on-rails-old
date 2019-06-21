@@ -1,29 +1,18 @@
 class ElementsController < ApplicationController
+  before_action :get_element, only: [:show, :edit, :update]
 
   def index
     @elements = current_site.elements
   end
 
   def show
-    @element = Element.find_by(id: params[:id])
-
-    unless @element
-      flash[:alert] = "Element not found"
-      render :index
-    end
   end
 
   def edit
-    @element = Element.find_by(id: params[:id])
-
-    unless @element
-      flash[:alert] = "Element not found"
-      render :index
-    end
   end
 
   def update
-    @element = Element.find_by(id: params[:id])
+    binding.pry
     @element.update(string_to_html(element_params.except(:ropes_attributes)))
     @element.update_ropes(element_params[:ropes_attributes])
 
@@ -56,6 +45,15 @@ class ElementsController < ApplicationController
   def string_to_html(params)
     params.to_h.transform_values do |text|
       text.sub("\r\n","<br>")
+    end
+  end
+
+  def get_element
+    @element = Element.find_by(id: params[:id])
+
+    unless @element
+      flash[:alert] = "Element not found"
+      render :index and return
     end
   end
 end

@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  skip_before_action :check_logged_in, only: [:new, :create]
-  
+  skip_before_action :check_logged_in
+
   # /login
   def new
     render :login

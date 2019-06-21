@@ -1,4 +1,5 @@
 class RopesController < ApplicationController
+
   def update
     @rope = Element::Rope.find(params[:id])
     @rope.update(retired: true)
