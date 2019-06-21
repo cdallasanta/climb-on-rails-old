@@ -9,12 +9,14 @@ class ElementsController < ApplicationController
   end
 
   def edit
+    @element.ropes.build
+    @element.ropes.build
   end
 
   def update
-    # TODO ropes attributes
+    remove_blank_ropes
     @element.update(string_to_html(element_params.except(:ropes_attributes)))
-    @element.update_ropes(element_params[:ropes_attributes])
+    @element.update(element_params.slice(:ropes_attributes))
 
     if @element.valid?
       flash[:alert] = "Element saved successfully"
@@ -25,6 +27,12 @@ class ElementsController < ApplicationController
   end
 
   private
+
+  def remove_blank_ropes
+    params[:element][:ropes_attributes].delete_if do |rope, details|
+      details[:identifier] == ""
+    end
+  end
 
   def element_params
     params.require(:element).permit(
@@ -38,7 +46,10 @@ class ElementsController < ApplicationController
       :periodic_equipment_instructions,
       :periodic_element_instructions,
       :periodic_envvironment_instructions,
-      ropes_attributes: {}
+      ropes_attributes: [
+        :identifier,
+        :id
+      ]
     )
   end
 

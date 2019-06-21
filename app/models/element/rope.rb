@@ -12,6 +12,7 @@ class Element::Rope < ApplicationRecord
 
   def not_retired
     self.retired ||= false
+    self.save
   end
 
   # returns the number of climbs this rope has received in its life

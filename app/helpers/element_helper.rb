@@ -16,17 +16,11 @@ module ElementHelper
   end
 
   def ropes_fields(f)
-    two_new_ropes(@element)
     f.fields_for :ropes do |ff|
       if !ff.object.retired
         ff.text_field(:identifier) + "<br>".html_safe
       end
     end
-  end
-
-  def two_new_ropes(element)
-    element.ropes.new
-    element.ropes.new
   end
 
   def date_of_last_periodic

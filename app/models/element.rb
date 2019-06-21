@@ -34,28 +34,4 @@ class Element < ApplicationRecord
     self.periodic_environment_instructions ||= @@DEFAULT_INSRUCTIONS[:periodic_environment_instructions]
     self.save
    end
-
-  def update_ropes(params)
-    element = self
-    params.each do |rope_num, rope_details|
-      if rope_details[:id]
-        old_rope = element.ropes.find_by(id: rope_details[:id])
-        if old_rope.identifier != rope_details[:identifier]
-          old_rope.update(retired: true)
-          element.ropes.create(identifier: rope_details[:identifier])
-        end
-      elsif rope_details[:identifier]
-        element.ropes.create(identifier: rope_details[:identifier])
-      end
-    end
-    clean_up_ropes
-  end
-
-  def clean_up_ropes
-    self.ropes.reverse_each do |rope|
-      unless rope.valid?
-        self.ropes.delete(rope)
-      end
-    end
-  end
 end
