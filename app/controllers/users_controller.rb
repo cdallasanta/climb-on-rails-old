@@ -26,10 +26,11 @@ class UsersController < ApplicationController
   end
 
   def update
+    # if they left the password field blank, don't change their password
     params[:user][:password] ||= @user.password
 
     if @user.update(user_params)
-      check_user_data_complete
+      check_user_data_complete # found in application_controller.rb
       flash[:alert] = "Details saved successfully"
       redirect_to user_path(@user)
     else
