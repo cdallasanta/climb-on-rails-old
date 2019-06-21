@@ -9,6 +9,7 @@ class ElementsController < ApplicationController
   end
 
   def edit
+    #create two blank ropes so the user can add new ones in the form
     @element.ropes.build
     @element.ropes.build
   end
@@ -53,12 +54,14 @@ class ElementsController < ApplicationController
     )
   end
 
+  # user's line breaks come in as "\r\n", but we will later display them using <br>
   def string_to_html(params)
     params.to_h.transform_values do |text|
       text.sub("\r\n","<br>")
     end
   end
 
+  #mostly preventing url shenanigans
   def get_element
     @element = Element.find_by(id: params[:id])
 
