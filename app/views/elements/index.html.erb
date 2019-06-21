@@ -13,3 +13,7 @@
     <% end %>
   </ul>
 <% end %>
+
+<% if current_user.has_permissions?("admin") %>
+  <%= link_to "View this week's comments", comments_path %>
+<% end %>

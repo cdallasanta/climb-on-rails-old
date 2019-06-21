@@ -14,4 +14,6 @@ Rails.application.routes.draw do
     resources :preuse_inspections, only: [:index, :create, :edit, :update]
     resources :periodic_inspections, only: [:new, :create, :show, :edit, :update]
   end
+
+  resources :comments, only: [:index]
 end
