@@ -5,7 +5,7 @@ class Element::Rope < ApplicationRecord
   has_many :preuse_inspections, through: :element
   accepts_nested_attributes_for :climbs
 
-  validates_presence_of :identifier
+  validates :identifier, presence: true, uniqueness: {scope: :element}
   validates_presence_of :element
 
   after_create :not_retired
