@@ -8,12 +8,14 @@ class PreuseInspectionsController < ApplicationController
     redirect_to edit_element_preuse_inspection_path(@inspection.element, @inspection)
   end
 
+  # /elements/:element_id/preuse_inspections
   def index
     if params[:date]
       @inspection = PreuseInspection.find_past_inspection(params[:date], @element.id)
     end
   end
 
+  # /elements/:element_id/preuse_inspections/:id/edit
   def edit
     @inspection.setup.comments.build(user:current_user)
     if @inspection.setup.is_complete?
@@ -27,15 +29,16 @@ class PreuseInspectionsController < ApplicationController
     @inspection.date = preuse_params[:date]
     #save preuse for date validation, to ensure the date is unique on that element
     unless @inspection.save
-      redirect_to_previous_preuse_on_that_date and return
+      link_to_previous_preuse_on_that_date and return
     end
 
     remove_empty_comments
     #updating setup
     setup = PreuseInspection::Setup.find_by(id: preuse_params[:setup_attributes][:id])
     if setup == @inspection.setup
+      # if the inspection will change when saved, add the current user to be referenced by
+      # 'edited by', and also reduced the number of calls to the db
       setup.assign_attributes(preuse_params[:setup_attributes])
-
       if setup.changed_for_autosave?
         setup.save
         setup.users << current_user unless setup.users.include?(current_user)
@@ -50,7 +53,8 @@ class PreuseInspectionsController < ApplicationController
     if preuse_params[:takedown_attributes]
       takedown = PreuseInspection::Takedown.find_by(id: preuse_params[:takedown_attributes][:id])
       if takedown == @inspection.takedown
-        # update checkboxes,comments, and update/create climbs
+        # if the inspection will change when saved, add the current user to be referenced by
+        # 'edited by', and also reduced the number of calls to the db
         takedown.assign_attributes(preuse_params[:takedown_attributes])
         if takedown.changed_for_autosave?
           takedown.save
@@ -63,6 +67,8 @@ class PreuseInspectionsController < ApplicationController
       end
     end
 
+    # sent to edit instead of show, since it is more likely that
+    # they will do more changes soon
     redirect_to edit_element_preuse_inspection_path(@inspection.element, @inspection)
   end
 
@@ -102,6 +108,7 @@ class PreuseInspectionsController < ApplicationController
     )
   end
 
+  # preventing url shenanigans
   def check_for_element_and_preuse_existance
     @element = Element.find_by(id:params[:element_id])
     if @element
@@ -118,7 +125,9 @@ class PreuseInspectionsController < ApplicationController
     end
   end
 
-  def redirect_to_previous_preuse_on_that_date
+  # called if they try to save an inspection for a date that already has
+  # an inspection logged
+  def link_to_previous_preuse_on_that_date
     previous_inspection = PreuseInspection.find_past_inspection(params[:preuse_inspection][:date], @element.id)
     if previous_inspection
       flash[:alert] = "There is already an inspection logged for that date. View/edit it <a href='#{edit_element_preuse_inspection_path(@element, previous_inspection)}'>here</a>"

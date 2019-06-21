@@ -1,7 +1,8 @@
 class PeriodicInspectionsController < ApplicationController
   before_action :check_for_element_and_periodic_existance
-  before_action :check_for_previous_periodic_on_that_date, :remove_empty_comments, only: [:create, :update]
+  before_action :check_for_previous_periodic_on_that_date, :remove_empty_comments, only: [:new, :create, :update]
 
+  # /elements/:element_id/periodic_inspections/new
   def new
     @inspection = PeriodicInspection.new(element: @element, date:Date.today)
     @inspection.comments.build(user:current_user)
@@ -9,8 +10,10 @@ class PeriodicInspectionsController < ApplicationController
 
   def create
     @inspection = PeriodicInspection.new(element: @element)
-    @inspection.assign_attributes(periodic_params)
 
+    # if the inspection will change when saved, add the current user to be referenced by
+    # 'edited by', and also reduced the number of calls to the db
+    @inspection.assign_attributes(periodic_params)
     if @inspection.changed_for_autosave?
       if @inspection.save
         @inspection.users << current_user unless @inspection.users.include?(current_user)
@@ -22,10 +25,12 @@ class PeriodicInspectionsController < ApplicationController
     end
   end
 
+  # /elements/:element_id/periodic_inspections/:id
   def show
     # @inspection is set in the before_action, check_for_element_and_inspection
   end
 
+  # /elements/:element_id/periodic_inspections/:id/edit
   def edit
     # @inspection is set in the before_action, check_for_element_and_inspection
     @inspection.comments.build(user:current_user)
@@ -62,6 +67,7 @@ class PeriodicInspectionsController < ApplicationController
     )
   end
 
+  # stopping url shenanigans, and also setting instance variables
   def check_for_element_and_periodic_existance
     @element = Element.find_by(id:params[:element_id])
     if @element
