@@ -14,7 +14,7 @@ module ElementHelper
 
   # used to convert the <br> stored in the db to a line break for the textarea
   def html_to_string(text)
-    text.sub("<br>","\n")
+    text.gsub("<br>","\n")
   end
 
   # text field for each non-retired rope
