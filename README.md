@@ -4,8 +4,6 @@ Climb On is a web app for challenge course managers (CCM) to cut down on the tre
 
 ### Known bugs
 - view past preuse, if there isn't one, should offer to create one
-- empty comments
-- updated_by for takedown not working yet
 
 ### Future Features
 - "Make it look good"
@@ -26,13 +24,13 @@ FACEBOOK_KEY = (your app id here)
 FACEBOOK_SECRET = (your app secret here)
 ```
 
-You can now run `rails server` in your terminal, and the app will be available at localhost:3000.
+You can then run `rails server` in your terminal, and the app will be available at localhost:3000.
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/cdallasanta/ropes-sinatra. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
 
 ## License
-The gem is available as open source under the terms of the MIT License.
+The gem is available as open source under the terms of the GNU General Public License.
 
 ## Code of Conduct
 Everyone interacting in the Rope Log's project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the code of conduct.
