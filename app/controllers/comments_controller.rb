@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
   def index
-    @comments = Site.recent_comments(current_site)
+    @comments = current_site.recent_comments
   end
 end

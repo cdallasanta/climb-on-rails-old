@@ -14,7 +14,7 @@ Specs:
   - Element has plenty other attributes an admin would change
   - Climb is a quasi-join table with a user-submitted attribute
 - [x] Include reasonable validations for simple model objects (User, PreuseInspection, PeriodicInspection, Element, Rope, Site)
-- [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes) - Element.find_by(id:params[:element_id]), used on most routes
+- [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes) - Comment.where("created_at >= ?", 1.week.ago.utc).order(:element).select {|c| c.commentable.element.site == self}, access through '/comments'
 - [x] Include signup (/signup)
 - [x] Include login (/login)
 - [x] Include logout (/logout)
