@@ -16,17 +16,8 @@ class PreuseInspection::Setup < ApplicationRecord
     self.save
   end
 
+  # only allows the creation of a takedown once each step of the setup is completed
   def is_complete?
     !self.attributes.any?{|attr, val| val == false}
-  end
-
-  def will_change?(params)
-    params.to_h.any? do |attr, val|
-      self.attributes[attr] != !val.to_i.zero?
-      # e.g.
-      # equipment_complete == false, and new equipment_complete == "1" would work out to:
-      # false != !(1.zero?)
-      # false != true => true, which means the value is changing
-    end
   end
 end
