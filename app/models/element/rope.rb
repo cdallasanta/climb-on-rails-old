@@ -19,9 +19,7 @@ class Element::Rope < ApplicationRecord
   # note: not the number of Climb objects, but the number of uses
   def climb_count
     self.climbs.inject(0) do |sum, climb|
-      if climb.number_of_climbs
-        sum + climb.number_of_climbs
-      end
+      climb.number_of_climbs ? sum + climb.number_of_climbs : sum
     end
   end
 end
