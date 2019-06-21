@@ -14,20 +14,12 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   has_secure_password
 
-  def is_admin?
-    self.role == "admin"
-  end
-
-  def is_lead?
-    self.role == "lead"
-  end
-
   def has_permissions?(level)
     case level
     when "admin"
-      self.is_admin?
+      self.role == "admin"
     when "lead"
-      self.is_lead? || self.is_admin?
+      self.role == "lead" || self.role == "admin"
     end
   end
 end
