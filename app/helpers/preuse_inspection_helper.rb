@@ -23,6 +23,14 @@ module PreuseInspectionHelper
   def show_inspection_if_selected
     if @inspection
       render partial: "preuse_inspection", locals: {inspection: @inspection}
+    else
+      text = <<-HTML
+        <p>
+          No preuse inspection has been logged for that date.
+          To create one, click
+        </p>
+      HTML
+      text.html_safe.insert(105, link_to("here", "/elements/#{@element.id}/preuse_inspections?date=#{@date}", method: :post))
     end
   end
 end

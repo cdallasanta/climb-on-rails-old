@@ -2,16 +2,28 @@ class PreuseInspectionsController < ApplicationController
   before_action :check_for_element_and_preuse_existance
 
   def create
-    @inspection = PreuseInspection.find_or_create_todays_inspection(params[:element_id])
+    if params[:date]
+      @inspection = @element.find_past_inspection(params[:date])
+      if @inspection.nil?
+        @inspection = @element.preuse_inspections.create(date:Date.strptime(params[:date], "%Y-%m-%d"))
+      else
+        redirect_to edit_element_preuse_inspection_path(@element, @inspection)
+      end
+    else
+      @inspection = @element.find_or_create_todays_inspection
+    end
     @inspection.setup = PreuseInspection::Setup.create if @inspection.setup == nil
 
-    redirect_to edit_element_preuse_inspection_path(@inspection.element, @inspection)
+    redirect_to edit_element_preuse_inspection_path(@element, @inspection)
   end
 
   # /elements/:element_id/preuse_inspections
   def index
     if params[:date]
       @inspection = PreuseInspection.find_past_inspection(params[:date], @element.id)
+      if @inspection.nil?
+       @date = params[:date]
+      end
     end
   end
 

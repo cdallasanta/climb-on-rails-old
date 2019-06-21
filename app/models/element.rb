@@ -33,5 +33,14 @@ class Element < ApplicationRecord
     self.periodic_element_instructions ||= @@DEFAULT_INSRUCTIONS[:periodic_element_instructions]
     self.periodic_environment_instructions ||= @@DEFAULT_INSRUCTIONS[:periodic_environment_instructions]
     self.save
-   end
+  end
+
+
+  def find_or_create_todays_inspection
+    self.preuse_inspections.where(date:Date.today.strftime("%Y-%m-%d").to_s , element: self).first_or_create
+  end
+
+  def find_past_inspection(date)
+    self.preuse_inspections.where(date: Date.strptime(date, "%Y-%m-%d"), element: self).first
+  end
 end
