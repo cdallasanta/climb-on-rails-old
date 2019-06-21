@@ -2,14 +2,11 @@
 
 Climb On is a web app for challenge course managers (CCM) to cut down on the tremendous amounts of paperwork they need to create and keep. The site's facilitators can complete their pre-use inspections online, seeing comments from past users, and log the number of uses each rope or cable receives. With higher levels of permissions, users can log periodic inspections, retire and replace ropes, and manage the instructions presented to the facilitators.
 
-### Known bugs
-- view past preuse, if there isn't one, should offer to create one
-
 ### Future Features
 - "Make it look good"
-- Implimenting Devise and ActiveAdmin engines
-- replace omniauth-facebook with admin-created users (and allow the admin to do so in bulk via a spreadsheet)
-- Adding more user data, such as their ropes portfolio (maybe leading to an automatic log of hours)
+- Implement Devise and ActiveAdmin engines
+- Replace omniauth-facebook with admin-created users (and allow the admin to do so in bulk via spreadsheet)
+- Adding more user data, such as their ropes portfolio (maybe leading to an automatic log of hours), relevant certs, trainings, etc
 - Site contact receives emails with comments from inspections
 - Replies to comments, such as one a CCM would leave on a repaired piece of gear
 - Gear log
