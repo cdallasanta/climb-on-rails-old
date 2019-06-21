@@ -2,13 +2,17 @@ class PreuseInspectionsController < ApplicationController
   before_action :check_for_element_and_preuse_existance
 
   def create
+    # if the request comes in with a string, it is likely coming from /index, where
+    # they selected a date without an inspection, and want to create one
     if params[:date]
       @inspection = @element.find_past_inspection(params[:date])
+      # checking for url shenanigans
       if @inspection.nil?
         @inspection = @element.preuse_inspections.create(date:Date.strptime(params[:date], "%Y-%m-%d"))
       else
         redirect_to edit_element_preuse_inspection_path(@element, @inspection)
       end
+    # otherwise, they are from /elements and want to log today's inspection
     else
       @inspection = @element.find_or_create_todays_inspection
     end
@@ -19,10 +23,13 @@ class PreuseInspectionsController < ApplicationController
 
   # /elements/:element_id/preuse_inspections
   def index
+    # if they selected a date, show the selected inspection in the view
     if params[:date]
       @inspection = PreuseInspection.find_past_inspection(params[:date], @element.id)
+      # if no inspection was found, this will allow the view to offer a link to
+      # create a new inspection on that date
       if @inspection.nil?
-       @date = params[:date]
+        @date = params[:date]
       end
     end
   end
