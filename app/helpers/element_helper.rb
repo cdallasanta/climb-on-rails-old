@@ -1,4 +1,5 @@
 module ElementHelper
+  # goes through each non-retired rope, putting out its info
   def rope_details
     @element.ropes.collect do |rope|
         if !rope.retired
@@ -11,10 +12,12 @@ module ElementHelper
     end.join.html_safe
   end
 
+  # used to convert the <br> stored in the db to a line break for the textarea
   def html_to_string(text)
     text.sub("<br>","\n")
   end
 
+  # text field for each non-retired rope
   def ropes_fields(f)
     f.fields_for :ropes do |ff|
       if !ff.object.retired
@@ -23,6 +26,7 @@ module ElementHelper
     end
   end
 
+  # puts date of the last periodic inspection, and a link to view it
   def date_of_last_periodic
     if @element.periodic_inspections != []
       link_to @element.periodic_inspections.last.date, element_periodic_inspection_path(@element, @element.periodic_inspections.last)

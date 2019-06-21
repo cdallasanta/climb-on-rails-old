@@ -14,6 +14,7 @@ module PreuseInspectionHelper
     end
   end
 
+  # li for each updater with their name
   def updaters_listed(object)
     object.users.collect do |user|
       user.fullname + '<br>'

@@ -1,5 +1,6 @@
 module TakedownHelper
 
+  # for each rope, put 4 fields (one for each climbing block)
   def rope_and_climb_fields(ff, takedown)
     ff.fields_for :ropes do |rope_form|
       "<div class=\"form-group\">
@@ -9,7 +10,8 @@ module TakedownHelper
   end
 
   def climb_fields(rope, form)
-    #for each rope, if they already have Climb objects, show those
+    # for each rope, if they already have Climb objects, show those. If they don't,
+    # make 4 blank ones.
     if rope.climbs == []
       4.times { rope.climbs.create(takedown: @inspection.takedown) }
     end

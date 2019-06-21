@@ -13,9 +13,10 @@ module ApplicationHelper
     current_user.site
   end
 
+  # adds form errors to the top of the form
   def errors_check(object)
     if object.errors.any?
-      render partial: 'application/errors', locals: {object: object}
+      render partial: 'application/errors', locals: {object: object}, class: "alert alert-error"
     end
   end
 end
