@@ -12,7 +12,7 @@ class ElementsController < ApplicationController
   end
 
   def update
-    binding.pry
+    # TODO ropes attributes
     @element.update(string_to_html(element_params.except(:ropes_attributes)))
     @element.update_ropes(element_params[:ropes_attributes])
 
@@ -53,7 +53,7 @@ class ElementsController < ApplicationController
 
     unless @element
       flash[:alert] = "Element not found"
-      render :index and return
+      redirect_to elements_path
     end
   end
 end

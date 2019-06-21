@@ -28,4 +28,12 @@ module ElementHelper
     element.ropes.new
     element.ropes.new
   end
+
+  def date_of_last_periodic
+    if @element.periodic_inspections != []
+      link_to @element.periodic_inspections.last.date, element_periodic_inspection_path(@element, @element.periodic_inspections.last)
+    else
+      "This element has never recieved a periodic inspection"
+    end
+  end
 end

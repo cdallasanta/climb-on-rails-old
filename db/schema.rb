@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2019_06_18_211908) do
 
   create_table "climbs", force: :cascade do |t|
     t.integer "number_of_climbs"
-    t.integer "climbing_block"
     t.integer "rope_id"
     t.integer "takedown_id"
   end

@@ -35,14 +35,6 @@ class Element < ApplicationRecord
     self.save
    end
 
-  def date_of_last_periodic
-    if self.periodic_inspections != []
-      link_to self.periodic_inspections.last.date, element_periodic_inspection_path(self, self.periodic_inspections.last)
-    else
-      "This element has never recieved a periodic inspection"
-    end
-  end
-
   def update_ropes(params)
     element = self
     params.each do |rope_num, rope_details|
