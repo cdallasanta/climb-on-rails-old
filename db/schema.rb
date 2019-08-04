@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_06_18_211908) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "climbs", force: :cascade do |t|
     t.integer "number_of_climbs"
     t.integer "rope_id"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 2019_06_18_211908) do
     t.text "content"
     t.integer "user_id"
     t.string "commentable_type"
-    t.integer "commentable_id"
+    t.bigint "commentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
