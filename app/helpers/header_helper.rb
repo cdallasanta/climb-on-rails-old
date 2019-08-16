@@ -1,6 +1,6 @@
 module HeaderHelper
   def login_link_or_header_buttons
-    if logged_in?
+    if user_signed_in?
       "<li class=\"nav-item\">
           #{link_to "Elements", elements_path, class: "nav-link", class: "nav-link"}
         </li>

@@ -23,27 +23,27 @@ Element::Rope.create(element:giants_ladder, identifier:"Red with orange pcord")
 Element::Rope.create(element:giants_ladder, identifier:"White with orange pcord")
 Element::Rope.create(element:giants_ladder, identifier:"Blue with orange pcord")
 
-#Users
-demo = User.create(
-  fullname: "Demo User",
-  email: "demo@gmail.com",
-  password: "demo",
-  site: orkila,
-  role: "admin"
-)
-liz = User.create(
-  fullname: "Liz Doane",
-  email: "liz@email.com",
-  password: "p",
-  site: orkila,
-  role: "lead"
-)
-emily = User.create(
-  fullname: "Emily Trusky",
-  email: "emily@email.com",
-  password: "p",
-  site: orkila,
-  role: "facilitator"
-)
+# #Users
+# demo = User.create(
+#   fullname: "Demo User",
+#   email: "demo@gmail.com",
+#   password: "demo",
+#   site: orkila,
+#   role: "admin"
+# )
+# liz = User.create(
+#   fullname: "Liz Doane",
+#   email: "liz@email.com",
+#   password: "p",
+#   site: orkila,
+#   role: "lead"
+# )
+# emily = User.create(
+#   fullname: "Emily Trusky",
+#   email: "emily@email.com",
+#   password: "p",
+#   site: orkila,
+#   role: "facilitator"
+# )
 
 AdminUser.create!(email: 'chris@email.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
