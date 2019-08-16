@@ -1,29 +1,19 @@
 class ApplicationController < ActionController::Base
-  before_action :check_logged_in
+  before_action :authenticate_user!
 
   # Helpers
-  def logged_in?
-    !!session[:user_id]
-  end
 
-  def check_logged_in
-    if logged_in?
-      check_user_data_complete
-    else
-      redirect_to '/login'
-    end
-  end
-
-  def current_user
-    if logged_in?
-      User.find_by(id: session[:user_id])
-    end
-  end
+  # The following are defined by Devise:
+  # current_user
+  # authenticate_user!
+  # user_logged_in
+  # user_session
 
   def current_site
     current_user.site
   end
 
+  #  TODO remove this with FB signup
   # This is the way around requiring a site and role for a user, but allowing
   # a signup via facebook, which doesn't specify that at creation.
   def check_user_data_complete

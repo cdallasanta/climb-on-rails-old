@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :check_logged_in
+  skip_before_action :user_signed_in?
 
   # /login
   def new

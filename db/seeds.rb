@@ -24,10 +24,10 @@ Element::Rope.create(element:giants_ladder, identifier:"White with orange pcord"
 Element::Rope.create(element:giants_ladder, identifier:"Blue with orange pcord")
 
 #Users
-chris = User.create(
-  fullname: "Chris Dalla Santa",
-  email: "chris@email.com",
-  password: "p",
+demo = User.create(
+  fullname: "Demo User",
+  email: "demo@gmail.com",
+  password: "demo",
   site: orkila,
   role: "admin"
 )
@@ -45,3 +45,5 @@ emily = User.create(
   site: orkila,
   role: "facilitator"
 )
+
+AdminUser.create!(email: 'chris@email.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

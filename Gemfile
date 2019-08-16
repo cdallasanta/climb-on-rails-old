@@ -23,6 +23,13 @@ gem 'turbolinks', '~> 5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# active admin backend management
+gem 'activeadmin'
+
+# Devise for user management, currently not well utilized, but will be more
+gem 'devise'
+
+# CURRENTLY DOES NOT WORK, AND NEEDS TO BE REMOVED EVENTUALLY
 # Use OmniAuth for alternative signin options
 gem 'omniauth'
 gem 'omniauth-facebook'
