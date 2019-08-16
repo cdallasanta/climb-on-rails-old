@@ -8,12 +8,12 @@ module HeaderHelper
           #{link_to "My profile", user_path(current_user), class: "nav-link"}
         </li>
         <li class=\"nav-item\">
-          #{link_to "Logout", logout_path, class: "nav-link"}
+          #{link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link"}
         </li>
       ".html_safe
     else
       "<li class=\"nav-item\">
-        #{link_to "Login", login_path, class: "nav-link"}
+        #{link_to "Login", new_user_session_path, class: "nav-link"}
       </li>".html_safe
     end
   end

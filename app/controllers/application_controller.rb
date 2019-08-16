@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   # The following are defined by Devise:
   # current_user
   # authenticate_user!
-  # user_logged_in
+  # user_signed_in?
   # user_session
 
   def current_site

@@ -23,6 +23,10 @@ class User < ApplicationRecord
     self.save
   end
 
+  def is_admin?
+    self.role == "admin"
+  end
+
   def has_permissions?(level)
     case level
     when "admin"

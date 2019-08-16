@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :user_signed_in?
+  skip_before_action :authenticate_user!
 
 #  lots to take out here
 
