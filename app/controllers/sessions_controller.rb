@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   skip_before_action :user_signed_in?
 
+#  lots to take out here
+
   # /login
   def new
     render :login
