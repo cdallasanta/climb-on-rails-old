@@ -31,5 +31,5 @@
 /config/master.key
 
 
-# Ignore .env, which is used by Omniauth
-.env
+# Ignore local env variables in
+/config/local_env.yml
