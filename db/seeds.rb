@@ -46,4 +46,4 @@ Element::Rope.create(element:giants_ladder, identifier:"Blue with orange pcord")
 #   role: "facilitator"
 # )
 
-AdminUser.create!(email: 'chris@email.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'chris@email.com', password: 'password', password_confirmation: 'password') if Rails.env.development?AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
