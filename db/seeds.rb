@@ -1,10 +1,6 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+
 
 #Site
 orkila = Site.create(name:"Orkila")
@@ -23,27 +19,13 @@ Element::Rope.create(element:giants_ladder, identifier:"Red with orange pcord")
 Element::Rope.create(element:giants_ladder, identifier:"White with orange pcord")
 Element::Rope.create(element:giants_ladder, identifier:"Blue with orange pcord")
 
-# #Users
-# demo = User.create(
-#   fullname: "Demo User",
-#   email: "demo@gmail.com",
-#   password: "demo",
-#   site: orkila,
-#   role: "admin"
-# )
-# liz = User.create(
-#   fullname: "Liz Doane",
-#   email: "liz@email.com",
-#   password: "p",
-#   site: orkila,
-#   role: "lead"
-# )
-# emily = User.create(
-#   fullname: "Emily Trusky",
-#   email: "emily@email.com",
-#   password: "p",
-#   site: orkila,
-#   role: "facilitator"
-# )
+#Users
+demo = User.create(
+  fullname: "Demo User",
+  email: "demo@gmail.com",
+  password: "demo",
+  site: orkila,
+  role: "admin"
+)
 
-AdminUser.create!(email: 'chris@email.com', password: 'password', password_confirmation: 'password') if Rails.env.development?AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'chris@email.com', password: 'password', password_confirmation: 'password', site:orkila, fullname:"Chris Dalla Santa") if Rails.env.development?

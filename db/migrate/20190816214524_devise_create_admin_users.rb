@@ -4,6 +4,8 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :admin_users do |t|
       ## Database authenticatable
+      t.string :fullname
+      t.integer :site_id
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
@@ -36,8 +38,8 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration[5.2]
       t.timestamps null: false
     end
 
-    add_index :admin_users, :email,                unique: true
-    add_index :admin_users, :reset_password_token, unique: true
+    # add_index :admin_users, :email,                unique: true
+    # add_index :admin_users, :reset_password_token, unique: true
     # add_index :admin_users, :confirmation_token,   unique: true
     # add_index :admin_users, :unlock_token,         unique: true
   end

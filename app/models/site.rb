@@ -1,5 +1,6 @@
 class Site < ApplicationRecord
   has_many :users
+  has_many :admin_users
   has_many :elements
 
   validates_presence_of :name
