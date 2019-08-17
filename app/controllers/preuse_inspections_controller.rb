@@ -1,5 +1,5 @@
 class PreuseInspectionsController < ApplicationController
-  before_action :check_for_element_and_preuse_existance
+  before_action :check_for_element_and_preuse_existance, :authenticate_user!
 
   def create
     # if the request comes in with a string, it is likely coming from /index, where

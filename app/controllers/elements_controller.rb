@@ -1,4 +1,5 @@
 class ElementsController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_element, only: [:show, :edit, :update]
 
   def index

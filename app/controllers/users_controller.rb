@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :check_owner_of_user, only: [:show, :edit, :update]
-  skip_before_action :authenticate_user!, except: :show
+  before_action :authenticate_user!, only: [:show]
 
   def new
     @user = User.new

@@ -1,5 +1,5 @@
 class RopesController < ApplicationController
-  before_action :check_for_element_and_rope_existance
+  before_action :check_for_element_and_rope_existance, :authenticate_user!
 
   def update
     @rope.update(retired: true)

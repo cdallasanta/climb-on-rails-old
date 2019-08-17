@@ -1,5 +1,5 @@
 class PeriodicInspectionsController < ApplicationController
-  before_action :check_for_element_and_periodic_existance
+  before_action :check_for_element_and_periodic_existance, :authenticate_user!
   before_action :check_for_previous_periodic_on_that_date, :remove_empty_comments, only: [:new, :create, :update]
 
   # /elements/:element_id/periodic_inspections/new
