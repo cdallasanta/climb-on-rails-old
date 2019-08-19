@@ -3,7 +3,7 @@
 
 
 #Site
-orkila = Site.create(name:"Orkila")
+orkila = Site.new(name:"Orkila")
 
 #Elements
 catwalk = Element.create(name:"Catwalk", site: orkila)
@@ -20,12 +20,15 @@ Element::Rope.create(element:giants_ladder, identifier:"White with orange pcord"
 Element::Rope.create(element:giants_ladder, identifier:"Blue with orange pcord")
 
 #Users
-demo = User.create(
+demo = User.new(
   fullname: "Demo User",
   email: "demo@gmail.com",
-  password: "demo",
-  site: orkila,
+  password: "demopass",
+  site: Site.find_by(name:"orkila"),
   role: "admin"
 )
 
-AdminUser.create!(email: 'chris@email.com', password: 'password', password_confirmation: 'password', site:orkila, fullname:"Chris Dalla Santa") if Rails.env.development?
+orkila.contact = demo
+orkila.save
+
+AdminUser.create!(email: 'chris@email.com', password: 'password', password_confirmation: 'password', fullname:"Chris Dalla Santa") if Rails.env.development?

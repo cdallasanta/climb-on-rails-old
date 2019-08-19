@@ -2,6 +2,7 @@ class Site < ApplicationRecord
   has_many :users
   has_many :admin_users
   has_many :elements
+  belongs_to :contact, class_name: 'User', foreign_key: :contact_id
 
   validates_presence_of :name
 
