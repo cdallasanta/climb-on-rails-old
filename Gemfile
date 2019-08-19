@@ -21,25 +21,14 @@ gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 
-# TODO, is this needed with Devise instead?
-# Use ActiveModel has_secure_password
+# Use ActiveModel for Devise
 gem 'bcrypt', '~> 3.1.7'
 
 # active admin backend management
 gem 'activeadmin'
 
-# Devise for user management, currently not well utilized, but will be more
+# Devise for user management
 gem 'devise'
-
-# CURRENTLY DOES NOT WORK, AND NEEDS TO BE REMOVED EVENTUALLY
-# Use OmniAuth for alternative signin options
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'dotenv-rails', groups: [:development, :test]
-
-# Use Bootstrap to pretty-fy the navbar
-gem 'bootstrap', '~> 4.3.1'
-gem 'jquery-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
