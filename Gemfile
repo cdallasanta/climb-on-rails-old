@@ -30,6 +30,10 @@ gem 'activeadmin'
 # Devise for user management
 gem 'devise'
 
+# Use Bootstrap to pretty-fy the navbar
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

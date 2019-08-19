@@ -6,6 +6,9 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <% if stylesheet_exists? %>
+      <%= stylesheet_link_tag params[:controller] %>
+    <% end %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
