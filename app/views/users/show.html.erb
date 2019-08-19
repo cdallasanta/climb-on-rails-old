@@ -1,0 +1,7 @@
+<h3><%= @user.fullname %></h3>
+Email: <%= @user.email %><br>
+Site: <%= @user.site.name %><br>
+Role: <%= @user.role %><br>
+
+
+<%= link_to "Edit details", edit_user_registration_path(@user) %>

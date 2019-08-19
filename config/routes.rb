@@ -4,14 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'elements#index'
 
-  #  will get rid of some of these
-  # get '/login', to: 'sessions#new'
-  # post '/login', to: 'sessions#create'
-  # get '/logout', to: 'sessions#destroy'
-  # get '/auth/:provider/callback', to: 'sessions#create'
-
-  get '/signup', to: 'users#new'
-  resources :users, only: [:create, :show, :edit, :update]
+  # get '/signup', to: 'users#new'
+  resources :users, only: [:show]
 
   resources :elements, only: [:index, :show, :edit, :update] do
     resources :ropes, only: [:new, :create, :update]

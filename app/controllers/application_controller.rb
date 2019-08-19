@@ -3,10 +3,13 @@ class ApplicationController < ActionController::Base
   # Helpers
 
   # The following are defined by Devise:
-  # current_user
-  # authenticate_user!
   # user_signed_in?
+  # current_user
   # user_session
+  # destroy_user_session_path (Logout)
+  # new_user_session_path (Login)
+  # edit_user_registration_path (Edit registration)
+  # new_user_registration_path (Register new user)
 
   def current_site
     current_user.site
