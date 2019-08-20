@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'elements#index'
 
-  # get '/signup', to: 'users#new'
   resources :users, only: [:show]
 
   resources :elements, only: [:index, :show, :edit, :update] do

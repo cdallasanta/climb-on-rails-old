@@ -6,12 +6,19 @@
   color: #fff;
   width: 25vw;
   height: 60vh;
+  border-radius: 20px;
+
+  // flexbos for aligning children roughly in center
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin: auto;
-  border-radius: 20px;
+  
+  //in order to vert and horiz align div
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #login-form {
@@ -60,5 +67,4 @@ body {
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
-  font-family: Arial, sans-serif;
 }

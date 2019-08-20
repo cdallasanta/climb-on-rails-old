@@ -15,3 +15,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 # precompile scss files
 Rails.application.config.assets.precompile += %w( devise/sessions.css )
+Rails.application.config.assets.precompile += %w( elements.css )

@@ -1,3 +1,7 @@
+Colors:
+https://paletton.com/#uid=51Z0u0knCd7g1lujEgMsc8U-w4V
+
+
 #Facilitators should be able to:
 [x] perform pre-use inspections
 [x] leave comments on elements through inspections

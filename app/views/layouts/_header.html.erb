@@ -1,9 +1,8 @@
 <header>
-  <div class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <%= login_link_or_header_buttons %>
-      </ul>
+  <% if user_signed_in? %> 
+    <div class="navbar">
+      <%= header_buttons %>
+      <img src=<%= asset_path 'logo.png' %> alt="logo">
     </div>
-  </div>
+  <% end %>
 </header>
