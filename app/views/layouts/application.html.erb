@@ -13,14 +13,18 @@
   </head>
 
   <body>
-    <%= render partial: 'layouts/header' %>
+    <header>
+      <%= render partial: 'layouts/header' %>
+    </header>
 
-    <% if flash.alert %>
-      <div class="alert alert-warning">
-        <%= raw flash.alert %>
-      </div>
-    <% end %>
+    <div id="content">
+      <% if flash.alert %>
+        <div class="alert alert-warning">
+          <%= raw flash.alert %>
+        </div>
+      <% end %>
 
-    <%= yield %>
+      <%= yield %>
+    </div>
   </body>
 </html>
