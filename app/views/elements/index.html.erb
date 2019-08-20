@@ -1,7 +1,6 @@
 <div id="elements-list">
 <% @elements.each do |element| %>
   <div class="element-card">
-    <img src=<%= asset_path "#{element.name.gsub(/[^0-9a-z]/i, "")}.png" %>>
     <div class="element-card-links">
       <h3><%= element.name %></h3>
       <ul>
@@ -17,11 +16,7 @@
         <% end %>
       </ul>
     </div>
+    <img src=<%= asset_path "#{element.name.gsub(/[^0-9a-z]/i, "")}.png" %>>
   </div>
 <% end %>
 </div>
-
-<!-- 
-<% if current_user.has_permissions?("admin") %>
-  <%= link_to "View this week's comments", comments_path %>
-<% end %> -->
