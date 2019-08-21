@@ -1,10 +1,19 @@
+body.registrations {
+  background-color: #141F04;
+  background-image: url(../ThunderCreek.JPG);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
 /* Form */
 #edit-user-container {
   background: rgba(27, 34, 17, .8);
   border: 10px solid rgb(13,13,13);
   color: #C0A88C;
   width: 25vw;
-  height: 60vh;
+  height: 85vh;
   border-radius: 20px;
 
   // flexbos for aligning children roughly in center
@@ -56,16 +65,6 @@
 
 #edit-user-container * {
   text-align: center
-}
-
-
-#edit-user-background {
-  background-color: #141F04;
-  background-image: url(ThunderCreek.JPG);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
 }
 
 i {
