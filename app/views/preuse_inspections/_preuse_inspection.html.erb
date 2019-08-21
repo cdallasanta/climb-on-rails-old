@@ -1,4 +1,4 @@
-<%= form_for inspection, url: edit_element_preuse_inspection_path(inspection.element, inspection), method: :get  do |f| %>
+<%= form_for inspection, url: edit_element_preuse_inspection_path(inspection.element, inspection), method: :get, :html=> {:id => 'preuse-inspection-form'}  do |f| %>
   <%= errors_check(inspection) %>
 
   <fieldset disabled>

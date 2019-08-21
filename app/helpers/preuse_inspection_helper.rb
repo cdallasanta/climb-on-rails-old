@@ -7,8 +7,8 @@ module PreuseInspectionHelper
 
   def updated_by_div(object)
     unless object.users == []
-      "<div class=\"updated-by\">
-        Updated by:<br>
+      "<div class=\"updated-by form-group\">
+        <h3>Updated by:</h3>
         #{updaters_listed(object)}
       </div>".html_safe
     end

@@ -1,0 +1,37 @@
+body {
+  background-color: #141F04;
+  background-image: url(ThunderCreek.JPG);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+#show-user-container {
+  background: rgba(27, 34, 17, .8);
+  border: 10px solid rgb(13,13,13);
+  color: #C0A88C;
+  width: 25vw;
+  height: 60vh;
+  border-radius: 20px;
+
+  // flexbos for aligning children roughly in center
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  
+  //in order to vert and horiz align div
+  position: absolute;
+  // top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+#show-user-container a {
+  color: #C0A88C;
+}
+
+#show-user-container * {
+  text-align: center
+}

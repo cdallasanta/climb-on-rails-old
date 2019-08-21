@@ -1,6 +1,7 @@
 <%= f.fields_for :setup do |ff| %>
   <%= errors_check(setup) %>
   <div class="setup-instructions form-group">
+    <h2>Equipment</h2>
     <%= raw @element.setup_equipment_instructions %><br>
     <div class="form-check">
       <%= ff.check_box :equipment_complete, class:"form-check-input" %>
@@ -8,6 +9,7 @@
     </div>
   </div>
   <div class="setup-instructions form-group">
+    <h2>Element</h2>
     <%= raw @element.setup_element_instructions %><br>
     <div class="form-check">
       <%= ff.check_box :element_complete, class:"form-check-input" %>
@@ -15,6 +17,7 @@
     </div>
   </div>
   <div class="setup-instructions form-group">
+    <h2>Environment</h2>
     <%= raw @element.setup_environment_instructions %><br>
     <div class="form-check">
       <%= ff.check_box :environment_complete, class:"form-check-input" %>

@@ -1,11 +1,12 @@
 <hr>
 <%= f.fields_for :takedown do |ff| %>
   <%= errors_check(takedown) %>
-  <div class="climb-blocks">
+  <div class="climb-blocks form-group">
     <%= rope_and_climb_fields(ff, takedown) %>
   </div>
 
   <div class="takedown-instructions form-group">
+    <h2>Equipment</h2>
     <%= @element.takedown_equipment_instructions.html_safe %><br>
 
     <div class="form-check">
@@ -14,6 +15,7 @@
     </div>
   </div>
   <div class="takedown-instructions form-group">
+    <h2>Element</h2>
     <%= @element.takedown_element_instructions.html_safe %><br>
 
     <div class="form-check">
@@ -22,6 +24,7 @@
     </div>
   </div>
   <div class="takedown-instructions form-group">
+    <h2>Environment</h2>
     <%= @element.takedown_environment_instructions.html_safe %><br>
 
     <div class="form-check">

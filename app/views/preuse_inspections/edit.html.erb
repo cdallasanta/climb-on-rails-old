@@ -1,5 +1,7 @@
-<%= form_for @inspection, url: element_preuse_inspection_path(@element, @inspection)  do |f| %>
-  Date: <%= f.date_field :date, diabled: true %><br>
+<%= form_for @inspection, url: element_preuse_inspection_path(@element, @inspection), :html=> {:id => 'preuse-inspection-form'}  do |f| %>
+  <div class="form-group">
+    <b>Date:</b> <%= f.date_field :date, diabled: true %>
+  </div>
 
   <%= render partial: 'setup', locals: {setup: @inspection.setup, f: f} %>
 

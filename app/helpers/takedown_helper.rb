@@ -3,7 +3,7 @@ module TakedownHelper
   # for each rope, put 4 fields (one for each climbing block)
   def rope_and_climb_fields(ff, takedown)
     ff.fields_for :ropes do |rope_form|
-      "<div class=\"form-group\">
+      "<div>
         #{rope_form.label(rope_form.object.identifier) + climb_fields(rope_form.object, rope_form)} <br>
       </div>".html_safe
     end

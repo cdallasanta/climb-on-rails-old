@@ -1,6 +1,6 @@
 class PeriodicInspectionsController < ApplicationController
   before_action :check_for_element_and_periodic_existance, :authenticate_user!
-  before_action :check_for_previous_periodic_on_that_date, :remove_empty_comments, only: [:new, :create, :update]
+  before_action :check_for_previous_periodic_on_that_date, :remove_empty_comments, only: [:create, :update]
 
   # /elements/:element_id/periodic_inspections/new
   def new
@@ -85,6 +85,7 @@ class PeriodicInspectionsController < ApplicationController
   end
 
   def check_for_previous_periodic_on_that_date
+    binding.pry
     previous_inspection = PeriodicInspection.find_by(date: params[:periodic_inspection][:date], element:@element.id)
     if previous_inspection != @inspection
       flash[:alert] = "There is already an inspection logged for that date. View/edit it <a href='#{edit_element_periodic_inspection_path(@element, previous_inspection)}'>here</a>"
