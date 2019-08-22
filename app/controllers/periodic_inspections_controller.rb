@@ -85,7 +85,6 @@ class PeriodicInspectionsController < ApplicationController
   end
 
   def check_for_previous_periodic_on_that_date
-    binding.pry
     previous_inspection = PeriodicInspection.find_by(date: params[:periodic_inspection][:date], element:@element.id)
     if previous_inspection != @inspection
       flash[:alert] = "There is already an inspection logged for that date. View/edit it <a href='#{edit_element_periodic_inspection_path(@element, previous_inspection)}'>here</a>"

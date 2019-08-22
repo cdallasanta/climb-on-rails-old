@@ -1,4 +1,4 @@
-<%= form_for @inspection, url: edit_element_periodic_inspection_path(@element, @inspection), method: :get  do |f| %>
+<%= form_for @inspection, url: edit_element_periodic_inspection_path(@element, @inspection), method: :get, :html => {:id => 'periodic-inspection-form'}  do |f| %>
   <%= errors_check(@inspection) %>
 
   <fieldset disabled>
