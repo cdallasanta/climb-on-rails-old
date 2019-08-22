@@ -6,9 +6,9 @@
 orkila = Site.new(name:"Orkila")
 
 #Elements
-catwalk = Element.create(name:"Catwalk", site: orkila)
-zipline = Element.create(name:"Zipline", site: orkila)
-giants_ladder = Element.create(name:"Giant's Ladder", site: orkila)
+catwalk = Element.create(name:"Catwalk", site: Site.find_by(name:"orkila"))
+zipline = Element.create(name:"Zipline", site: Site.find_by(name:"orkila"))
+giants_ladder = Element.create(name:"Giant's Ladder", site: Site.find_by(name:"orkila"))
 
 #rope
 Element::Rope.create(element:catwalk, identifier:"Olive with red pcord")
