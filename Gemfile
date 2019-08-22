@@ -40,6 +40,9 @@ gem 'jquery-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# yarn for heroku?
+gem 'yarn'
+
 group :development, :test do
   gem 'pry'
 end
