@@ -40,8 +40,9 @@ gem 'jquery-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-# yarn for heroku?
-gem 'yarn'
+# this might be a fix for assets compiling in heroku, maybe just for Rails 4 though
+gem 'rails_serve_static_assets'
+gem 'rails_stdout_logging'
 
 group :development, :test do
   gem 'pry'
