@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   def set_defaults
     self.site = Site.find_by(name:"Orkila")
-    self.role = "lead"
+    self.role ||= "lead"
     self.save
   end
 
