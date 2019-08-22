@@ -2,7 +2,7 @@ module HeaderHelper
   def header_buttons
     if user_signed_in?
       "<div class='nav-item'>
-          #{link_to "Elements", elements_path, class: "nav-link", class: "nav-link"}
+          #{link_to "Elements", elements_path, class: "nav-link"}
         </div>
         <div class='nav-item'>
           #{link_to "My profile", user_path(current_user), class: "nav-link"}
