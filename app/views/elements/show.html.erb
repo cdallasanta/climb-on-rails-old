@@ -1,9 +1,17 @@
-<h2><%= @element.name %></h2>
-<%= link_to "Edit details", edit_element_path(@element) %><br>
+<div id="show-element">
+  <div class="elements-section">
+    <h2><%= @element.name %></h2>
+    <%= link_to "Edit details", edit_element_path(@element) %>
+  </div>
 
-Date of last Periodic Inspection:<br>
-<%= date_of_last_periodic %>
+  <div class="elements-section">
+    Date of last Periodic Inspection:<br>
+    <%= date_of_last_periodic %>
+  </div>
 
-<%= rope_details %>
+  <div class="elements-section">
+    <%= rope_details %>
+  </div>
 
-<%= render partial: 'instructions', locals: {element: @element} %>
+  <%= render partial: 'instructions', locals: {element: @element} %>
+</div>

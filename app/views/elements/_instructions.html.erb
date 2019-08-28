@@ -1,24 +1,34 @@
-<h3>Preuse Instructions</h3>
-<h4>Setup</h4>
-<h5>Equipment:</h5>
-<%= raw element.setup_equipment_instructions %>
-<h5>Element:</h5>
-<%= raw element.setup_element_instructions %>
-<h5>Environment:</h5>
-<%= raw element.setup_environment_instructions %>
+<div class="elements-section">
+  <h2>Preuse Instructions</h2>
+  <div class="instructions" id="setup-instructions">
+    <h3>Setup</h3>
+    <h4>Equipment:</h4>
+    <%= raw element.setup_equipment_instructions %>
+    <h4>Element:</h4>
+    <%= raw element.setup_element_instructions %>
+    <h4>Environment:</h4>
+    <%= raw element.setup_environment_instructions %>
+  </div>
 
-<h4>Takedown</h4>
-<h5>Equipment:</h5>
-<%= raw element.takedown_equipment_instructions %>
-<h5>Element:</h5>
-<%= raw element.takedown_element_instructions %>
-<h5>Environment:</h5>
-<%= raw element.takedown_environment_instructions %>
+  <div class="instructions" id="takedown-instructions">
+    <h3>Takedown</h3>
+    <h4>Equipment:</h4>
+    <%= raw element.takedown_equipment_instructions %>
+    <h4>Element:</h4>
+    <%= raw element.takedown_element_instructions %>
+    <h4>Environment:</h4>
+    <%= raw element.takedown_environment_instructions %>
+  </div>
+</div>
 
-<h3>Periodic Instructions</h3>
-<h5>Equipment:</h5>
-<%= raw element.periodic_equipment_instructions %>
-<h5>Element:</h5>
-<%= raw element.periodic_element_instructions %>
-<h5>Environment:</h5>
-<%= raw element.periodic_environment_instructions %>
+<div class="elements-section">
+  <h2>Periodic Instructions</h2>
+  <div class="instructions" id="periodic-instructions">
+    <h4>Equipment:</h4>
+    <%= raw element.periodic_equipment_instructions %>
+    <h4>Element:</h4>
+    <%= raw element.periodic_element_instructions %>
+    <h4>Environment:</h4>
+    <%= raw element.periodic_environment_instructions %>
+  </div>
+</div>

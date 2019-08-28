@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def current_site
+    current_user.site
+  end
+
   # adds form errors to the top of the form
   def errors_check(object)
     if object.errors.any?
