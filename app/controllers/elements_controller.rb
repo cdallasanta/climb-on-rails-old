@@ -3,7 +3,6 @@ class ElementsController < ApplicationController
   before_action :get_element, only: [:show, :edit, :update]
 
   def index
-    puts "~~~~~~~~~~IN INDEX CONTROLLER~~~~~~~~~~~~~~~~~"
     @elements = current_site.elements
   end
 

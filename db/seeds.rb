@@ -22,7 +22,14 @@ Element::Rope.create(element:giants_ladder, identifier:"Blue with orange pcord")
 #Users
 demo = User.new(
   fullname: "Demo User",
-  email: "demo@gmail.com",
+  email: "demo@email.com",
+  password: "demopass",
+  site: Site.find_by(name:"orkila"),
+  role: "admin"
+)
+chris = User.new(
+  fullname: "Chris Dalla Santa",
+  email: "chris@email.com",
   password: "demopass",
   site: Site.find_by(name:"orkila"),
   role: "admin"
@@ -30,5 +37,3 @@ demo = User.new(
 
 orkila.contact = demo
 orkila.save
-
-AdminUser.create!(email: 'chris@email.com', password: 'password', password_confirmation: 'password', fullname:"Chris Dalla Santa") if Rails.env.development?
