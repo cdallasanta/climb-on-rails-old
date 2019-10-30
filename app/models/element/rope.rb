@@ -18,6 +18,7 @@ class Element::Rope < ApplicationRecord
   # returns the number of climbs this rope has received in its life
   # note: not the number of Climb objects, but the number of uses
   def climb_count
+    binding.pry
     self.climbs.inject(0) do |sum, climb|
       climb.number_of_climbs ? sum + climb.number_of_climbs : sum
     end

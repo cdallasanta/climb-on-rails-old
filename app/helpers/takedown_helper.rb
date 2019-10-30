@@ -1,22 +1,14 @@
 module TakedownHelper
 
-  # for each rope, put 4 fields (one for each climbing block)
-  def rope_and_climb_fields(ff, takedown)
-    ff.fields_for :ropes do |rope_form|
-      "<div>
-        #{rope_form.label(rope_form.object.identifier) + climb_fields(rope_form.object, rope_form)} <br>
-      </div>".html_safe
-    end
-  end
 
-  def climb_fields(rope, form)
+  def climb_fields(rope)
     # for each rope, if they already have Climb objects, show those. If they don't,
     # make 4 blank ones.
-    if rope.climbs == []
-      4.times { rope.climbs.create(takedown: @inspection.takedown) }
+    binding.pry
+    if rope.climbs.where(takedown: @inspection.takedown) == []
+      rope.climbs.create(takedown: @inspection.takedown)
     end
-    form.fields_for :climbs do |climb_form|
-      climb_form.phone_field :number_of_climbs, class:"form-control-sm"
-    end
+    
+    render partial: "preuse_inspections/partials/climbs", locals: { takedown: @inspection.takedown }
   end
 end

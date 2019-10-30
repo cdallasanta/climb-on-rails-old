@@ -30,9 +30,12 @@ ActiveRecord::Schema.define(version: 2019_10_30_193251) do
   end
 
   create_table "climbs", force: :cascade do |t|
-    t.integer "number_of_climbs"
     t.integer "rope_id"
     t.integer "takedown_id"
+    t.integer "block_1"
+    t.integer "block_2"
+    t.integer "block_3"
+    t.integer "block_4"
   end
 
   create_table "comments", force: :cascade do |t|

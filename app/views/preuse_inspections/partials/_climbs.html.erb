@@ -1,0 +1,9 @@
+<% @takedown.climbs.each do |climb| %>
+  <div>
+    <label><%= climb.rope.identifier %>:</label>
+    <input type="phone" value=<%= climb.block_1 %>>
+    <input type="phone" value=<%= climb.block_2 %>>
+    <input type="phone" value=<%= climb.block_3 %>>
+    <input type="phone" value=<%= climb.block_4 %>>
+  </div>
+<% end %>

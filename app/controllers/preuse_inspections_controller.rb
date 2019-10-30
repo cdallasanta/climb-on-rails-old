@@ -39,7 +39,13 @@ class PreuseInspectionsController < ApplicationController
     @inspection.setup.comments.build(user:current_user)
     if @inspection.setup.is_complete?
       @inspection.takedown ||= PreuseInspection::Takedown.create
-      @inspection.takedown.comments.build(user:current_user)
+      @takedown = @inspection.takedown
+      @takedown.comments.build(user:current_user)
+      if @takedown.climbs = []
+        @takedown.ropes.each do |rope|
+          @takedown.climbs.create(rope:rope)
+        end
+      end
     end
   end
 
