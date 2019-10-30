@@ -34,7 +34,7 @@
       <%= render partial: 'comments', locals: {f:f, inspection:@inspection} %>
     </div>
 
-    <%= updated_by_div(inspection) %>
+    <%= updated_by_div(@inspection) %>
 
     <%= f.submit %>
   <% end %>

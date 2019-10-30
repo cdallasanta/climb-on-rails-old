@@ -7,18 +7,17 @@ module PreuseInspectionHelper
 
   def updated_by_div(object)
     unless object.users == []
-      "<div class=\"updated-by form-group\">
-        <h3>Updated by:</h3>
-        #{updaters_listed(object)}
-      </div>".html_safe
+      names = object.users.collect do |user|
+        user.fullname + '<br>'
+      end.join.html_safe
+
+      render partial: "periodic_inspections/updated_by", locals: {names: names}
     end
   end
 
   # li for each updater with their name
   def updaters_listed(object)
-    object.users.collect do |user|
-      user.fullname + '<br>'
-    end.join
+
   end
 
   def show_inspection_if_selected
