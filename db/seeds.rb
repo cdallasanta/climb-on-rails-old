@@ -6,9 +6,9 @@
 orkila = Site.new(name:"Orkila")
 
 #Elements
-catwalk = Element.create(name:"Catwalk", site: Site.find_by(name:"orkila"))
-zipline = Element.create(name:"Zipline", site: Site.find_by(name:"orkila"))
-giants_ladder = Element.create(name:"Giant's Ladder", site: Site.find_by(name:"orkila"))
+catwalk = Element.create(name:"Catwalk", site: orkila)
+zipline = Element.create(name:"Zipline", site: orkila)
+giants_ladder = Element.create(name:"Giant's Ladder", site: orkila)
 
 #rope
 Element::Rope.create(element:catwalk, identifier:"Olive with red pcord")
@@ -20,18 +20,18 @@ Element::Rope.create(element:giants_ladder, identifier:"White with orange pcord"
 Element::Rope.create(element:giants_ladder, identifier:"Blue with orange pcord")
 
 #Users
-demo = User.new(
+demo = User.create(
   fullname: "Demo User",
   email: "demo@email.com",
   password: "demopass",
-  site: Site.find_by(name:"orkila"),
+  site: orkila,
   role: "admin"
 )
-chris = User.new(
+chris = User.create(
   fullname: "Chris Dalla Santa",
   email: "chris@email.com",
   password: "demopass",
-  site: Site.find_by(name:"orkila"),
+  site: orkila,
   role: "admin"
 )
 

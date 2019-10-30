@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
     current_user.site
   end
 
+  def authenticate_admin_user
+    if !user_signed_in?
+      redirect_to new_user_session_path
+    elsif !current_user.is_admin?
+      redirect_to root_path
+    end
+  end
+
   #  TODO remove this with FB signup
   # This is the way around requiring a site and role for a user, but allowing
   # a signup via facebook, which doesn't specify that at creation.

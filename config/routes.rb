@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users, ActiveAdmin::Devise.config
+  devise_for :users
+
   root to: 'elements#index'
 
   resources :users, only: [:show]
@@ -12,5 +12,6 @@ Rails.application.routes.draw do
     resources :periodic_inspections, only: [:new, :create, :show, :edit, :update]
   end
 
+  # TODO eventually remove this
   resources :comments, only: [:index]
 end
