@@ -50,6 +50,7 @@ class PreuseInspectionsController < ApplicationController
   end
 
   def update
+    binding.pry
     #updating preuse (just the date, really)
     @inspection.date = preuse_params[:date]
     #save preuse for date validation, to ensure the date is unique on that element
@@ -127,7 +128,8 @@ class PreuseInspectionsController < ApplicationController
         ],
         comments_attributes: [
           :user_id,
-          :content
+          :content,
+          :id
         ]
       ]
     )
