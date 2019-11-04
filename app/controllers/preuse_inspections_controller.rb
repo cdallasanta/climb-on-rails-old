@@ -21,6 +21,7 @@ class PreuseInspectionsController < ApplicationController
     redirect_to edit_element_preuse_inspection_path(@element, @inspection)
   end
 
+  # TODO: I might have removed this
   # /elements/:element_id/preuse_inspections
   def index
     # if they selected a date, show the selected inspection in the view
