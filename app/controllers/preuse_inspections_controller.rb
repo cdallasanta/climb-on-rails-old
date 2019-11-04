@@ -41,7 +41,8 @@ class PreuseInspectionsController < ApplicationController
       @inspection.takedown ||= PreuseInspection::Takedown.create
       @takedown = @inspection.takedown
       @takedown.comments.build(user:current_user)
-      if @takedown.climbs = []
+      binding.pry
+      if @takedown.climbs == []
         @takedown.ropes.each do |rope|
           @takedown.climbs.create(rope:rope)
         end
@@ -50,7 +51,6 @@ class PreuseInspectionsController < ApplicationController
   end
 
   def update
-    binding.pry
     #updating preuse (just the date, really)
     @inspection.date = preuse_params[:date]
     #save preuse for date validation, to ensure the date is unique on that element
@@ -120,15 +120,18 @@ class PreuseInspectionsController < ApplicationController
         :environment_complete,
         :id,
         ropes_attributes: [
-          :id,
-          climbs_attributes: [
-            :number_of_climbs,
-            :id
-          ]
+          :id
         ],
         comments_attributes: [
           :user_id,
           :content,
+          :id
+        ],
+        climbs_attributes: [
+          :block_1,
+          :block_2,
+          :block_3,
+          :block_4,
           :id
         ]
       ]
