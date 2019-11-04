@@ -41,7 +41,6 @@ class PreuseInspectionsController < ApplicationController
       @inspection.takedown ||= PreuseInspection::Takedown.create
       @takedown = @inspection.takedown
       @takedown.comments.build(user:current_user)
-      binding.pry
       if @takedown.climbs == []
         @takedown.ropes.each do |rope|
           @takedown.climbs.create(rope:rope)
