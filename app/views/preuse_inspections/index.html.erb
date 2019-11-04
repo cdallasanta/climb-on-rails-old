@@ -1,7 +1,7 @@
 <%= form_tag(element_preuse_inspections_path(@element), method: :get) do %>
   <%= hidden_field_tag :element_id, @element.id %>
   <%= date_field_tag :date %>
-  <%# There's JS I can impliment here to make this auto-go, right? %>
+  <%# TODO: There's JS I can impliment here to make this auto-go, right? %>
   <%= submit_tag "View Inspection" %>
 <% end %>
 

@@ -21,6 +21,7 @@ class PreuseInspectionsController < ApplicationController
     redirect_to edit_element_preuse_inspection_path(@element, @inspection)
   end
 
+  # TODO: I might have removed this
   # /elements/:element_id/preuse_inspections
   def index
     # if they selected a date, show the selected inspection in the view
@@ -41,7 +42,7 @@ class PreuseInspectionsController < ApplicationController
       @inspection.takedown ||= PreuseInspection::Takedown.create
       @takedown = @inspection.takedown
       @takedown.comments.build(user:current_user)
-      if @takedown.climbs = []
+      if @takedown.climbs == []
         @takedown.ropes.each do |rope|
           @takedown.climbs.create(rope:rope)
         end
@@ -119,15 +120,19 @@ class PreuseInspectionsController < ApplicationController
         :environment_complete,
         :id,
         ropes_attributes: [
-          :id,
-          climbs_attributes: [
-            :number_of_climbs,
-            :id
-          ]
+          :id
         ],
         comments_attributes: [
           :user_id,
-          :content
+          :content,
+          :id
+        ],
+        climbs_attributes: [
+          :block_1,
+          :block_2,
+          :block_3,
+          :block_4,
+          :id
         ]
       ]
     )

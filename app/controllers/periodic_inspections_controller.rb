@@ -62,7 +62,8 @@ class PeriodicInspectionsController < ApplicationController
       :environment_complete,
       comments_attributes: [
         :user_id,
-        :content
+        :content,
+        :id
       ]
     )
   end

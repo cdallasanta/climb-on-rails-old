@@ -4,11 +4,10 @@
     <div class="element-card-links">
       <h3><%= element.name %></h3>
       <ul>
-        <li><%= link_to "View today's inspection", "/elements/#{element.id}/preuse_inspections", method: :post %></li>
-        <li><%= link_to "View past inspections", element_preuse_inspections_path(element) %></li>
+        <li><%= link_to "Preuse inspections", "/elements/#{element.id}/preuse_inspections", method: :post %></li>
 
         <% if current_user.has_permissions?("lead") %>
-          <li><%= link_to "Log a periodic inspection", new_element_periodic_inspection_path(element) %></li>
+          <li><%= link_to "Periodic inspections", new_element_periodic_inspection_path(element) %></li>
         <% end %>
 
         <% if current_user.has_permissions?("admin") %>

@@ -1,9 +1,9 @@
-<% @takedown.climbs.each do |climb| %>
+<%= ff.fields_for :climbs do |climb_form| %>
   <div>
-    <label><%= climb.rope.identifier %>:</label>
-    <input type="phone" value=<%= climb.block_1 %>>
-    <input type="phone" value=<%= climb.block_2 %>>
-    <input type="phone" value=<%= climb.block_3 %>>
-    <input type="phone" value=<%= climb.block_4 %>>
+    <%= climb_form.label(:climb, climb_form.object.rope.identifier) %>
+    <%= climb_form.number_field :block_1 %>
+    <%= climb_form.number_field :block_2 %>
+    <%= climb_form.number_field :block_3 %>
+    <%= climb_form.number_field :block_4 %>
   </div>
 <% end %>
