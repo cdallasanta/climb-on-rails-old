@@ -1,7 +1,7 @@
 class PreuseInspectionsController < ApplicationController
-  # adding test comment
-  before_action :check_for_element_and_preuse_existance, :authenticate_user!
+  before_action :check_for_element_and_preuse_existance, :authenticate_user!, except: [:show]
 
+  # TODO: the comment below is out of date now
   def create
     # if the request comes in with a string, it is likely coming from /index, where
     # they selected a date without an inspection, and want to create one
@@ -17,9 +17,17 @@ class PreuseInspectionsController < ApplicationController
     else
       @inspection = @element.find_or_create_todays_inspection
     end
-    @inspection.setup = PreuseInspection::Setup.create if @inspection.setup == nil
+    @inspection.setup = PreuseInspection::Setup.create unless @inspection.setup
 
     redirect_to edit_element_preuse_inspection_path(@element, @inspection)
+  end
+
+  def show
+    @inspection = PreuseInspection.find_or_create_past_inspection(params[:date], params[:element_id])
+    @inspection.setup = PreuseInspection::Setup.create unless @inspection.setup
+    if @inspection
+      render :js => "window.location = '#{edit_element_preuse_inspection_url(@inspection.element, @inspection)}'"
+    end
   end
 
   # TODO: I might have removed this
@@ -27,7 +35,7 @@ class PreuseInspectionsController < ApplicationController
   def index
     # if they selected a date, show the selected inspection in the view
     if params[:date]
-      @inspection = PreuseInspection.find_past_inspection(params[:date], @element.id)
+      @inspection = PreuseInspection.find_or_create_past_inspection(params[:date], @element.id)
       # if no inspection was found, this will allow the view to offer a link to
       # create a new inspection on that date
       if @inspection.nil?
@@ -158,8 +166,9 @@ class PreuseInspectionsController < ApplicationController
 
   # called if they try to save an inspection for a date that already has
   # an inspection logged
+  # TODO: this might be unnecessary now
   def link_to_previous_preuse_on_that_date
-    previous_inspection = PreuseInspection.find_past_inspection(params[:preuse_inspection][:date], @element.id)
+    previous_inspection = PreuseInspection.find_or_create_past_inspection(params[:preuse_inspection][:date], @element.id)
     if previous_inspection
       flash[:alert] = "There is already an inspection logged for that date. View/edit it <a href='#{edit_element_preuse_inspection_path(@element, previous_inspection)}'>here</a>"
       redirect_to edit_element_preuse_inspection_path(@element, @inspection)

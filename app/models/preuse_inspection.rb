@@ -13,7 +13,7 @@ class PreuseInspection < ApplicationRecord
     self.where(date:Date.today.strftime("%Y-%m-%d").to_s , element_id: element_id).first_or_create
   end
 
-  def self.find_past_inspection(date, element_id)
-    self.where(date: Date.strptime(date, "%Y-%m-%d"), element_id: element_id).first
+  def self.find_or_create_past_inspection(date, element_id)
+    self.where(date: Date.strptime(date, "%Y-%m-%d"), element_id: element_id).first_or_create
   end
 end
