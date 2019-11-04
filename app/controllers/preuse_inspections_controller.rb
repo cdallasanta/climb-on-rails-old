@@ -1,22 +1,16 @@
 class PreuseInspectionsController < ApplicationController
   before_action :check_for_element_and_preuse_existance, :authenticate_user!, except: [:show]
 
-  # TODO: the comment below is out of date now
+  # /elements/:element_id/preuse_inspections/new
+  def new
+    binding.pry
+    params[:date] ? date = params[:date] : date = Date.today.to_s
+    @inspection = PreuseInspection.find_or_create_past_inspection(date, @element.id)
+    @inspection.setup = PreuseInspection::Setup.create unless @inspection.setup
+  end
+    
   def create
-    # if the request comes in with a string, it is likely coming from /index, where
-    # they selected a date without an inspection, and want to create one
-    if params[:date]
-      @inspection = @element.find_past_inspection(params[:date])
-      # checking for url shenanigans
-      if @inspection.nil?
-        @inspection = @element.preuse_inspections.create(date:Date.strptime(params[:date], "%Y-%m-%d"))
-      else
-        redirect_to edit_element_preuse_inspection_path(@element, @inspection)
-      end
-    # otherwise, they are from /elements and want to log today's inspection
-    else
-      @inspection = @element.find_or_create_todays_inspection
-    end
+    @inspection = @element.find_or_create_todays_inspection
     @inspection.setup = PreuseInspection::Setup.create unless @inspection.setup
 
     redirect_to edit_element_preuse_inspection_path(@element, @inspection)
@@ -24,23 +18,11 @@ class PreuseInspectionsController < ApplicationController
 
   def show
     @inspection = PreuseInspection.find_or_create_past_inspection(params[:date], params[:element_id])
-    @inspection.setup = PreuseInspection::Setup.create unless @inspection.setup
-    if @inspection
+    if @inspection.id != nil
       render :js => "window.location = '#{edit_element_preuse_inspection_url(@inspection.element, @inspection)}'"
-    end
-  end
-
-  # TODO: I might have removed this
-  # /elements/:element_id/preuse_inspections
-  def index
-    # if they selected a date, show the selected inspection in the view
-    if params[:date]
-      @inspection = PreuseInspection.find_or_create_past_inspection(params[:date], @element.id)
-      # if no inspection was found, this will allow the view to offer a link to
-      # create a new inspection on that date
-      if @inspection.nil?
-        @date = params[:date]
-      end
+    else
+      binding.pry
+      render :js => "window.location = '#{new_element_preuse_inspection_url(@inspection.element)}"
     end
   end
 
@@ -49,6 +31,7 @@ class PreuseInspectionsController < ApplicationController
     @inspection.setup.comments.build(user:current_user)
     if @inspection.setup.is_complete?
       @inspection.takedown ||= PreuseInspection::Takedown.create
+
       @takedown = @inspection.takedown
       @takedown.comments.build(user:current_user)
       if @takedown.climbs == []

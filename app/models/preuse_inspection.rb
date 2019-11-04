@@ -14,6 +14,6 @@ class PreuseInspection < ApplicationRecord
   end
 
   def self.find_or_create_past_inspection(date, element_id)
-    self.where(date: Date.strptime(date, "%Y-%m-%d"), element_id: element_id).first_or_create
+    self.find_or_initialize_by(date: Date.strptime(date, "%Y-%m-%d"), element_id: element_id)
   end
 end
