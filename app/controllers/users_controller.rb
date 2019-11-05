@@ -2,36 +2,20 @@ class UsersController < ApplicationController
   before_action :check_owner_of_user, only: [:show, :edit, :update]
   before_action :authenticate_user!, only: [:show, :edit, :update]
 
-  # def new
-  #   @user = User.new
-  # end
-
-  # def create
-  #   @user = User.new(user_params)
-
-  #   if @user.save
-  #     session[:user_id] = @user.id
-  #     redirect_to user_path(@user)
-  #   else
-  #     render :new
-  #   end
-  # end
-
   def show
     # @user is set in the before_action, #check_owner_of_user
     render "users/show"
   end
 
-  def edit
-    # @user is set in the before_action, #check_owner_of_user
-  end
-
   def update
+    if params[:user][:password] != params[:user][:password_confirmation]
+      flash[:alert] = "Passwords must match"
+      render :edit and return
+    end
     # if they left the password field blank, don't change their password
-    params[:user][:password] ||= @user.password
+    params[:user].delete_if {|k,v| v == ""}
 
     if @user.update(user_params)
-      check_user_data_complete # found in application_controller.rb
       flash[:alert] = "Details saved successfully"
       redirect_to user_path(@user)
     else

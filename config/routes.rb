@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   root to: 'elements#index'
 
-  resources :users, only: [:show]
+  resources :users, only: [:show, :edit, :update]
 
   resources :elements, only: [:index, :show, :edit, :update] do
     resources :ropes, only: [:new, :create, :update]
