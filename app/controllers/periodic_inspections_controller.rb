@@ -1,5 +1,5 @@
 class PeriodicInspectionsController < ApplicationController
-  before_action :check_for_element_and_periodic_existance, :authenticate_user!
+  before_action :check_for_element_and_periodic_existance, :authenticate_user!, except: [:find_by_date]
   before_action :check_for_previous_periodic_on_that_date, :remove_empty_comments, only: [:create, :update]
 
   # /elements/:element_id/periodic_inspections/new
@@ -22,6 +22,18 @@ class PeriodicInspectionsController < ApplicationController
       else
         render :edit
       end
+    end
+  end
+
+  # from datepicker JS
+  # /elements/:element_id/periodic_inspections/:date
+  def find_by_date
+    binding.pry
+    @inspection = PeriodicInspection.find_or_init_past_inspection(params[:date], params[:element_id])
+    if @inspection.id != nil
+      render js: "window.location = '#{edit_element_periodic_inspection_url(@inspection.element, @inspection)}'"
+    else
+      render js: "window.location = '#{new_element_periodic_inspection_url(@inspection.element)}?date=#{params[:date]}'"
     end
   end
 

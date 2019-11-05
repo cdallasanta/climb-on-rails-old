@@ -1,6 +1,6 @@
 class PreuseInspectionsController < ApplicationController
   before_action :remove_empty_comments, only: [:create, :update]
-  before_action :check_for_element_and_preuse_existance, :authenticate_user!, except: [:show]
+  before_action :check_for_element_and_preuse_existance, :authenticate_user!, except: [:find_by_date]
 
   # /elements/:element_id/preuse_inspections/new
   def new
@@ -40,7 +40,7 @@ class PreuseInspectionsController < ApplicationController
 
   # from datepicker JS
   # /elements/:element_id/preuse_inspections/:date
-  def show
+  def find_by_date
     @inspection = PreuseInspection.find_or_init_past_inspection(params[:date], params[:element_id])
     if @inspection.id != nil
       render js: "window.location = '#{edit_element_preuse_inspection_url(@inspection.element, @inspection)}'"
