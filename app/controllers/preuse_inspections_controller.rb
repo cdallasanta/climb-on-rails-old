@@ -5,7 +5,12 @@ class PreuseInspectionsController < ApplicationController
   # /elements/:element_id/preuse_inspections/new
   def new
     params[:date] ? date = params[:date] : date = Date.today.to_s
+
     @inspection = PreuseInspection.find_or_init_past_inspection(date, @element.id)
+    if @inspection.id != nil
+      redirect_to edit_element_preuse_inspection_path(@element, @inspection) and return
+    end
+
     @inspection.setup = PreuseInspection::Setup.create unless @inspection.setup
     @inspection.setup.comments.build(user:current_user)
 
@@ -16,6 +21,7 @@ class PreuseInspectionsController < ApplicationController
 
   # /elements/:element_id/preuse_inspections/:id
   def create
+    @inspection = PreuseInspection.find_or_init_past_inspection(preuse_params[:date], @element.id)
     @inspection.assign_attributes(preuse_params)
     #  TODO, this might not be necessary anymore
     #save preuse for date validation, to ensure the date is unique on that element
@@ -156,8 +162,9 @@ class PreuseInspectionsController < ApplicationController
           flash[:alert] = "Inspection id not found under that element"
           redirect_to element_path(@element)
         end
-      else
-        @inspection = @element.preuse_inspections.create()
+        # TODO is this necessary?
+      # else
+      #   @inspection = @element.preuse_inspections.create()
       end
     else
       flash[:alert] = "No element found with that id"
