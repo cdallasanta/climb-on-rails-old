@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   $('#preuse_inspection_date').on('change', (event) => {
     $.ajax({
-      url: `/elements/${elementId}/preuse_inspections/${event.target.value}`
+      url: `/elements/${elementId}/preuse_inspections/date/${event.target.value}`
     })
   });
 });

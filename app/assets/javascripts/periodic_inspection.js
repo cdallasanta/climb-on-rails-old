@@ -3,7 +3,7 @@ $(document).ready(function() {
 
   $('#periodic_inspection_date').on('change', (event) => {
     $.ajax({
-      url: `/elements/${elementId}/periodic_inspections/${event.target.value}`
+      url: `/elements/${elementId}/periodic_inspections/date/${event.target.value}`
     })
   });
 });
