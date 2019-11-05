@@ -9,7 +9,7 @@ class PreuseInspectionsController < ApplicationController
     @inspection.setup = PreuseInspection::Setup.create unless @inspection.setup
     @inspection.setup.comments.build(user:current_user)
 
-    # The following line, for some reason, makes it so the "Preuse Inspection must exist error"
+    # TODO The following line, for some reason, makes it so the "Preuse Inspection must exist" error
     # doesn't show up in the form. I don't know why yet
     @inspection.valid?
   end
