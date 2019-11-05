@@ -10,6 +10,9 @@
       <%= stylesheet_link_tag params[:controller] %>
     <% end %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <% if javascript_exists? %>
+      <%= javascript_include_tag params[:controller] %>
+    <% end %>
   </head>
 
   <body class=<%= controller_name %>>

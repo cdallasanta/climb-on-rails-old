@@ -26,9 +26,8 @@ class PeriodicInspectionsController < ApplicationController
   end
 
   # from datepicker JS
-  # /elements/:element_id/periodic_inspections/:date
+  # /elements/:element_id/periodic_inspections/date/:date
   def find_by_date
-    binding.pry
     @inspection = PeriodicInspection.find_or_init_past_inspection(params[:date], params[:element_id])
     if @inspection.id != nil
       render js: "window.location = '#{edit_element_periodic_inspection_url(@inspection.element, @inspection)}'"

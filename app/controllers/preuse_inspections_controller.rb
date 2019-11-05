@@ -39,7 +39,7 @@ class PreuseInspectionsController < ApplicationController
   end
 
   # from datepicker JS
-  # /elements/:element_id/preuse_inspections/:date
+  # /elements/:element_id/preuse_inspections/date/:date
   def find_by_date
     @inspection = PreuseInspection.find_or_init_past_inspection(params[:date], params[:element_id])
     if @inspection.id != nil

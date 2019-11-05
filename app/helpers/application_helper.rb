@@ -10,6 +10,11 @@ module ApplicationHelper
     end
   end
 
+  def javascript_exists?
+    script = "#{Rails.root}/app/assets/javascripts/#{params[:controller]}.js"
+    File.exists?(script) || File.exists?("#{script}.coffee") 
+  end
+
   def stylesheet_exists?
     script = "#{Rails.root}/app/assets/stylesheets/#{params[:controller]}.scss"
     File.exists?(script) || File.exists?("#{script}.erb") 
