@@ -1,4 +1,5 @@
 class PreuseInspectionsController < ApplicationController
+  before_action :remove_empty_comments, only: [:create, :update]
   before_action :check_for_element_and_preuse_existance, :authenticate_user!, except: [:show]
 
   # /elements/:element_id/preuse_inspections/new
@@ -6,7 +7,8 @@ class PreuseInspectionsController < ApplicationController
     params[:date] ? date = params[:date] : date = Date.today.to_s
     @inspection = PreuseInspection.find_or_init_past_inspection(date, @element.id)
     @inspection.setup = PreuseInspection::Setup.create unless @inspection.setup
-    
+    @inspection.setup.comments.build(user:current_user)
+
     # The following line, for some reason, makes it so the "Preuse Inspection must exist error"
     # doesn't show up in the form. I don't know why yet
     @inspection.valid?
@@ -14,29 +16,24 @@ class PreuseInspectionsController < ApplicationController
 
   # /elements/:element_id/preuse_inspections/:id
   def create
-    #updating preuse (just the date, really)
-    @inspection.date = preuse_params[:date]
+    @inspection.assign_attributes(preuse_params)
+    #  TODO, this might not be necessary anymore
     #save preuse for date validation, to ensure the date is unique on that element
-    unless @inspection.save
+    unless @inspection.valid?
       link_to_previous_preuse_on_that_date and return
     end
 
-    remove_empty_comments
-    #updating setup
-    setup = PreuseInspection::Setup.find_by(id: preuse_params[:setup_attributes][:id])
-    if setup == @inspection.setup
-      # if the inspection will change when saved, add the current user to be referenced by
-      # 'edited by', and also reduced the number of calls to the db
-      setup.assign_attributes(preuse_params[:setup_attributes])
-      if setup.changed_for_autosave?
-        setup.save
-        setup.users << current_user unless setup.users.include?(current_user)
-        flash[:alert] = "Inspection logged successfully"
-      end
-    else
-      flash[:alert] = "Setup inspection id not found"
-      render :edit and return
+    # updating setup
+
+    # if the inspection will change when saved, add the current user to be referenced by
+    # 'edited by', and also reduced the number of calls to the db
+    setup = @inspection.setup
+    if setup.changed_for_autosave?
+      setup.users << current_user unless setup.users.include?(current_user)
     end
+    
+    @inspection.save
+    flash[:alert] = "Inspection logged successfully"
 
     redirect_to edit_element_preuse_inspection_path(@element, @inspection)
   end
@@ -70,46 +67,35 @@ class PreuseInspectionsController < ApplicationController
 
   def update
     #updating preuse (just the date, really)
-    @inspection.date = preuse_params[:date]
+    @inspection.assign_attributes(preuse_params)
+    # TODO this might also note be necessary
     #save preuse for date validation, to ensure the date is unique on that element
-    unless @inspection.save
+    unless @inspection.valid?
       link_to_previous_preuse_on_that_date and return
     end
 
-    remove_empty_comments
     #updating setup
-    setup = PreuseInspection::Setup.find_by(id: preuse_params[:setup_attributes][:id])
-    if setup == @inspection.setup
-      # if the inspection will change when saved, add the current user to be referenced by
-      # 'edited by', and also reduced the number of calls to the db
-      setup.assign_attributes(preuse_params[:setup_attributes])
-      if setup.changed_for_autosave?
-        setup.save
-        setup.users << current_user unless setup.users.include?(current_user)
-        flash[:alert] = "Inspection logged successfully"
-      end
-    else
-      flash[:alert] = "Setup inspection id not found"
-      render :edit and return
+    setup = @inspection.setup
+    
+    # if the inspection will change when saved, add the current user to be referenced by
+    # 'edited by', and also reduced the number of calls to the db
+    if setup.changed_for_autosave?
+      setup.users << current_user unless setup.users.include?(current_user)
     end
 
     #updating takedown
     if preuse_params[:takedown_attributes]
-      takedown = PreuseInspection::Takedown.find_by(id: preuse_params[:takedown_attributes][:id])
-      if takedown == @inspection.takedown
-        # if the inspection will change when saved, add the current user to be referenced by
-        # 'edited by', and also reduced the number of calls to the db
-        takedown.assign_attributes(preuse_params[:takedown_attributes])
-        if takedown.changed_for_autosave?
-          takedown.save
-          takedown.users << current_user unless takedown.users.include?(current_user)
-          flash[:alert] = "Inspection logged successfully"
-        end
-      else
-        flash[:alert] = "Takedown inspection id not found"
-        render :edit and return
+      takedown = @inspection.takedown
+
+      # if the inspection will change when saved, add the current user to be referenced by
+      # 'edited by', and also reduced the number of calls to the db
+      if takedown.changed_for_autosave?
+        takedown.users << current_user unless takedown.users.include?(current_user)
       end
     end
+
+    @inspection.save
+    flash[:alert] = "Inspection logged successfully"
 
     # sent to edit instead of show, since it is more likely that
     # they will do more changes soon
@@ -119,41 +105,45 @@ class PreuseInspectionsController < ApplicationController
   private
 
   def preuse_params
-    params.require(:preuse_inspection).permit(
-      :date,
-      setup_attributes: [
-        :equipment_complete,
-        :element_complete,
-        :environment_complete,
-        :id,
-        comments_attributes: [
-          :user_id,
-          :content,
-          :id
-        ]
-      ],
-      takedown_attributes: [
-        :equipment_complete,
-        :element_complete,
-        :environment_complete,
-        :id,
-        ropes_attributes: [
-          :id
+    # TODO this is hitting an error even when not called, which makes me think something's wrong somewhere else
+    # adding in the `if` statment for now as a workaround
+    if params[:preuse_inspection]
+      params[:preuse_inspection].permit(
+        :date,
+        setup_attributes: [
+          :equipment_complete,
+          :element_complete,
+          :environment_complete,
+          :id,
+          comments_attributes: [
+            :user_id,
+            :content,
+            :id
+          ]
         ],
-        comments_attributes: [
-          :user_id,
-          :content,
-          :id
-        ],
-        climbs_attributes: [
-          :block_1,
-          :block_2,
-          :block_3,
-          :block_4,
-          :id
+        takedown_attributes: [
+          :equipment_complete,
+          :element_complete,
+          :environment_complete,
+          :id,
+          ropes_attributes: [
+            :id
+          ],
+          comments_attributes: [
+            :user_id,
+            :content,
+            :id
+          ],
+          climbs_attributes: [
+            :block_1,
+            :block_2,
+            :block_3,
+            :block_4,
+            :id
+          ]
         ]
-      ]
-    )
+      )
+    end
   end
 
   # preventing url shenanigans
@@ -166,6 +156,8 @@ class PreuseInspectionsController < ApplicationController
           flash[:alert] = "Inspection id not found under that element"
           redirect_to element_path(@element)
         end
+      else
+        @inspection = @element.preuse_inspections.create()
       end
     else
       flash[:alert] = "No element found with that id"
