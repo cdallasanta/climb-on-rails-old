@@ -4,7 +4,9 @@ class PeriodicInspectionsController < ApplicationController
 
   # /elements/:element_id/periodic_inspections/new
   def new
-    @inspection = PeriodicInspection.new(element: @element, date:Date.today)
+    params[:date] ? date = params[:date] : date = Date.today.to_s
+
+    @inspection = PeriodicInspection.find_or_init_past_inspection(date, @element.id)
     @inspection.comments.build(user:current_user)
   end
 

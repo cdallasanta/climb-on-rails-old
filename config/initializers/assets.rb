@@ -25,3 +25,4 @@ Rails.application.config.assets.precompile += %w( ropes.css )
 # precompile JS files
 Rails.application.config.assets.precompile += %w( preuse_inspections.js )
 Rails.application.config.assets.precompile += %w( periodic_inspections.js )
+Rails.application.config.assets.precompile += %w( elements.js )
