@@ -16,7 +16,4 @@ Rails.application.routes.draw do
     resources :periodic_inspections, only: [:new, :create, :show, :edit, :update]
     get '/periodic_inspections/date/:date', to: "periodic_inspections#find_by_date"
   end
-
-  # TODO eventually remove this
-  resources :comments, only: [:index]
 end
