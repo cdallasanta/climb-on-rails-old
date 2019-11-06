@@ -16,4 +16,15 @@ class PreuseInspection < ApplicationRecord
   def self.find_or_init_past_inspection(date, element_id)
     self.find_or_initialize_by(date: Date.strptime(date, "%Y-%m-%d"), element_id: element_id)
   end
+
+  def create_takedown(current_user)
+    self.takedown ||= PreuseInspection::Takedown.create
+
+    self.takedown.comments.build(user:current_user)
+    if self.takedown.climbs == []
+      self.takedown.ropes.each do |rope|
+        self.takedown.climbs.create(rope:rope)
+      end
+    end
+  end
 end

@@ -1,13 +1,17 @@
 class PeriodicInspectionsController < ApplicationController
   before_action :check_for_element_and_periodic_existance, :authenticate_user!, except: [:find_by_date]
-  before_action :check_for_previous_periodic_on_that_date, :remove_empty_comments, only: [:create, :update]
+  before_action :remove_empty_comments, only: [:create, :update]
 
   # /elements/:element_id/periodic_inspections/new
   def new
     params[:date] ? date = params[:date] : date = Date.today.to_s
 
     @inspection = PeriodicInspection.find_or_init_past_inspection(date, @element.id)
-    @inspection.comments.build(user:current_user)
+    if @inspection.id != nil
+      redirect_to element_periodic_inspection_path(@element, @inspection)
+    else
+      @inspection.comments.build(user:current_user)
+    end
   end
 
   def create
@@ -17,8 +21,8 @@ class PeriodicInspectionsController < ApplicationController
     # 'edited by', and also reduced the number of calls to the db
     @inspection.assign_attributes(periodic_params)
     if @inspection.changed_for_autosave?
+      @inspection.users << current_user unless @inspection.users.include?(current_user)
       if @inspection.save
-        @inspection.users << current_user unless @inspection.users.include?(current_user)
         flash[:alert] = "Inspection logged successfully"
         redirect_to element_periodic_inspection_path(@element, @inspection)
       else
@@ -32,7 +36,8 @@ class PeriodicInspectionsController < ApplicationController
   def find_by_date
     @inspection = PeriodicInspection.find_or_init_past_inspection(params[:date], params[:element_id])
     if @inspection.id != nil
-      render js: "window.location = '#{edit_element_periodic_inspection_url(@inspection.element, @inspection)}'"
+      binding.pry
+      render js: "window.location = '#{element_periodic_inspection_url(@element, @inspection)}'"
     else
       render js: "window.location = '#{new_element_periodic_inspection_url(@inspection.element)}?date=#{params[:date]}'"
     end
@@ -53,8 +58,8 @@ class PeriodicInspectionsController < ApplicationController
     @inspection.assign_attributes(periodic_params)
 
     if @inspection.changed_for_autosave?
+      @inspection.users << current_user unless @inspection.users.include?(current_user)
       if @inspection.save
-        @inspection.users << current_user unless @inspection.users.include?(current_user)
         flash[:alert] = "Inspection logged successfully"
         redirect_to element_periodic_inspection_path(@element, @inspection)
       else
@@ -98,17 +103,18 @@ class PeriodicInspectionsController < ApplicationController
     end
   end
 
-  def check_for_previous_periodic_on_that_date
-    previous_inspection = PeriodicInspection.find_by(date: params[:periodic_inspection][:date], element:@element.id)
-    if previous_inspection != @inspection
-      flash[:alert] = "There is already an inspection logged for that date. View/edit it <a href='#{edit_element_periodic_inspection_path(@element, previous_inspection)}'>here</a>"
-      if @inspection
-        render :edit and return
-      else
-        redirect_to new_element_periodic_inspection_path(@element) and return
-      end
-    end
-  end
+  #  TODO is this necessary?
+  # def check_for_previous_periodic_on_that_date
+  #   previous_inspection = PeriodicInspection.find_by(date: params[:periodic_inspection][:date], element:@element.id)
+  #   if previous_inspection != @inspection
+  #     flash[:alert] = "There is already an inspection logged for that date. View/edit it <a href='#{edit_element_periodic_inspection_path(@element, previous_inspection)}'>here</a>"
+  #     if @inspection
+  #       render :edit and return
+  #     else
+  #       redirect_to new_element_periodic_inspection_path(@element) and return
+  #     end
+  #   end
+  # end
 
   def remove_empty_comments
     params[:periodic_inspection][:comments_attributes].delete_if do |num, comment|

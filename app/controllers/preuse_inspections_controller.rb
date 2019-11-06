@@ -14,7 +14,7 @@ class PreuseInspectionsController < ApplicationController
     @inspection.setup = PreuseInspection::Setup.create unless @inspection.setup
     @inspection.setup.comments.build(user:current_user)
 
-    # TODO The following line, for some reason, makes it so the "Preuse Inspection must exist" error
+    # The following line, for some reason, makes it so the "Preuse Inspection must exist" error
     # doesn't show up in the form. I don't know why yet
     @inspection.valid?
   end
@@ -23,23 +23,11 @@ class PreuseInspectionsController < ApplicationController
   def create
     @inspection = PreuseInspection.find_or_init_past_inspection(preuse_params[:date], @element.id)
     @inspection.assign_attributes(preuse_params)
-    #  TODO, this might not be necessary anymore
-    #save preuse for date validation, to ensure the date is unique on that element
-    unless @inspection.valid?
-      link_to_previous_preuse_on_that_date and return
-    end
-
-    # updating setup
-
-    # if the inspection will change when saved, add the current user to be referenced by
-    # 'edited by', and also reduced the number of calls to the db
-    setup = @inspection.setup
-    if setup.changed_for_autosave?
-      setup.users << current_user unless setup.users.include?(current_user)
-    end
+    @inspection.setup.users << current_user unless @inspection.setup.users.include?(current_user)
     
-    @inspection.save
-    flash[:alert] = "Inspection logged successfully"
+    if @inspection.save
+      flash[:alert] = "Inspection logged successfully"
+    end
 
     redirect_to edit_element_preuse_inspection_path(@element, @inspection)
   end
@@ -59,52 +47,24 @@ class PreuseInspectionsController < ApplicationController
   def edit
     @inspection.setup.comments.build(user:current_user)
     if @inspection.setup.is_complete?
-      @inspection.takedown ||= PreuseInspection::Takedown.create
-
-      @takedown = @inspection.takedown
-      @takedown.comments.build(user:current_user)
-      if @takedown.climbs == []
-        @takedown.ropes.each do |rope|
-          @takedown.climbs.create(rope:rope)
-        end
-      end
+      @inspection.create_takedown(current_user)
     end
   end
 
   def update
-    #updating preuse (just the date, really)
+    @inspection = PreuseInspection.find_or_init_past_inspection(preuse_params[:date], @element.id)
     @inspection.assign_attributes(preuse_params)
-    # TODO this might also note be necessary
-    #save preuse for date validation, to ensure the date is unique on that element
-    unless @inspection.valid?
-      link_to_previous_preuse_on_that_date and return
+    if @inspection.setup.changed_for_autosave?
+      @inspection.setup.users << current_user unless @inspection.setup.users.include?(current_user)
+    end
+    if @inspection.takedown&.changed_for_autosave?
+      @inspection.takedown.users << current_user unless @inspection.takedown.users.include?(current_user)
     end
 
-    #updating setup
-    setup = @inspection.setup
-    
-    # if the inspection will change when saved, add the current user to be referenced by
-    # 'edited by', and also reduced the number of calls to the db
-    if setup.changed_for_autosave?
-      setup.users << current_user unless setup.users.include?(current_user)
+    if @inspection.save
+      flash[:alert] = "Inspection logged successfully"
     end
 
-    #updating takedown
-    if preuse_params[:takedown_attributes]
-      takedown = @inspection.takedown
-
-      # if the inspection will change when saved, add the current user to be referenced by
-      # 'edited by', and also reduced the number of calls to the db
-      if takedown.changed_for_autosave?
-        takedown.users << current_user unless takedown.users.include?(current_user)
-      end
-    end
-
-    @inspection.save
-    flash[:alert] = "Inspection logged successfully"
-
-    # sent to edit instead of show, since it is more likely that
-    # they will do more changes soon
     redirect_to edit_element_preuse_inspection_path(@inspection.element, @inspection)
   end
 
@@ -162,24 +122,10 @@ class PreuseInspectionsController < ApplicationController
           flash[:alert] = "Inspection id not found under that element"
           redirect_to element_path(@element)
         end
-        # TODO is this necessary?
-      # else
-      #   @inspection = @element.preuse_inspections.create()
       end
     else
       flash[:alert] = "No element found with that id"
       redirect_to root_path
-    end
-  end
-
-  # called if they try to save an inspection for a date that already has
-  # an inspection logged
-  # TODO: this might be unnecessary now
-  def link_to_previous_preuse_on_that_date
-    previous_inspection = PreuseInspection.find_or_init_past_inspection(params[:preuse_inspection][:date], @element.id)
-    if previous_inspection
-      flash[:alert] = "There is already an inspection logged for that date. View/edit it <a href='#{edit_element_preuse_inspection_path(@element, previous_inspection)}'>here</a>"
-      redirect_to edit_element_preuse_inspection_path(@element, @inspection)
     end
   end
 
