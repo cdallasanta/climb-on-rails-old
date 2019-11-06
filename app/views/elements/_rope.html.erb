@@ -1,0 +1,5 @@
+<div class="rope-details">
+  <h3><%= rope.identifier %></h3>
+  Total climbs: <%= rope.climb_count %><br>
+  <%= link_to("Retire and replace rope", element_rope_path(@element, rope), method: :patch) %>
+</div>

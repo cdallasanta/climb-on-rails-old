@@ -15,8 +15,12 @@
   </div>
 
   <div class="elements-section">
-    <%= rope_details %>
+    <% @element.ropes.each do |rope| %>
+      <% if !rope.retired %>
+        <%= render partial: "rope", locals: {rope: rope} %>
+      <% end %>
+    <% end %>
   </div>
 
-  <%= render partial: 'instructions', locals: {element: @element} %>
+  <%= render partial: "instructions", locals: {element: @element} %>
 </div>
