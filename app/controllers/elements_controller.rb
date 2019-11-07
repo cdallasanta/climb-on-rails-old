@@ -17,8 +17,7 @@ class ElementsController < ApplicationController
 
   def update
     remove_blank_ropes
-    @element.update(string_to_html(element_params.except(:ropes_attributes)))
-    @element.update(element_params.slice(:ropes_attributes))
+    @element.update(element_params)
 
     if @element.valid?
       flash[:alert] = "Element saved successfully"
@@ -53,13 +52,6 @@ class ElementsController < ApplicationController
         :id
       ]
     )
-  end
-
-  # user's line breaks come in as "\r\n", but we will later display them using <br>
-  def string_to_html(params)
-    params.to_h.transform_values do |text|
-      text.gsub("\r\n","<br>")
-    end
   end
 
   #mostly preventing url shenanigans

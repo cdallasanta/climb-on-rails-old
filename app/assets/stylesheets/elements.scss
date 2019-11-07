@@ -92,4 +92,8 @@ body.elements {
   #periodic-ul li:nth-child(n+2){
     display:none;
  }
+
+  .instructions-text {
+    white-space: pre-line;
+  }
 }
