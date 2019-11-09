@@ -1,5 +1,6 @@
 ActiveAdmin.register Site do
-  permit_params :name
+  scope_to :current_user, unless: proc{ current_user.fullname == "Chris Dalla Santa" }
+  permit_params :name, :contact
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

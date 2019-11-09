@@ -7,7 +7,7 @@
 
   <div class="takedown-instructions form-group">
     <h2>Equipment</h2>
-    <%= @element.takedown_equipment_instructions.html_safe %><br>
+    <div class="instructions-text"><%= @element.takedown_equipment_instructions %></div>
 
     <div class="form-check">
       <%= ff.check_box :equipment_complete, class:"form-check-input" %>
@@ -16,7 +16,7 @@
   </div>
   <div class="takedown-instructions form-group">
     <h2>Element</h2>
-    <%= @element.takedown_element_instructions.html_safe %><br>
+    <div class="instructions-text"><%= @element.takedown_element_instructions %></div>
 
     <div class="form-check">
       <%= ff.check_box :element_complete, class:"form-check-input" %>
@@ -25,7 +25,7 @@
   </div>
   <div class="takedown-instructions form-group">
     <h2>Environment</h2>
-    <%= @element.takedown_environment_instructions.html_safe %><br>
+    <div class="instructions-text"><%= @element.takedown_environment_instructions %></div>
 
     <div class="form-check">
       <%= ff.check_box :environment_complete, class:"form-check-input" %>
