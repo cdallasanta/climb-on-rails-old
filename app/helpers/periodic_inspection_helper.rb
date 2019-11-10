@@ -5,7 +5,7 @@ module PeriodicInspectionHelper
     if ff.object.content == nil
       ff.text_area :content
     else
-      "<strong>#{ff.object.user.fullname}:</strong> #{ff.object.content}<br>".html_safe
+      "<div class=\"instructions-text\"><strong>#{ff.object.user.fullname}:</strong> #{ff.object.content}</div>".html_safe
     end
   end
 end
